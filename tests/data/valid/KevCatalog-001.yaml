@@ -1,0 +1,31 @@
+title: CISA Known Exploited Vulnerabilities Catalog
+catalog_version: "2024.02.01"
+date_released: "2024-02-01T00:00:00.0000Z"
+count: 2
+vulnerabilities:
+  - cve_id: CVE-2021-27104
+    vendor_project: Accellion
+    product: FTA
+    vulnerability_name: Accellion FTA OS Command Injection Vulnerability
+    date_added: "2021-11-03"
+    short_description: >-
+      Accellion FTA 9_12_370 and earlier is affected by OS command execution via
+      a local web service call. This vulnerability has a CVSS score of 9.8.
+    required_action: Apply updates per vendor instructions.
+    due_date: "2021-11-17"
+    known_ransomware_campaign_use: known
+    notes: ""
+  - cve_id: CVE-2021-44228
+    vendor_project: Apache
+    product: Log4j2
+    vulnerability_name: Apache Log4j2 Remote Code Execution Vulnerability
+    date_added: "2021-12-10"
+    short_description: >-
+      Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases
+      2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log
+      messages, and parameters do not protect against attacker-controlled LDAP
+      and other JNDI-related endpoints.
+    required_action: Apply updates per vendor instructions.
+    due_date: "2021-12-24"
+    known_ransomware_campaign_use: known
+    notes: ""
