@@ -415,6 +415,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#in-subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In Subsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -486,8 +497,8 @@
 
 
 <h1 id="slot-title">Slot: title</h1>
-<p><em>The title of the KEV catalog.</em></p>
-<p>URI: <a href="http://purl.org/dc/terms/title">dcterms:title</a>
+<p><em>Short human-readable title or name for this entity.</em></p>
+<p>URI: <a href="http://purl.org/dc/terms/title">dct:title</a>
 Alias: title</p>
 <!-- no inheritance hierarchy -->
 
@@ -502,8 +513,18 @@ Alias: title</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Vulnerability/">Vulnerability</a></td>
+<td>Abstract base representation of a security vulnerability</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../KevCatalog/">KevCatalog</a></td>
 <td>The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative so...</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../KevEntry/">KevEntry</a></td>
+<td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -524,11 +545,11 @@ Alias: title</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../KevCatalog/">KevCatalog</a></td>
+<td><a href="../KevCatalog/">KevCatalog</a>, <a href="../Vulnerability/">Vulnerability</a></td>
 </tr>
 <tr>
 <td>Slot URI</td>
-<td><a href="http://purl.org/dc/terms/title">dcterms:title</a></td>
+<td><a href="http://purl.org/dc/terms/title">dct:title</a></td>
 </tr>
 </tbody>
 </table>
@@ -547,6 +568,10 @@ Alias: title</p>
 </tr>
 </tbody>
 </table>
+<h2 id="in-subsets">In Subsets</h2>
+<ul>
+<li><a href="../Metadata/">Metadata</a></li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -563,24 +588,33 @@ Alias: title</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>dcterms:title</td>
+<td>dct:title</td>
 </tr>
 <tr>
 <td>native</td>
 <td>kev_catalog:title</td>
+</tr>
+<tr>
+<td>exact</td>
+<td>schema:name</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The title of the KEV catalog.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short human-readable title or name for this entity.</span>
+<span class="nt">in_subset</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metadata</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/kev-catalog</span>
+<span class="nt">exact_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:name</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcterms:title</span>
+<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:title</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">KevCatalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vulnerability</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>

@@ -415,6 +415,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#in-subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In Subsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aliases" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -497,8 +508,8 @@
 
 
 <h1 id="slot-cve_id">Slot: cve_id</h1>
-<p><em>The CVE identifier assigned to this vulnerability by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.</em></p>
-<p>URI: <a href="http://purl.org/dc/terms/identifier">dcterms:identifier</a>
+<p><em>The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.</em></p>
+<p>URI: <a href="http://purl.org/dc/terms/identifier">dct:identifier</a>
 Alias: cve_id</p>
 <!-- no inheritance hierarchy -->
 
@@ -514,6 +525,11 @@ Alias: cve_id</p>
 <tbody>
 <tr>
 <td><a href="../Vulnerability/">Vulnerability</a></td>
+<td>Abstract base representation of a security vulnerability</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../KevEntry/">KevEntry</a></td>
 <td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
 <td>no</td>
 </tr>
@@ -539,7 +555,7 @@ Alias: cve_id</p>
 </tr>
 <tr>
 <td>Slot URI</td>
-<td><a href="http://purl.org/dc/terms/identifier">dcterms:identifier</a></td>
+<td><a href="http://purl.org/dc/terms/identifier">dct:identifier</a></td>
 </tr>
 </tbody>
 </table>
@@ -576,6 +592,10 @@ Alias: cve_id</p>
 </tr>
 </tbody>
 </table>
+<h2 id="in-subsets">In Subsets</h2>
+<ul>
+<li><a href="../Metadata/">Metadata</a></li>
+</ul>
 <h2 id="aliases">Aliases</h2>
 <ul>
 <li>cveID</li>
@@ -596,7 +616,7 @@ Alias: cve_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>dcterms:identifier</td>
+<td>dct:identifier</td>
 </tr>
 <tr>
 <td>native</td>
@@ -611,15 +631,17 @@ Alias: cve_id</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve_id</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">CVE</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">assigned</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">vulnerability</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">CVE</span><span class="nv"> </span><span class="s">Numbering</span>
-<span class="w">  </span><span class="s">Authority</span><span class="nv"> </span><span class="s">(CNA).</span><span class="nv"> </span><span class="s">Format:</span><span class="nv"> </span><span class="s">CVE-YYYY-NNNNN.&#39;</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">CVE</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">assigned</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">CVE</span><span class="nv"> </span><span class="s">Numbering</span><span class="nv"> </span><span class="s">Authority</span><span class="nv"> </span><span class="s">(CNA).</span><span class="nv"> </span><span class="s">Format:</span>
+<span class="w">  </span><span class="s">CVE-YYYY-NNNNN.&#39;</span>
+<span class="nt">in_subset</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metadata</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/kev-catalog</span>
 <span class="nt">aliases</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cveID</span>
 <span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:identifier</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcterms:identifier</span>
+<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:identifier</span>
 <span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve_id</span>
 <span class="nt">domain_of</span><span class="p">:</span>

@@ -563,12 +563,36 @@ Infrastructure Security Agency (CISA).</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="Configuration/">Configuration</a></td>
+<td>Logical grouping of CPE match expressions</td>
+</tr>
+<tr>
+<td><a href="Impact/">Impact</a></td>
+<td>Assessment of the vulnerability's impact and severity</td>
+</tr>
+<tr>
 <td><a href="KevCatalog/">KevCatalog</a></td>
 <td>The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative so...</td>
 </tr>
 <tr>
+<td><a href="Product/">Product</a></td>
+<td>Software or hardware entity affected by the vulnerability</td>
+</tr>
+<tr>
+<td><a href="Reference/">Reference</a></td>
+<td>External reference such as an advisory or article</td>
+</tr>
+<tr>
 <td><a href="Vulnerability/">Vulnerability</a></td>
+<td>Abstract base representation of a security vulnerability</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="KevEntry/">KevEntry</a></td>
 <td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
+</tr>
+<tr>
+<td><a href="Weakness/">Weakness</a></td>
+<td>Weakness classification from CWE or a similar taxonomy</td>
 </tr>
 </tbody>
 </table>
@@ -590,8 +614,16 @@ Infrastructure Security Agency (CISA).</p>
 <td>The total number of vulnerabilities in this catalog version</td>
 </tr>
 <tr>
+<td><a href="cpe_uri/">cpe_uri</a></td>
+<td>CPE 2</td>
+</tr>
+<tr>
 <td><a href="cve_id/">cve_id</a></td>
-<td>The CVE identifier assigned to this vulnerability by a CVE Numbering Authorit...</td>
+<td>The CVE identifier assigned by a CVE Numbering Authority (CNA)</td>
+</tr>
+<tr>
+<td><a href="cwe_id/">cwe_id</a></td>
+<td>CWE identifier for the weakness classification (e</td>
 </tr>
 <tr>
 <td><a href="date_added/">date_added</a></td>
@@ -602,36 +634,104 @@ Infrastructure Security Agency (CISA).</p>
 <td>The ISO 8601 timestamp at which this catalog version was released</td>
 </tr>
 <tr>
+<td><a href="description/">description</a></td>
+<td>Narrative description of the vulnerability</td>
+</tr>
+<tr>
 <td><a href="due_date/">due_date</a></td>
 <td>The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agenc...</td>
+</tr>
+<tr>
+<td><a href="impact/">impact</a></td>
+<td>Impact and severity assessment for this vulnerability</td>
 </tr>
 <tr>
 <td><a href="known_ransomware_campaign_use/">known_ransomware_campaign_use</a></td>
 <td>Whether the vulnerability is known to have been leveraged as part of a ransom...</td>
 </tr>
 <tr>
+<td><a href="last_modified_date/">last_modified_date</a></td>
+<td>Date and time the vulnerability record was last modified</td>
+</tr>
+<tr>
+<td><a href="name/">name</a></td>
+<td>Name of the entity (product, weakness, reference, etc</td>
+</tr>
+<tr>
 <td><a href="notes/">notes</a></td>
 <td>Additional notes or references related to the vulnerability or its remediatio...</td>
+</tr>
+<tr>
+<td><a href="operator/">operator</a></td>
+<td>Logical operator (AND/OR) used in configuration node groupings</td>
+</tr>
+<tr>
+<td><a href="platforms/">platforms</a></td>
+<td>Platforms or operating environments affected</td>
 </tr>
 <tr>
 <td><a href="product/">product</a></td>
 <td>The name of the affected product</td>
 </tr>
 <tr>
+<td><a href="products/">products</a></td>
+<td>Products affected by this vulnerability</td>
+</tr>
+<tr>
+<td><a href="published_date/">published_date</a></td>
+<td>Date and time the vulnerability was first published</td>
+</tr>
+<tr>
+<td><a href="references/">references</a></td>
+<td>External references such as advisories and articles</td>
+</tr>
+<tr>
 <td><a href="required_action/">required_action</a></td>
 <td>The remediation action required, e</td>
+</tr>
+<tr>
+<td><a href="score/">score</a></td>
+<td>Numeric vulnerability score (e</td>
+</tr>
+<tr>
+<td><a href="severity/">severity</a></td>
+<td>Qualitative severity rating</td>
 </tr>
 <tr>
 <td><a href="short_description/">short_description</a></td>
 <td>A brief description of the vulnerability</td>
 </tr>
 <tr>
+<td><a href="source/">source</a></td>
+<td>Source or origin of the reference or data</td>
+</tr>
+<tr>
+<td><a href="status/">status</a></td>
+<td>Current lifecycle state of the vulnerability record</td>
+</tr>
+<tr>
 <td><a href="title/">title</a></td>
-<td>The title of the KEV catalog</td>
+<td>Short human-readable title or name for this entity</td>
+</tr>
+<tr>
+<td><a href="url/">url</a></td>
+<td>URL pointing to the reference resource</td>
+</tr>
+<tr>
+<td><a href="vector/">vector</a></td>
+<td>CVSS vector string or equivalent scoring vector expression</td>
+</tr>
+<tr>
+<td><a href="vendor/">vendor</a></td>
+<td>Name of the vendor or organization responsible for the product</td>
 </tr>
 <tr>
 <td><a href="vendor_project/">vendor_project</a></td>
 <td>The name of the vendor or project responsible for the affected product</td>
+</tr>
+<tr>
+<td><a href="version/">version</a></td>
+<td>Version string of the affected product</td>
 </tr>
 <tr>
 <td><a href="vulnerabilities/">vulnerabilities</a></td>
@@ -640,6 +740,10 @@ Infrastructure Security Agency (CISA).</p>
 <tr>
 <td><a href="vulnerability_name/">vulnerability_name</a></td>
 <td>A short, descriptive name for the vulnerability</td>
+</tr>
+<tr>
+<td><a href="weaknesses/">weaknesses</a></td>
+<td>Weakness classifications (e</td>
 </tr>
 </tbody>
 </table>
@@ -653,8 +757,16 @@ Infrastructure Security Agency (CISA).</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="ImpactSeverity/">ImpactSeverity</a></td>
+<td>CVSS qualitative severity rating</td>
+</tr>
+<tr>
 <td><a href="KnownRansomwareCampaignUseEnum/">KnownRansomwareCampaignUseEnum</a></td>
 <td>Whether the vulnerability is known to have been used in ransomware campaigns</td>
+</tr>
+<tr>
+<td><a href="VulnerabilityStatus/">VulnerabilityStatus</a></td>
+<td>Lifecycle state of a vulnerability record</td>
 </tr>
 </tbody>
 </table>
@@ -677,7 +789,7 @@ Infrastructure Security Agency (CISA).</p>
 </tr>
 <tr>
 <td><a href="CveId/">CveId</a></td>
-<td>A CVE identifier in the format CVE-YYYY-NNNNN as assigned by a CVE Numbering ...</td>
+<td>A CVE identifier assigned by a CVE Numbering Authority (CNA)</td>
 </tr>
 <tr>
 <td><a href="Date/">Date</a></td>
@@ -709,7 +821,7 @@ Infrastructure Security Agency (CISA).</p>
 </tr>
 <tr>
 <td><a href="IsoDate/">IsoDate</a></td>
-<td>A date in ISO 8601 format (YYYY-MM-DD)</td>
+<td>A calendar date in ISO 8601 format (YYYY-MM-DD)</td>
 </tr>
 <tr>
 <td><a href="Jsonpath/">Jsonpath</a></td>
@@ -763,8 +875,12 @@ Infrastructure Security Agency (CISA).</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
+<td><a href="Core/">Core</a></td>
+<td>Cross-program vulnerability metadata</td>
+</tr>
+<tr>
+<td><a href="Metadata/">Metadata</a></td>
+<td>Identification and reference fields</td>
 </tr>
 </tbody>
 </table>
