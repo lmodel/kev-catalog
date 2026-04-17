@@ -1,0 +1,80 @@
+# metamodel_version: 1.7.0
+# version: 1.0
+BASE <https://w3id.org/lmodel/kev-catalog/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
+PREFIX WIKIDATA: <http://identifiers.org/wikidata/>
+
+
+<CveId> xsd:string
+
+<IsoDate> xsd:date
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<KevCatalog> CLOSED {
+    (  $<KevCatalog_tes> (  dcterms:title @linkml:String ? ;
+          <catalog_version> @linkml:String ? ;
+          <date_released> @linkml:String ? ;
+          <count> @linkml:Integer ? ;
+          <vulnerabilities> @<Vulnerability> *
+       ) ;
+       rdf:type [ <KevCatalog> ] ?
+    )
+}
+
+<Vulnerability> CLOSED {
+    (  $<Vulnerability_tes> (  schema1:Organization @linkml:String ;
+          schema1:name @linkml:String ;
+          dcterms:title @linkml:String ;
+          dcterms:created @<IsoDate> ;
+          dcterms:description @linkml:String ;
+          <required_action> @linkml:String ;
+          <due_date> @<IsoDate> ;
+          <known_ransomware_campaign_use> [ WIKIDATA:Q532924
+             <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> ] ? ;
+          skos:note @linkml:String ?
+       ) ;
+       rdf:type [ <Vulnerability> ]
+    )
+}

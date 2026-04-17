@@ -1,0 +1,27 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// version: 1.0
+// The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.
+message KevCatalog
+ {
+  string title = 0
+  string catalogVersion = 0
+  string dateReleased = 0
+  integer count = 0
+ repeated  vulnerability vulnerabilities = 0
+ }
+// A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.
+message Vulnerability
+ {
+  cveId cveId = 0
+  string vendorProject = 0
+  string product = 0
+  string vulnerabilityName = 0
+  isoDate dateAdded = 0
+  string shortDescription = 0
+  string requiredAction = 0
+  isoDate dueDate = 0
+  knownRansomwareCampaignUseEnum knownRansomwareCampaignUse = 0
+  string notes = 0
+ }

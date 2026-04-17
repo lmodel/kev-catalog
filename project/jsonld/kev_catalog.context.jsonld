@@ -1,0 +1,71 @@
+{
+   "@context": {
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "WIKIDATA": "http://identifiers.org/wikidata/",
+      "dcterms": "http://purl.org/dc/terms/",
+      "kev_catalog": "https://w3id.org/lmodel/kev-catalog/",
+      "linkml": "https://w3id.org/linkml/",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "@vocab": "https://w3id.org/lmodel/kev-catalog/",
+      "catalog_version": {
+         "@id": "catalog_version"
+      },
+      "count": {
+         "@type": "xsd:integer",
+         "@id": "count"
+      },
+      "cve_id": "@id",
+      "date_added": {
+         "@type": "xsd:date",
+         "@id": "dcterms:created"
+      },
+      "date_released": {
+         "@id": "date_released"
+      },
+      "due_date": {
+         "@type": "xsd:date",
+         "@id": "due_date"
+      },
+      "known_ransomware_campaign_use": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "known_ransomware_campaign_use"
+      },
+      "notes": {
+         "@id": "skos:note"
+      },
+      "product": {
+         "@id": "schema:name"
+      },
+      "required_action": {
+         "@id": "required_action"
+      },
+      "short_description": {
+         "@id": "dcterms:description"
+      },
+      "title": {
+         "@id": "dcterms:title"
+      },
+      "vendor_project": {
+         "@id": "schema:Organization"
+      },
+      "vulnerabilities": {
+         "@type": "@id",
+         "@id": "vulnerabilities"
+      },
+      "vulnerability_name": {
+         "@id": "dcterms:title"
+      },
+      "KevCatalog": {
+         "@id": "KevCatalog"
+      },
+      "Vulnerability": {
+         "@id": "Vulnerability"
+      }
+   }
+}

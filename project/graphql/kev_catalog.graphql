@@ -1,0 +1,30 @@
+# metamodel_version: 1.7.0
+# version: 1.0
+enum KnownRansomwareCampaignUseEnum
+  {
+    known
+    unknown
+  }
+
+type KevCatalog
+  {
+    title: String
+    catalogVersion: String
+    dateReleased: String
+    count: Int
+    vulnerabilities: [Vulnerability]
+  }
+
+type Vulnerability
+  {
+    cveId: CveId!
+    vendorProject: String!
+    product: String!
+    vulnerabilityName: String!
+    dateAdded: IsoDate!
+    shortDescription: String!
+    requiredAction: String!
+    dueDate: IsoDate!
+    knownRansomwareCampaignUse: KnownRansomwareCampaignUseEnum
+    notes: String
+  }

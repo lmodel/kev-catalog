@@ -1,0 +1,330 @@
+@prefix WIKIDATA: <http://identifiers.org/wikidata/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix kev_catalog: <https://w3id.org/lmodel/kev-catalog/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/lmodel/kev-catalog.owl.ttl> a owl:Ontology ;
+    rdfs:label "kev-catalog" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source <https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json> ;
+    dcterms:title "CISA Known Exploited Vulnerabilities (KEV) Catalog" ;
+    pav:version "1.0" ;
+    rdfs:seeAlso <https://lmodel.github.io/kev-catalog>,
+        <https://weis2020.econinfosec.org/wp-content/uploads/sites/8/2020/06/weis20-final6.pdf>,
+        <https://www.cisa.gov/binding-operational-directive-22-01>,
+        <https://www.cisa.gov/directives>,
+        <https://www.cisa.gov/known-exploited-vulnerabilities-catalog> ;
+    skos:definition """LinkML schema for the CISA Known Exploited Vulnerabilities (KEV) Catalog.
+The KEV catalog is the authoritative source of vulnerabilities that have
+been exploited in the wild, maintained by the Cybersecurity and
+Infrastructure Security Agency (CISA).""" ;
+    skos:editorialNote "As of 2022-07-15 the KEV catalog contained 787 entries drawn from a universe of ~179,383 total CVEs (56,342 Critical/High by CVSS).",
+        "BOD 22-01 applies to all federal civilian executive branch (FCEB) departments and agencies. It does NOT apply to statutorily defined national security systems nor to systems operated by the Department of Defense or the Intelligence Community.",
+        "BOD 22-01 key compliance milestones: Nov 17 2021 — remediate CVEs assigned 2021+; Jan 2 2022 — update agency policies; Jan 17 2022 — first CyberScope status report; May 3 2022 — remediate pre-2021 CVEs; Oct 1 2022 — reporting via CDM Federal Dashboard.",
+        "Contact: CyberDirectives@cisa.dhs.gov for questions about BOD 22-01 and the KEV catalog; CyberLiaison@cisa.dhs.gov for all other CISA questions.",
+        "Mandated by Binding Operational Directive (BOD) 22-01, \"Reducing the Significant Risk of Known Exploited Vulnerabilities\", issued under the authority of Section 3553(b)(2) of title 44, U.S. Code.",
+        "This is a Schema. The KEV database is distributed under the CC0 1.0 Universal license. You may use this data in any legal manner but note that information  provided at any 3rd party links included in the KEV database are bound by the policies and licenses of those 3rd party websites. Use of the information does not authorize you to use the CISA Logo or DHS Seal, nor should such use be interpreted as an endorsement by CISA or DHS." .
+
+kev_catalog:KevCatalog a owl:Class ;
+    rdfs:label "KevCatalog" ;
+    rdfs:seeAlso <https://www.cisa.gov/binding-operational-directive-22-01>,
+        <https://www.cisa.gov/directives> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:count ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:date_released ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:catalog_version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty kev_catalog:count ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:catalog_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:vulnerabilities ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:date_released ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:count ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom kev_catalog:Vulnerability ;
+            owl:onProperty kev_catalog:vulnerabilities ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:catalog_version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:date_released ] ;
+    skos:definition "The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01." ;
+    skos:exactMatch WIKIDATA:Q1172284,
+        schema1:Dataset ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "BOD 22-01 does not apply to: national security systems (as defined by statute), systems operated by the Department of Defense, or systems operated by the Intelligence Community.",
+        "BOD 22-01, \"Reducing the Significant Risk of Known Exploited Vulnerabilities\", was issued under Section 3553(b)(2) of title 44, U.S. Code by the Secretary of Homeland Security. It is a compulsory direction to all FCEB departments and agencies.",
+        "CISA strongly recommends all organizations — including state, local, tribal and territorial (SLTT) governments and private sector — prioritize remediation of KEV catalog entries as part of their vulnerability management plan, even though BOD 22-01 itself only binds FCEB agencies." ;
+    kev_catalog:contact_directives "CyberDirectives@cisa.dhs.gov" ;
+    kev_catalog:contact_general "CyberLiaison@cisa.dhs.gov" ;
+    kev_catalog:directive_date "2021-11-03" ;
+    kev_catalog:directive_id "BOD 22-01" ;
+    kev_catalog:issuing_body "Department of Homeland Security / CISA" ;
+    kev_catalog:legal_authority "44 U.S.C. § 3553(b)(2)" .
+
+WIKIDATA:Q532924 a owl:Class ;
+    rdfs:label "known" ;
+    rdfs:subClassOf kev_catalog:KnownRansomwareCampaignUseEnum ;
+    skos:definition "The vulnerability is known to have been used in a ransomware campaign." .
+
+<https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> a owl:Class ;
+    rdfs:label "unknown" ;
+    rdfs:subClassOf kev_catalog:KnownRansomwareCampaignUseEnum ;
+    skos:definition "It is not known whether the vulnerability has been used in a ransomware campaign." .
+
+kev_catalog:Vulnerability a owl:Class ;
+    rdfs:label "Vulnerability" ;
+    rdfs:seeAlso <https://www.cisa.gov/known-exploited-vulnerabilities-catalog> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:product ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:product ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:due_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:due_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom kev_catalog:KnownRansomwareCampaignUseEnum ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty kev_catalog:due_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:product ] ;
+    skos:definition "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists." ;
+    skos:exactMatch WIKIDATA:Q16798631,
+        schema1:SoftwareApplication ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "BOD 22-01 focuses on a small, high-signal subset of all vulnerabilities: as of 2022-07-15 the catalog contained 787 KEVs from a universe of ~179,383 CVEs, and approximately 20 of those KEVs were the most prevalent across the entire federal enterprise.",
+        "Three criteria must all be met for inclusion: (1) assigned CVE ID, (2) reliable evidence of active exploitation in the wild, and (3) clear remediation guidance (vendor update or EOL removal)." .
+
+kev_catalog:vulnerabilities a owl:ObjectProperty ;
+    rdfs:label "vulnerabilities" ;
+    rdfs:range kev_catalog:Vulnerability ;
+    skos:definition "The list of known exploited vulnerabilities." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:catalog_version a owl:DatatypeProperty ;
+    rdfs:label "catalog_version" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "catalogVersion" ;
+    skos:definition "The version string of the KEV catalog release." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:count a owl:DatatypeProperty ;
+    rdfs:label "count" ;
+    rdfs:range xsd:integer ;
+    skos:definition "The total number of vulnerabilities in this catalog version." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:cve_id a owl:DatatypeProperty ;
+    rdfs:label "cve_id" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "cveID" ;
+    skos:definition "The CVE identifier assigned to this vulnerability by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN." ;
+    skos:exactMatch schema1:identifier ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:date_added a owl:DatatypeProperty ;
+    rdfs:label "date_added" ;
+    rdfs:range xsd:date ;
+    skos:altLabel "dateAdded" ;
+    skos:definition "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:date_released a owl:DatatypeProperty ;
+    rdfs:label "date_released" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "dateReleased" ;
+    skos:definition "The ISO 8601 timestamp at which this catalog version was released." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:due_date a owl:DatatypeProperty ;
+    rdfs:label "due_date" ;
+    rdfs:range xsd:date ;
+    skos:altLabel "dueDate" ;
+    skos:definition "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "Deadline set by CISA. Under BOD 19-02, internet-accessible critical vulnerabilities (CVSS >9.0) must be remediated within 15 calendar days and high vulnerabilities (7.0-9.0) within 30 calendar days of initial detection; BOD 22-01 due dates may be tighter and apply to all agency systems, not only internet-accessible ones." .
+
+kev_catalog:known_ransomware_campaign_use a owl:ObjectProperty ;
+    rdfs:label "known_ransomware_campaign_use" ;
+    rdfs:range kev_catalog:KnownRansomwareCampaignUseEnum ;
+    skos:altLabel "knownRansomwareCampaignUse" ;
+    skos:definition "Whether the vulnerability is known to have been leveraged as part of a ransomware campaign." ;
+    skos:editorialNote "CISA encourages organizations with evidence of exploited vulnerabilities not listed in the KEV to submit them to vulnerability@mail.cisa.dhs.gov." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:notes a owl:DatatypeProperty ;
+    rdfs:label "notes" ;
+    rdfs:range xsd:string ;
+    skos:definition "Additional notes or references related to the vulnerability or its remediation." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:product a owl:DatatypeProperty ;
+    rdfs:label "product" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "product" ;
+    skos:definition "The name of the affected product." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:required_action a owl:DatatypeProperty ;
+    rdfs:label "required_action" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "requiredAction" ;
+    skos:definition "The remediation action required, e.g. \"Apply updates per vendor instructions.\"" ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "BOD 22-01 specifies two acceptable actions: (1) apply updates per vendor instructions, or (2) remove the product from agency networks if it is end-of-life or cannot otherwise be updated. Temporary mitigations and workarounds may be applied while awaiting a vendor patch." .
+
+kev_catalog:short_description a owl:DatatypeProperty ;
+    rdfs:label "short_description" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "shortDescription" ;
+    skos:definition "A brief description of the vulnerability." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "KEV inclusion criterion #2 requires reliable evidence that the vulnerability has been actively exploited in the wild. Active exploitation includes attempted and successful exploitation; scanning, security research, and public PoC alone do not qualify." .
+
+kev_catalog:title a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:range xsd:string ;
+    skos:definition "The title of the KEV catalog." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:vendor_project a owl:DatatypeProperty ;
+    rdfs:label "vendor_project" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "vendorProject" ;
+    skos:definition "The name of the vendor or project responsible for the affected product." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:vulnerability_name a owl:DatatypeProperty ;
+    rdfs:label "vulnerability_name" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "vulnerabilityName" ;
+    skos:definition "A short, descriptive name for the vulnerability." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+xsd:date a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ] ) ] .
+
+kev_catalog:KnownRansomwareCampaignUseEnum a owl:Class ;
+    rdfs:label "KnownRansomwareCampaignUseEnum" ;
+    owl:unionOf ( WIKIDATA:Q532924 <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> ) ;
+    skos:definition "Whether the vulnerability is known to have been used in ransomware campaigns." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "CISA uses this field to signal whether the KEV entry has been observed as part of ransomware activity, enabling organizations to further prioritize their remediation efforts beyond the base BOD 22-01 timeline." ;
+    linkml:permissible_values WIKIDATA:Q532924,
+        <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> .
+
+xsd:string a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^CVE-[0-9]{4}-[0-9]+$" ] ) ] .
+
+

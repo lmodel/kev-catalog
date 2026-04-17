@@ -1,0 +1,171 @@
+{
+    "$defs": {
+        "KevCatalog": {
+            "additionalProperties": false,
+            "description": "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.",
+            "properties": {
+                "catalog_version": {
+                    "description": "The version string of the KEV catalog release.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "count": {
+                    "description": "The total number of vulnerabilities in this catalog version.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "date_released": {
+                    "description": "The ISO 8601 timestamp at which this catalog version was released.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "The title of the KEV catalog.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "vulnerabilities": {
+                    "description": "The list of known exploited vulnerabilities.",
+                    "items": {
+                        "$ref": "#/$defs/Vulnerability"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "KevCatalog",
+            "type": "object"
+        },
+        "KnownRansomwareCampaignUseEnum": {
+            "description": "Whether the vulnerability is known to have been used in ransomware campaigns.",
+            "enum": [
+                "known",
+                "unknown"
+            ],
+            "title": "KnownRansomwareCampaignUseEnum",
+            "type": "string"
+        },
+        "Vulnerability": {
+            "additionalProperties": false,
+            "description": "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.",
+            "properties": {
+                "cve_id": {
+                    "description": "The CVE identifier assigned to this vulnerability by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.",
+                    "pattern": "^CVE-[0-9]{4}-[0-9]+$",
+                    "type": "string"
+                },
+                "date_added": {
+                    "description": "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog.",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                    "type": "string"
+                },
+                "due_date": {
+                    "description": "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01.",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                    "type": "string"
+                },
+                "known_ransomware_campaign_use": {
+                    "$ref": "#/$defs/KnownRansomwareCampaignUseEnum",
+                    "description": "Whether the vulnerability is known to have been leveraged as part of a ransomware campaign."
+                },
+                "notes": {
+                    "description": "Additional notes or references related to the vulnerability or its remediation.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "product": {
+                    "description": "The name of the affected product.",
+                    "type": "string"
+                },
+                "required_action": {
+                    "description": "The remediation action required, e.g. \"Apply updates per vendor instructions.\"",
+                    "type": "string"
+                },
+                "short_description": {
+                    "description": "A brief description of the vulnerability.",
+                    "type": "string"
+                },
+                "vendor_project": {
+                    "description": "The name of the vendor or project responsible for the affected product.",
+                    "type": "string"
+                },
+                "vulnerability_name": {
+                    "description": "A short, descriptive name for the vulnerability.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cve_id",
+                "vendor_project",
+                "product",
+                "vulnerability_name",
+                "date_added",
+                "short_description",
+                "required_action",
+                "due_date"
+            ],
+            "title": "Vulnerability",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/lmodel/kev-catalog",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "catalog_version": {
+            "description": "The version string of the KEV catalog release.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "count": {
+            "description": "The total number of vulnerabilities in this catalog version.",
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "date_released": {
+            "description": "The ISO 8601 timestamp at which this catalog version was released.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "title": {
+            "description": "The title of the KEV catalog.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "vulnerabilities": {
+            "description": "The list of known exploited vulnerabilities.",
+            "items": {
+                "$ref": "#/$defs/Vulnerability"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "title": "kev-catalog",
+    "type": "object",
+    "version": "1.0"
+}

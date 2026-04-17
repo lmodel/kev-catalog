@@ -1,0 +1,121 @@
+@prefix WIKIDATA: <http://identifiers.org/wikidata/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix kev_catalog: <https://w3id.org/lmodel/kev-catalog/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kev_catalog:KevCatalog a sh:NodeShape ;
+    rdfs:comment "The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The version string of the KEV catalog release." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path kev_catalog:catalog_version ],
+        [ sh:datatype xsd:integer ;
+            sh:description "The total number of vulnerabilities in this catalog version." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path kev_catalog:count ],
+        [ sh:class kev_catalog:Vulnerability ;
+            sh:description "The list of known exploited vulnerabilities." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path kev_catalog:vulnerabilities ],
+        [ sh:datatype xsd:string ;
+            sh:description "The title of the KEV catalog." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path dcterms:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "The ISO 8601 timestamp at which this catalog version was released." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path kev_catalog:date_released ] ;
+    sh:targetClass kev_catalog:KevCatalog .
+
+kev_catalog:Vulnerability a sh:NodeShape ;
+    rdfs:comment "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Whether the vulnerability is known to have been leveraged as part of a ransomware campaign." ;
+            sh:in ( WIKIDATA:Q532924 "unknown" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path kev_catalog:known_ransomware_campaign_use ],
+        [ sh:datatype xsd:date ;
+            sh:description "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path kev_catalog:due_date ;
+            sh:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "A brief description of the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path dcterms:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "The name of the affected product." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A short, descriptive name for the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path dcterms:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes or references related to the vulnerability or its remediation." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path skos:note ],
+        [ sh:datatype xsd:string ;
+            sh:description "The CVE identifier assigned to this vulnerability by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path dcterms:identifier ;
+            sh:pattern "^CVE-[0-9]{4}-[0-9]+$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "The remediation action required, e.g. \"Apply updates per vendor instructions.\"" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path kev_catalog:required_action ],
+        [ sh:datatype xsd:string ;
+            sh:description "The name of the vendor or project responsible for the affected product." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path schema1:Organization ],
+        [ sh:datatype xsd:date ;
+            sh:description "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path dcterms:created ;
+            sh:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ] ;
+    sh:targetClass kev_catalog:Vulnerability .
+
