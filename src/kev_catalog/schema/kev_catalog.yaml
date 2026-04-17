@@ -48,39 +48,23 @@ notes:
 
 prefixes:
   kev_catalog: https://w3id.org/lmodel/kev-catalog/
+  core: https://w3id.org/lmodel/vulnerability-core/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   dcterms: http://purl.org/dc/terms/
-  xsd:    http://www.w3.org/2001/XMLSchema#
-  rdfs:   http://www.w3.org/2000/01/rdf-schema#
-  skos:   http://www.w3.org/2004/02/skos/core#
-  WIKIDATA: http://identifiers.org/wikidata/
+  xsd:    "http://www.w3.org/2001/XMLSchema#"
+  rdfs:   "http://www.w3.org/2000/01/rdf-schema#"
+  skos:   "http://www.w3.org/2004/02/skos/core#"
+  WIKIDATA: https://www.wikidata.org/wiki/
 
 default_prefix: kev_catalog
 default_range: string
 
 imports:
   - linkml:types
+  - ./vulnerability_core
 
-types:
-  CveId:
-    uri: xsd:string
-    base: str
-    description: >-
-      A CVE identifier in the format CVE-YYYY-NNNNN as assigned by a CVE
-      Numbering Authority (CNA).
-    pattern: "^CVE-[0-9]{4}-[0-9]+$"
-    notes:
-      - >-
-        The first KEV inclusion criterion: the vulnerability must have an
-        assigned CVE ID. The CVE Program is sponsored by CISA and operated by
-        The MITRE Corporation.
-
-  IsoDate:
-    uri: xsd:date
-    base: str
-    description: A date in ISO 8601 format (YYYY-MM-DD).
-    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+types: {}  # no additional types beyond vulnerability_core
 
 enums:
   KnownRansomwareCampaignUseEnum:
@@ -96,26 +80,12 @@ enums:
       known:
         description: >-
           The vulnerability is known to have been used in a ransomware campaign.
-        meaning: WIKIDATA:Q532924
       unknown:
         description: >-
           It is not known whether the vulnerability has been used in a
           ransomware campaign.
 
 slots:
-  cve_id:
-    identifier: true
-    range: CveId
-    required: true
-    description: >-
-      The CVE identifier assigned to this vulnerability by a CVE Numbering
-      Authority (CNA). Format: CVE-YYYY-NNNNN.
-    slot_uri: dcterms:identifier
-    exact_mappings:
-      - schema:identifier
-    aliases:
-      - cveID
-
   vendor_project:
     range: string
     required: true
@@ -220,11 +190,6 @@ slots:
     slot_uri: skos:note
 
   # --- catalog-level slots ---
-  title:
-    range: string
-    description: The title of the KEV catalog.
-    slot_uri: dcterms:title
-
   catalog_version:
     range: string
     description: The version string of the KEV catalog release.
@@ -242,13 +207,14 @@ slots:
     description: The total number of vulnerabilities in this catalog version.
 
   vulnerabilities:
-    range: Vulnerability
+    range: KevEntry
     multivalued: true
     inlined_as_list: true
     description: The list of known exploited vulnerabilities.
 
 classes:
-  Vulnerability:
+  KevEntry:
+    is_a: Vulnerability
     description: >-
       A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog,
       representing one CVE that has been confirmed exploited in the wild and for
@@ -264,7 +230,6 @@ classes:
         ~179,383 CVEs, and approximately 20 of those KEVs were the most
         prevalent across the entire federal enterprise.
     slots:
-      - cve_id
       - vendor_project
       - product
       - vulnerability_name
@@ -274,9 +239,11 @@ classes:
       - due_date
       - known_ransomware_campaign_use
       - notes
-    exact_mappings:
+    related_mappings:
       - schema:SoftwareApplication
-      - WIKIDATA:Q16798631
+      - WIKIDATA:Q166142  # application software
+    exact_mappings:
+      - WIKIDATA:Q631425  # software vulnerability
     see_also:
       - https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 
@@ -314,9 +281,13 @@ classes:
       - date_released
       - count
       - vulnerabilities
-    exact_mappings:
+    slot_usage:
+      title:
+        description: The title of the KEV catalog.
+    broad_mappings:
+      - WIKIDATA:Q2352616  # catalog
+    close_mappings:
       - schema:Dataset
-      - WIKIDATA:Q1172284
     see_also:
       - https://www.cisa.gov/directives
       - https://www.cisa.gov/binding-operational-directive-22-01

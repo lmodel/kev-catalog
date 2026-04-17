@@ -1,0 +1,107 @@
+# metamodel_version: 1.7.0
+# version: 1.0
+enum ImpactSeverity
+  {
+    NONE
+    LOW
+    MEDIUM
+    HIGH
+    CRITICAL
+    UNKNOWN
+  }
+
+enum KnownRansomwareCampaignUseEnum
+  {
+    known
+    unknown
+  }
+
+enum VulnerabilityStatus
+  {
+    ACTIVE
+    REJECTED
+    DISPUTED
+    RESERVED
+    DEPRECATED
+  }
+
+type Configuration
+  {
+    cpeUri: String
+    operator: String
+  }
+
+type Impact
+  {
+    severity: ImpactSeverity
+    vector: String
+    score: Float
+  }
+
+type KevCatalog
+  {
+    title: String
+    catalogVersion: String
+    dateReleased: String
+    count: Int
+    vulnerabilities: [KevEntry]
+  }
+
+type KevEntry
+  {
+    cveId: CveId!
+    title: String
+    description: String!
+    publishedDate: String
+    lastModifiedDate: String
+    products: [Product]
+    weaknesses: [Weakness]
+    references: [Reference]
+    impact: Impact
+    status: VulnerabilityStatus
+    vendorProject: String!
+    product: String!
+    vulnerabilityName: String!
+    dateAdded: IsoDate!
+    shortDescription: String!
+    requiredAction: String!
+    dueDate: IsoDate!
+    knownRansomwareCampaignUse: KnownRansomwareCampaignUseEnum
+    notes: String
+  }
+
+type Product
+  {
+    vendor: String
+    name: String
+    version: String
+    platforms: [String]
+  }
+
+type Reference
+  {
+    url: String
+    name: String
+    source: String
+  }
+
+interface Vulnerability
+  {
+    cveId: CveId!
+    title: String
+    description: String!
+    publishedDate: String
+    lastModifiedDate: String
+    products: [Product]
+    weaknesses: [Weakness]
+    references: [Reference]
+    impact: Impact
+    status: VulnerabilityStatus
+  }
+
+type Weakness
+  {
+    cweId: String
+    name: String
+    description: String
+  }

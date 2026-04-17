@@ -1,0 +1,63 @@
+
+Title: test_data.py and _test-examples fail when a schema imports classes/slots from
+a parent schema
+
+Component: linkml-project-copier (generated tests/test_data.py and justfile)
+
+---
+
+Problem 1 — test_data.py: unexpected keyword argument from imported class
+
+test_data.py derives the target class from the filename stem (e.g. "Vulnerability" from
+Vulnerability-001.yaml) and looks it up via getattr on the generated datamodel module.
+When the child schema imports an abstract base class from a parent schema (e.g. Vulnerability
+from vulnerability_core.yaml), the generated datamodel merges all imports into one module.
+The merged Vulnerability class requires only the fields declared in the parent schema
+(cve_id, description). A Vulnerability-001.yaml example written for the KEV child schema
+may include child-only fields (vendor_project, product, etc.) that are valid on KevEntry
+(the concrete subclass) but not on the base Vulnerability, causing:
+
+    TypeError: Vulnerability.__init__() got an unexpected keyword argument 'vendor_project'
+
+Conversely, if the example omits a field that is required on the parent abstract class
+(e.g. description) but not present in the child schema's own slot list, validation fails:
+
+    ValueError: description must be supplied
+
+Root cause: test_data.py assumes tests/data/valid/ contains only tree-root or
+self-contained class examples, but gives no mechanism to specify which class an example
+targets other than by filename stem. When that stem resolves to an imported abstract base
+class the mismatch between expected and actual fields causes failures.
+
+---
+
+Problem 2 — justfile _test-examples: linkml-run-examples rejects non-root examples
+
+_test-examples passes the entire tests/data/valid/ directory to linkml-run-examples, which
+validates every file against the schema's single tree_root class. Example files for
+non-root imported classes fail with:
+
+    ValueError: Example Vulnerability-001.yaml failed validation:
+    [ERROR] Additional properties are not allowed ('cve_id', 'description' were unexpected) in /
+
+Root cause: linkml-run-examples has no per-file class option; it always validates against
+the tree root. The recipe does not filter out non-root examples before invoking the tool.
+
+---
+
+Workaround applied in this project:
+
+1. Moved non-tree-root examples to tests/data/classes/valid/.
+2. Extended the glob in test_data.py to also collect that directory.
+3. The justfile _test-examples recipe is left standard (tests/data/valid/ contains only
+   tree-root examples and is safe to pass directly to linkml-run-examples).
+
+---
+
+Suggested upstream fix:
+
+- test_data.py: add a DATA_DIR_CLASSES_VALID directory (tests/data/classes/valid/) and
+  union it into VALID_EXAMPLE_FILES so non-root class examples are tested by pytest but
+  are not visible to linkml-run-examples.
+- justfile: document that tests/data/valid/ must contain only tree-root instances, or
+  add a --target-class flag to linkml-run-examples to support per-file class targeting.

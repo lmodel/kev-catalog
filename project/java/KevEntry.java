@@ -1,0 +1,25 @@
+package None;
+
+/* metamodel_version: 1.7.0 */
+/* version: 1.0 */
+import java.util.List;
+import lombok.*;
+
+/**
+  A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.
+**/
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class KevEntry extends Vulnerability {
+
+  private String vendorProject;
+  private String product;
+  private String vulnerabilityName;
+  private LocalDate dateAdded;
+  private String shortDescription;
+  private String requiredAction;
+  private LocalDate dueDate;
+  private String knownRansomwareCampaignUse;
+  private String notes;
+
+}

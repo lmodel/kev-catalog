@@ -1,0 +1,355 @@
+@prefix core: <https://w3id.org/lmodel/vulnerability-core/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix kev_catalog: <https://w3id.org/lmodel/kev-catalog/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kev_catalog:KevCatalog a sh:NodeShape ;
+    rdfs:comment "The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The ISO 8601 timestamp at which this catalog version was released." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path kev_catalog:date_released ],
+        [ sh:datatype xsd:string ;
+            sh:description "The title of the KEV catalog." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path dcterms:title ],
+        [ sh:class kev_catalog:KevEntry ;
+            sh:description "The list of known exploited vulnerabilities." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path kev_catalog:vulnerabilities ],
+        [ sh:datatype xsd:integer ;
+            sh:description "The total number of vulnerabilities in this catalog version." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path kev_catalog:count ],
+        [ sh:datatype xsd:string ;
+            sh:description "The version string of the KEV catalog release." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path kev_catalog:catalog_version ] ;
+    sh:targetClass kev_catalog:KevCatalog .
+
+core:Configuration a sh:NodeShape ;
+    rdfs:comment "Logical grouping of CPE match expressions." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Logical operator (AND/OR) used in configuration node groupings." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path core:operator ],
+        [ sh:datatype xsd:string ;
+            sh:description "CPE 2.2 URI identifying an affected product configuration." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path core:cpe_uri ] ;
+    sh:targetClass core:Configuration .
+
+core:Vulnerability a sh:NodeShape ;
+    rdfs:comment "Abstract base representation of a security vulnerability. Extended by source-specific schemas (KEV, CVE, NVD)." ;
+    sh:closed false ;
+    sh:ignoredProperties ( schema1:Organization skos:note kev_catalog:known_ransomware_campaign_use rdf:type schema1:name kev_catalog:required_action kev_catalog:due_date ) ;
+    sh:property [ sh:class core:Reference ;
+            sh:description "External references such as advisories and articles." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path core:references ],
+        [ sh:datatype xsd:string ;
+            sh:description "Short human-readable title or name for this entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path dcterms:title ],
+        [ sh:description "Current lifecycle state of the vulnerability record." ;
+            sh:in ( "ACTIVE" "REJECTED" "DISPUTED" "RESERVED" "DEPRECATED" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path core:status ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path dcterms:description ],
+        [ sh:class core:Product ;
+            sh:description "Products affected by this vulnerability." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path core:products ],
+        [ sh:datatype xsd:string ;
+            sh:description "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path dcterms:identifier ;
+            sh:pattern "^CVE-[0-9]{4}-[0-9]+$" ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time the vulnerability was first published." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path dcterms:created ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time the vulnerability record was last modified." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path dcterms:modified ],
+        [ sh:class core:Weakness ;
+            sh:description "Weakness classifications (e.g. CWE) associated with this vulnerability." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path core:weaknesses ],
+        [ sh:class core:Impact ;
+            sh:description "Impact and severity assessment for this vulnerability." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path core:impact ] ;
+    sh:targetClass core:Vulnerability .
+
+kev_catalog:KevEntry a sh:NodeShape ;
+    rdfs:comment "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path kev_catalog:due_date ;
+            sh:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time the vulnerability record was last modified." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path dcterms:modified ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes or references related to the vulnerability or its remediation." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path skos:note ],
+        [ sh:datatype xsd:string ;
+            sh:description "The name of the vendor or project responsible for the affected product." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path schema1:Organization ],
+        [ sh:datatype xsd:string ;
+            sh:description "A brief description of the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path dcterms:description ],
+        [ sh:class core:Weakness ;
+            sh:description "Weakness classifications (e.g. CWE) associated with this vulnerability." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 15 ;
+            sh:path core:weaknesses ],
+        [ sh:class core:Product ;
+            sh:description "Products affected by this vulnerability." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 14 ;
+            sh:path core:products ],
+        [ sh:datatype xsd:string ;
+            sh:description "A short, descriptive name for the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path dcterms:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path dcterms:description ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time the vulnerability was first published." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path dcterms:created ],
+        [ sh:datatype xsd:string ;
+            sh:description "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path dcterms:identifier ;
+            sh:pattern "^CVE-[0-9]{4}-[0-9]+$" ],
+        [ sh:description "Whether the vulnerability is known to have been leveraged as part of a ransomware campaign." ;
+            sh:in ( "known" "unknown" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path kev_catalog:known_ransomware_campaign_use ],
+        [ sh:datatype xsd:date ;
+            sh:description "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path dcterms:created ;
+            sh:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Short human-readable title or name for this entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path dcterms:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "The remediation action required, e.g. \"Apply updates per vendor instructions.\"" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path kev_catalog:required_action ],
+        [ sh:class core:Impact ;
+            sh:description "Impact and severity assessment for this vulnerability." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 17 ;
+            sh:path core:impact ],
+        [ sh:datatype xsd:string ;
+            sh:description "The name of the affected product." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "Current lifecycle state of the vulnerability record." ;
+            sh:in ( "ACTIVE" "REJECTED" "DISPUTED" "RESERVED" "DEPRECATED" ) ;
+            sh:maxCount 1 ;
+            sh:order 18 ;
+            sh:path core:status ],
+        [ sh:class core:Reference ;
+            sh:description "External references such as advisories and articles." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 16 ;
+            sh:path core:references ] ;
+    sh:targetClass kev_catalog:KevEntry .
+
+core:Impact a sh:NodeShape ;
+    rdfs:comment "Assessment of the vulnerability's impact and severity." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Numeric vulnerability score (e.g. CVSS base score)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path core:score ],
+        [ sh:description "Qualitative severity rating." ;
+            sh:in ( "NONE" "LOW" "MEDIUM" "HIGH" "CRITICAL" "UNKNOWN" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path core:severity ],
+        [ sh:datatype xsd:string ;
+            sh:description "CVSS vector string or equivalent scoring vector expression." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path core:vector ] ;
+    sh:targetClass core:Impact .
+
+core:Product a sh:NodeShape ;
+    rdfs:comment "Software or hardware entity affected by the vulnerability." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Version string of the affected product." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path schema1:version ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the vendor or organization responsible for the product." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Platforms or operating environments affected." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path core:platforms ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the entity (product, weakness, reference, etc.)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path rdfs:label ] ;
+    sh:targetClass core:Product .
+
+core:Reference a sh:NodeShape ;
+    rdfs:comment "External reference such as an advisory or article." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name of the entity (product, weakness, reference, etc.)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path rdfs:label ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL pointing to the reference resource." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path schema1:url ],
+        [ sh:datatype xsd:string ;
+            sh:description "Source or origin of the reference or data." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path dcterms:source ] ;
+    sh:targetClass core:Reference .
+
+core:Weakness a sh:NodeShape ;
+    rdfs:comment "Weakness classification from CWE or a similar taxonomy." ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "CWE identifier for the weakness classification (e.g. CWE-79)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path dcterms:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the vulnerability." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path dcterms:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the entity (product, weakness, reference, etc.)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path rdfs:label ] ;
+    sh:targetClass core:Weakness .
+

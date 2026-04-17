@@ -1,0 +1,30 @@
+{
+   "WIKIDATA": "https://www.wikidata.org/wiki/",
+   "core": "https://w3id.org/lmodel/vulnerability-core/",
+   "dct": "http://purl.org/dc/terms/",
+   "dcterms": "http://purl.org/dc/terms/",
+   "kev_catalog": "https://w3id.org/lmodel/kev-catalog/",
+   "linkml": "https://w3id.org/linkml/",
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+   "schema": "http://schema.org/",
+   "skos": "http://www.w3.org/2004/02/skos/core#",
+   "xsd": "http://www.w3.org/2001/XMLSchema#",
+   "Configuration": {
+      "@id": "core:Configuration"
+   },
+   "Impact": {
+      "@id": "core:Impact"
+   },
+   "Product": {
+      "@id": "core:Product"
+   },
+   "Reference": {
+      "@id": "core:Reference"
+   },
+   "Vulnerability": {
+      "@id": "core:Vulnerability"
+   },
+   "Weakness": {
+      "@id": "core:Weakness"
+   }
+}

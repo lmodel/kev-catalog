@@ -1,0 +1,414 @@
+{
+    "$defs": {
+        "Configuration": {
+            "additionalProperties": false,
+            "description": "Logical grouping of CPE match expressions.",
+            "properties": {
+                "cpe_uri": {
+                    "description": "CPE 2.2 URI identifying an affected product configuration.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "operator": {
+                    "description": "Logical operator (AND/OR) used in configuration node groupings.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Configuration",
+            "type": "object"
+        },
+        "Impact": {
+            "additionalProperties": false,
+            "description": "Assessment of the vulnerability's impact and severity.",
+            "properties": {
+                "score": {
+                    "description": "Numeric vulnerability score (e.g. CVSS base score).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "severity": {
+                    "$ref": "#/$defs/ImpactSeverity",
+                    "description": "Qualitative severity rating."
+                },
+                "vector": {
+                    "description": "CVSS vector string or equivalent scoring vector expression.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Impact",
+            "type": "object"
+        },
+        "ImpactSeverity": {
+            "description": "CVSS qualitative severity rating.",
+            "enum": [
+                "NONE",
+                "LOW",
+                "MEDIUM",
+                "HIGH",
+                "CRITICAL",
+                "UNKNOWN"
+            ],
+            "title": "ImpactSeverity",
+            "type": "string"
+        },
+        "KevCatalog": {
+            "additionalProperties": false,
+            "description": "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.",
+            "properties": {
+                "catalog_version": {
+                    "description": "The version string of the KEV catalog release.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "count": {
+                    "description": "The total number of vulnerabilities in this catalog version.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "date_released": {
+                    "description": "The ISO 8601 timestamp at which this catalog version was released.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "The title of the KEV catalog.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "vulnerabilities": {
+                    "description": "The list of known exploited vulnerabilities.",
+                    "items": {
+                        "$ref": "#/$defs/KevEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "KevCatalog",
+            "type": "object"
+        },
+        "KevEntry": {
+            "additionalProperties": false,
+            "description": "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.",
+            "properties": {
+                "cve_id": {
+                    "description": "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.",
+                    "pattern": "^CVE-[0-9]{4}-[0-9]+$",
+                    "type": "string"
+                },
+                "date_added": {
+                    "description": "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog.",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Narrative description of the vulnerability.",
+                    "type": "string"
+                },
+                "due_date": {
+                    "description": "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01.",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                    "type": "string"
+                },
+                "impact": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Impact"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Impact and severity assessment for this vulnerability."
+                },
+                "known_ransomware_campaign_use": {
+                    "$ref": "#/$defs/KnownRansomwareCampaignUseEnum",
+                    "description": "Whether the vulnerability is known to have been leveraged as part of a ransomware campaign."
+                },
+                "last_modified_date": {
+                    "description": "Date and time the vulnerability record was last modified.",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "description": "Additional notes or references related to the vulnerability or its remediation.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "product": {
+                    "description": "The name of the affected product.",
+                    "type": "string"
+                },
+                "products": {
+                    "description": "Products affected by this vulnerability.",
+                    "items": {
+                        "$ref": "#/$defs/Product"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "published_date": {
+                    "description": "Date and time the vulnerability was first published.",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "references": {
+                    "description": "External references such as advisories and articles.",
+                    "items": {
+                        "$ref": "#/$defs/Reference"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "required_action": {
+                    "description": "The remediation action required, e.g. \"Apply updates per vendor instructions.\"",
+                    "type": "string"
+                },
+                "short_description": {
+                    "description": "A brief description of the vulnerability.",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/VulnerabilityStatus",
+                    "description": "Current lifecycle state of the vulnerability record."
+                },
+                "title": {
+                    "description": "Short human-readable title or name for this entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "vendor_project": {
+                    "description": "The name of the vendor or project responsible for the affected product.",
+                    "type": "string"
+                },
+                "vulnerability_name": {
+                    "description": "A short, descriptive name for the vulnerability.",
+                    "type": "string"
+                },
+                "weaknesses": {
+                    "description": "Weakness classifications (e.g. CWE) associated with this vulnerability.",
+                    "items": {
+                        "$ref": "#/$defs/Weakness"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "vendor_project",
+                "product",
+                "vulnerability_name",
+                "date_added",
+                "short_description",
+                "required_action",
+                "due_date",
+                "cve_id",
+                "description"
+            ],
+            "title": "KevEntry",
+            "type": "object"
+        },
+        "KnownRansomwareCampaignUseEnum": {
+            "description": "Whether the vulnerability is known to have been used in ransomware campaigns.",
+            "enum": [
+                "known",
+                "unknown"
+            ],
+            "title": "KnownRansomwareCampaignUseEnum",
+            "type": "string"
+        },
+        "Product": {
+            "additionalProperties": false,
+            "description": "Software or hardware entity affected by the vulnerability.",
+            "properties": {
+                "name": {
+                    "description": "Name of the entity (product, weakness, reference, etc.).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "platforms": {
+                    "description": "Platforms or operating environments affected.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "vendor": {
+                    "description": "Name of the vendor or organization responsible for the product.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "description": "Version string of the affected product.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Product",
+            "type": "object"
+        },
+        "Reference": {
+            "additionalProperties": false,
+            "description": "External reference such as an advisory or article.",
+            "properties": {
+                "name": {
+                    "description": "Name of the entity (product, weakness, reference, etc.).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source": {
+                    "description": "Source or origin of the reference or data.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "url": {
+                    "description": "URL pointing to the reference resource.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Reference",
+            "type": "object"
+        },
+        "VulnerabilityStatus": {
+            "description": "Lifecycle state of a vulnerability record.",
+            "enum": [
+                "ACTIVE",
+                "REJECTED",
+                "DISPUTED",
+                "RESERVED",
+                "DEPRECATED"
+            ],
+            "title": "VulnerabilityStatus",
+            "type": "string"
+        },
+        "Weakness": {
+            "additionalProperties": false,
+            "description": "Weakness classification from CWE or a similar taxonomy.",
+            "properties": {
+                "cwe_id": {
+                    "description": "CWE identifier for the weakness classification (e.g. CWE-79).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the vulnerability.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of the entity (product, weakness, reference, etc.).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Weakness",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/lmodel/kev-catalog",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "catalog_version": {
+            "description": "The version string of the KEV catalog release.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "count": {
+            "description": "The total number of vulnerabilities in this catalog version.",
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "date_released": {
+            "description": "The ISO 8601 timestamp at which this catalog version was released.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "title": {
+            "description": "The title of the KEV catalog.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "vulnerabilities": {
+            "description": "The list of known exploited vulnerabilities.",
+            "items": {
+                "$ref": "#/$defs/KevEntry"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "title": "kev-catalog",
+    "type": "object",
+    "version": "1.0"
+}

@@ -1,0 +1,71 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// version: 1.0
+// Logical grouping of CPE match expressions.
+message Configuration
+ {
+  string cpeUri = 0
+  string operator = 0
+ }
+// Assessment of the vulnerability's impact and severity.
+message Impact
+ {
+  impactSeverity severity = 0
+  string vector = 0
+  float score = 0
+ }
+// The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.
+message KevCatalog
+ {
+  string title = 0
+  string catalogVersion = 0
+  string dateReleased = 0
+  integer count = 0
+ repeated  kevEntry vulnerabilities = 0
+ }
+// A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.
+message KevEntry
+ {
+  cveId cveId = 0
+  string title = 0
+  string description = 0
+  datetime publishedDate = 0
+  datetime lastModifiedDate = 0
+ repeated  product products = 0
+ repeated  weakness weaknesses = 0
+ repeated  reference references = 0
+  impact impact = 0
+  vulnerabilityStatus status = 0
+  string vendorProject = 0
+  string product = 0
+  string vulnerabilityName = 0
+  isoDate dateAdded = 0
+  string shortDescription = 0
+  string requiredAction = 0
+  isoDate dueDate = 0
+  knownRansomwareCampaignUseEnum knownRansomwareCampaignUse = 0
+  string notes = 0
+ }
+// Software or hardware entity affected by the vulnerability.
+message Product
+ {
+  string vendor = 0
+  string name = 0
+  string version = 0
+ repeated  string platforms = 0
+ }
+// External reference such as an advisory or article.
+message Reference
+ {
+  uri url = 0
+  string name = 0
+  string source = 0
+ }
+// Weakness classification from CWE or a similar taxonomy.
+message Weakness
+ {
+  string cweId = 0
+  string name = 0
+  string description = 0
+ }

@@ -1,0 +1,169 @@
+{
+   "@context": {
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "WIKIDATA": "https://www.wikidata.org/wiki/",
+      "core": "https://w3id.org/lmodel/vulnerability-core/",
+      "dct": "http://purl.org/dc/terms/",
+      "dcterms": "http://purl.org/dc/terms/",
+      "kev_catalog": "https://w3id.org/lmodel/kev-catalog/",
+      "linkml": "https://w3id.org/linkml/",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "@vocab": "https://w3id.org/lmodel/kev-catalog/",
+      "catalog_version": {
+         "@id": "catalog_version"
+      },
+      "count": {
+         "@type": "xsd:integer",
+         "@id": "count"
+      },
+      "cpe_uri": {
+         "@id": "core:cpe_uri"
+      },
+      "cve_id": "@id",
+      "cwe_id": {
+         "@id": "dct:identifier"
+      },
+      "date_added": {
+         "@type": "xsd:date",
+         "@id": "dcterms:created"
+      },
+      "date_released": {
+         "@id": "date_released"
+      },
+      "description": {
+         "@id": "dct:description"
+      },
+      "due_date": {
+         "@type": "xsd:date",
+         "@id": "due_date"
+      },
+      "impact": {
+         "@type": "@id",
+         "@id": "core:impact"
+      },
+      "known_ransomware_campaign_use": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "known_ransomware_campaign_use"
+      },
+      "last_modified_date": {
+         "@type": "xsd:dateTime",
+         "@id": "dct:modified"
+      },
+      "name": {
+         "@id": "rdfs:label"
+      },
+      "notes": {
+         "@id": "skos:note"
+      },
+      "operator": {
+         "@id": "core:operator"
+      },
+      "platforms": {
+         "@id": "core:platforms"
+      },
+      "product": {
+         "@id": "schema:name"
+      },
+      "products": {
+         "@type": "@id",
+         "@id": "core:products"
+      },
+      "published_date": {
+         "@type": "xsd:dateTime",
+         "@id": "dct:created"
+      },
+      "references": {
+         "@type": "@id",
+         "@id": "core:references"
+      },
+      "required_action": {
+         "@id": "required_action"
+      },
+      "score": {
+         "@type": "xsd:float",
+         "@id": "core:score"
+      },
+      "severity": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "core:severity"
+      },
+      "short_description": {
+         "@id": "dcterms:description"
+      },
+      "source": {
+         "@id": "dct:source"
+      },
+      "status": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "core:status"
+      },
+      "title": {
+         "@id": "dct:title"
+      },
+      "url": {
+         "@type": "xsd:anyURI",
+         "@id": "schema:url"
+      },
+      "vector": {
+         "@id": "core:vector"
+      },
+      "vendor": {
+         "@id": "schema:name"
+      },
+      "vendor_project": {
+         "@id": "schema:Organization"
+      },
+      "version": {
+         "@id": "schema:version"
+      },
+      "vulnerabilities": {
+         "@type": "@id",
+         "@id": "vulnerabilities"
+      },
+      "vulnerability_name": {
+         "@id": "dcterms:title"
+      },
+      "weaknesses": {
+         "@type": "@id",
+         "@id": "core:weaknesses"
+      },
+      "Configuration": {
+         "@id": "core:Configuration"
+      },
+      "Impact": {
+         "@id": "core:Impact"
+      },
+      "KevCatalog": {
+         "@id": "KevCatalog"
+      },
+      "KevEntry": {
+         "@id": "KevEntry"
+      },
+      "Product": {
+         "@id": "core:Product"
+      },
+      "Reference": {
+         "@id": "core:Reference"
+      },
+      "Vulnerability": {
+         "@id": "core:Vulnerability"
+      },
+      "Weakness": {
+         "@id": "core:Weakness"
+      }
+   }
+}

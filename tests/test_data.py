@@ -9,8 +9,12 @@ from linkml_runtime.loaders import yaml_loader
 
 DATA_DIR_VALID = Path(__file__).parent / "data" / "valid"
 DATA_DIR_INVALID = Path(__file__).parent / "data" / "invalid"
+DATA_DIR_CLASSES_VALID = Path(__file__).parent / "data" / "classes" / "valid"
 
-VALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_VALID, '*.yaml'))
+VALID_EXAMPLE_FILES = (
+    glob.glob(os.path.join(DATA_DIR_VALID, '*.yaml')) +
+    glob.glob(os.path.join(DATA_DIR_CLASSES_VALID, '*.yaml'))
+)
 INVALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_INVALID, '*.yaml'))
 
 
