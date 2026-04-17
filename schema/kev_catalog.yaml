@@ -400,7 +400,6 @@ enums:
       REJECTED:
         text: REJECTED
         description: CVE ID was rejected and should not be used.
-        meaning: WIKIDATA:Q4877841
       DISPUTED:
         text: DISPUTED
         description: The vulnerability details are disputed by a party.
@@ -1106,7 +1105,7 @@ classes:
     - core
     from_schema: https://w3id.org/lmodel/vulnerability-core
     exact_mappings:
-    - WIKIDATA:Q16798631
+    - WIKIDATA:Q631425
     related_mappings:
     - schema:SoftwareApplication
     abstract: true
@@ -1195,7 +1194,7 @@ classes:
     class_uri: core:Configuration
 metamodel_version: 1.7.0
 source_file: kev_catalog.yaml
-source_file_date: '2026-04-17T15:28:39'
+source_file_date: '2026-04-17T15:37:21'
 source_file_size: 10444
-generation_date: '2026-04-17T15:28:51'
+generation_date: '2026-04-17T15:37:33'
 
