@@ -1,5 +1,5 @@
 # Auto generated from kev_catalog.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-17T16:36:20
+# Generation date: 2026-05-07T15:20:47
 # Schema: kev-catalog
 #
 # id: https://w3id.org/lmodel/kev-catalog
@@ -68,10 +68,13 @@ version = "1.0"
 # Namespaces
 WIKIDATA = CurieNamespace('WIKIDATA', 'https://www.wikidata.org/wiki/')
 CORE = CurieNamespace('core', 'https://w3id.org/lmodel/vulnerability-core/')
+CVE = CurieNamespace('cve', 'https://w3id.org/lmodel/cve/')
+CWE = CurieNamespace('cwe', 'https://w3id.org/lmodel/cwe/')
 DCT = CurieNamespace('dct', 'http://purl.org/dc/terms/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 KEV_CATALOG = CurieNamespace('kev_catalog', 'https://w3id.org/lmodel/kev-catalog/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
+NVD = CurieNamespace('nvd', 'https://w3id.org/lmodel/nist-nvd/')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
@@ -155,8 +158,8 @@ class Vulnerability(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Vulnerability
 
     cve_id: Union[str, VulnerabilityCveId] = None
-    description: str = None
     title: Optional[str] = None
+    description: Optional[str] = None
     published_date: Optional[Union[str, XSDDateTime]] = None
     last_modified_date: Optional[Union[str, XSDDateTime]] = None
     products: Optional[Union[Union[dict, "Product"], list[Union[dict, "Product"]]]] = empty_list()
@@ -171,13 +174,11 @@ class Vulnerability(YAMLRoot):
         if not isinstance(self.cve_id, VulnerabilityCveId):
             self.cve_id = VulnerabilityCveId(self.cve_id)
 
-        if self._is_empty(self.description):
-            self.MissingRequiredField("description")
-        if not isinstance(self.description, str):
-            self.description = str(self.description)
-
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
 
         if self.published_date is not None and not isinstance(self.published_date, XSDDateTime):
             self.published_date = XSDDateTime(self.published_date)
@@ -220,7 +221,6 @@ class KevEntry(Vulnerability):
     class_model_uri: ClassVar[URIRef] = KEV_CATALOG.KevEntry
 
     cve_id: Union[str, KevEntryCveId] = None
-    description: str = None
     vendor_project: str = None
     product: str = None
     vulnerability_name: str = None
@@ -589,7 +589,8 @@ slots.source = Slot(uri=DCT.source, name="source", curie=DCT.curie('source'),
                    model_uri=KEV_CATALOG.source, domain=None, range=Optional[str])
 
 slots.cwe_id = Slot(uri=DCT.identifier, name="cwe_id", curie=DCT.curie('identifier'),
-                   model_uri=KEV_CATALOG.cwe_id, domain=None, range=Optional[str])
+                   model_uri=KEV_CATALOG.cwe_id, domain=None, range=Optional[str],
+                   pattern=re.compile(r'^CWE-[1-9][0-9]*$'))
 
 slots.severity = Slot(uri=CORE.severity, name="severity", curie=CORE.curie('severity'),
                    model_uri=KEV_CATALOG.severity, domain=None, range=Optional[Union[str, "ImpactSeverity"]])
@@ -606,6 +607,9 @@ slots.cpe_uri = Slot(uri=CORE.cpe_uri, name="cpe_uri", curie=CORE.curie('cpe_uri
 slots.operator = Slot(uri=CORE.operator, name="operator", curie=CORE.curie('operator'),
                    model_uri=KEV_CATALOG.operator, domain=None, range=Optional[str])
 
+slots.KevEntry_cve_id = Slot(uri=DCT.identifier, name="KevEntry_cve_id", curie=DCT.curie('identifier'),
+                   model_uri=KEV_CATALOG.KevEntry_cve_id, domain=KevEntry, range=Union[str, KevEntryCveId])
+
 slots.KevCatalog_title = Slot(uri=DCT.title, name="KevCatalog_title", curie=DCT.curie('title'),
                    model_uri=KEV_CATALOG.KevCatalog_title, domain=KevCatalog, range=Optional[str])
 
@@ -613,4 +617,4 @@ slots.Vulnerability_cve_id = Slot(uri=DCT.identifier, name="Vulnerability_cve_id
                    model_uri=KEV_CATALOG.Vulnerability_cve_id, domain=Vulnerability, range=Union[str, VulnerabilityCveId])
 
 slots.Vulnerability_description = Slot(uri=DCT.description, name="Vulnerability_description", curie=DCT.curie('description'),
-                   model_uri=KEV_CATALOG.Vulnerability_description, domain=Vulnerability, range=str)
+                   model_uri=KEV_CATALOG.Vulnerability_description, domain=Vulnerability, range=Optional[str])

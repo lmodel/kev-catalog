@@ -1,5 +1,6 @@
 @prefix WIKIDATA: <https://www.wikidata.org/wiki/> .
 @prefix core: <https://w3id.org/lmodel/vulnerability-core/> .
+@prefix cve: <https://w3id.org/lmodel/cve/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix kev_catalog: <https://w3id.org/lmodel/kev-catalog/> .
 @prefix linkml: <https://w3id.org/linkml/> .
@@ -39,46 +40,46 @@ kev_catalog:KevCatalog a owl:Class ;
         <https://www.cisa.gov/directives> ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:count ],
+            owl:onProperty kev_catalog:catalog_version ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty core:title ],
         [ a owl:Restriction ;
-            owl:allValuesFrom kev_catalog:KevEntry ;
-            owl:onProperty kev_catalog:vulnerabilities ],
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:count ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:date_released ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty kev_catalog:count ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty kev_catalog:date_released ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
             owl:onProperty kev_catalog:count ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:catalog_version ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:vulnerabilities ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:date_released ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom kev_catalog:KevEntry ;
+            owl:onProperty kev_catalog:vulnerabilities ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty core:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty core:title ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty kev_catalog:catalog_version ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:catalog_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:title ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty kev_catalog:catalog_version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:date_released ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:date_released ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty kev_catalog:vulnerabilities ] ;
+            owl:onProperty kev_catalog:date_released ] ;
     skos:broadMatch WIKIDATA:Q2352616 ;
     skos:closeMatch schema1:Dataset ;
     skos:definition "The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01." ;
@@ -96,6 +97,9 @@ kev_catalog:KevCatalog a owl:Class ;
 core:Configuration a owl:Class ;
     rdfs:label "Configuration" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:cpe_uri ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty core:operator ],
         [ a owl:Restriction ;
@@ -105,104 +109,105 @@ core:Configuration a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty core:cpe_uri ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty core:cpe_uri ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty core:operator ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:cpe_uri ] ;
+            owl:onProperty core:operator ] ;
+    skos:closeMatch <https://w3id.org/lmodel/nist-nvd/CPEConfiguration> ;
     skos:definition "Logical grouping of CPE match expressions." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
 core:Vulnerability a owl:Class ;
     rdfs:label "Vulnerability" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:published_date ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty core:description ],
         [ a owl:Restriction ;
-            owl:allValuesFrom core:Product ;
-            owl:onProperty core:products ],
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty core:last_modified_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:impact ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:last_modified_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty core:cve_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:title ],
         [ a owl:Restriction ;
             owl:allValuesFrom core:Reference ;
             owl:onProperty core:references ],
         [ a owl:Restriction ;
+            owl:allValuesFrom kev_catalog:VulnerabilityStatus ;
+            owl:onProperty core:status ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty core:cve_id ],
+            owl:onProperty core:published_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom core:Impact ;
+            owl:onProperty core:impact ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:references ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom core:Product ;
+            owl:onProperty core:products ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:impact ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty core:products ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty core:weaknesses ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:status ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty core:published_date ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:dateTime ;
-            owl:onProperty core:last_modified_date ],
+            owl:maxCardinality 1 ;
+            owl:onProperty core:cve_id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom kev_catalog:VulnerabilityStatus ;
+            owl:minCardinality 0 ;
             owl:onProperty core:status ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty core:last_modified_date ],
+            owl:onProperty core:weaknesses ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty core:published_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:cve_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom core:Weakness ;
             owl:onProperty core:weaknesses ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty core:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:dateTime ;
-            owl:onProperty core:published_date ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:references ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:cve_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:impact ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty core:cve_id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:last_modified_date ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:status ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom core:Impact ;
-            owl:onProperty core:impact ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty core:title ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:impact ] ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:last_modified_date ] ;
+    skos:broadMatch kev_catalog:KevEntry,
+        <https://w3id.org/lmodel/nist-nvd/NVDEntry> ;
     skos:definition "Abstract base representation of a security vulnerability. Extended by source-specific schemas (KEV, CVE, NVD)." ;
     skos:exactMatch WIKIDATA:Q631425 ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
-    skos:relatedMatch schema1:SoftwareApplication .
+    skos:relatedMatch schema1:SoftwareApplication,
+        <https://w3id.org/lmodel/cwe/Weakness> .
 
 <https://w3id.org/lmodel/kev-catalog/ImpactSeverity#CRITICAL> a owl:Class ;
     rdfs:label "CRITICAL" ;
@@ -233,99 +238,6 @@ core:Vulnerability a owl:Class ;
     rdfs:label "UNKNOWN" ;
     rdfs:subClassOf kev_catalog:ImpactSeverity ;
     skos:definition "Severity has not been assessed or is unavailable." .
-
-kev_catalog:KevEntry a owl:Class ;
-    rdfs:label "KevEntry" ;
-    rdfs:seeAlso <https://www.cisa.gov/known-exploited-vulnerabilities-catalog> ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:date ;
-            owl:onProperty kev_catalog:date_added ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:vendor_project ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:required_action ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:date_added ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:due_date ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:notes ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:vulnerability_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:product ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:notes ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:product ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:vulnerability_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:short_description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:date ;
-            owl:onProperty kev_catalog:due_date ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:date_added ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:required_action ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:short_description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:required_action ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:due_date ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:short_description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty kev_catalog:notes ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:vendor_project ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty kev_catalog:product ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty kev_catalog:vulnerability_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty kev_catalog:vendor_project ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom kev_catalog:KnownRansomwareCampaignUseEnum ;
-            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
-        core:Vulnerability ;
-    skos:definition "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists." ;
-    skos:exactMatch WIKIDATA:Q631425 ;
-    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
-    skos:note "BOD 22-01 focuses on a small, high-signal subset of all vulnerabilities: as of 2022-07-15 the catalog contained 787 KEVs from a universe of ~179,383 CVEs, and approximately 20 of those KEVs were the most prevalent across the entire federal enterprise.",
-        "Three criteria must all be met for inclusion: (1) assigned CVE ID, (2) reliable evidence of active exploitation in the wild, and (3) clear remediation guidance (vendor update or EOL removal)." ;
-    skos:relatedMatch schema1:SoftwareApplication,
-        WIKIDATA:Q166142 .
 
 <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#known> a owl:Class ;
     rdfs:label "known" ;
@@ -371,32 +283,33 @@ kev_catalog:vulnerabilities a owl:ObjectProperty ;
 core:Impact a owl:Class ;
     rdfs:label "Impact" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:severity ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom kev_catalog:ImpactSeverity ;
-            owl:onProperty core:severity ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty core:score ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:vector ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:severity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:severity ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty core:vector ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:severity ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty core:score ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:vector ],
+            owl:allValuesFrom kev_catalog:ImpactSeverity ;
+            owl:onProperty core:severity ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty core:vector ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:float ;
             owl:onProperty core:score ] ;
+    skos:closeMatch <https://w3id.org/lmodel/nist-nvd/CVSSMetric> ;
     skos:definition "Assessment of the vulnerability's impact and severity." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
@@ -404,49 +317,56 @@ core:Product a owl:Class ;
     rdfs:label "Product" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty core:version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:vendor ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:vendor ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:platforms ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:platforms ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty core:vendor ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty core:version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty core:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty core:name ] ;
+            owl:onProperty core:vendor ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:vendor ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:platforms ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:platforms ] ;
     skos:definition "Software or hardware entity affected by the vulnerability." ;
     skos:exactMatch schema1:SoftwareApplication ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch kev_catalog:KevEntry .
 
 core:Reference a owl:Class ;
     rdfs:label "Reference" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:name ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:source ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty core:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty core:url ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty core:name ],
@@ -457,20 +377,17 @@ core:Reference a owl:Class ;
             owl:maxCardinality 1 ;
             owl:onProperty core:source ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:source ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty core:url ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty core:url ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:source ] ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:name ] ;
+    skos:closeMatch <https://w3id.org/lmodel/cwe/ExternalReference>,
+        <https://w3id.org/lmodel/nist-nvd/NVDReference> ;
     skos:definition "External reference such as an advisory or article." ;
     skos:exactMatch schema1:CreativeWork ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch kev_catalog:notes .
 
 core:Weakness a owl:Class ;
     rdfs:label "Weakness" ;
@@ -478,29 +395,34 @@ core:Weakness a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty core:description ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty core:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty core:cwe_id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty core:cwe_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty core:description ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^CWE-[1-9][0-9]*$" ] ) ] ) ] ;
+            owl:onProperty core:cwe_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty core:cwe_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty core:name ] ;
+            owl:onProperty core:cwe_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty core:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty core:description ] ;
+    skos:closeMatch <https://w3id.org/lmodel/cwe/Weakness>,
+        <https://w3id.org/lmodel/nist-nvd/NVDWeakness> ;
     skos:definition "Weakness classification from CWE or a similar taxonomy." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
@@ -526,7 +448,8 @@ core:weaknesses a owl:ObjectProperty ;
     rdfs:label "weaknesses" ;
     rdfs:range core:Weakness ;
     skos:definition "Weakness classifications (e.g. CWE) associated with this vulnerability." ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch <https://w3id.org/lmodel/cwe/Weakness> .
 
 kev_catalog:catalog_version a owl:DatatypeProperty ;
     rdfs:label "catalog_version" ;
@@ -539,13 +462,6 @@ kev_catalog:count a owl:DatatypeProperty ;
     rdfs:label "count" ;
     rdfs:range xsd:integer ;
     skos:definition "The total number of vulnerabilities in this catalog version." ;
-    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
-
-kev_catalog:date_added a owl:DatatypeProperty ;
-    rdfs:label "date_added" ;
-    rdfs:range xsd:date ;
-    skos:altLabel "dateAdded" ;
-    skos:definition "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog." ;
     skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
 
 kev_catalog:date_released a owl:DatatypeProperty ;
@@ -571,12 +487,6 @@ kev_catalog:known_ransomware_campaign_use a owl:ObjectProperty ;
     skos:editorialNote "CISA encourages organizations with evidence of exploited vulnerabilities not listed in the KEV to submit them to vulnerability@mail.cisa.dhs.gov." ;
     skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
 
-kev_catalog:notes a owl:DatatypeProperty ;
-    rdfs:label "notes" ;
-    rdfs:range xsd:string ;
-    skos:definition "Additional notes or references related to the vulnerability or its remediation." ;
-    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
-
 kev_catalog:product a owl:DatatypeProperty ;
     rdfs:label "product" ;
     rdfs:range xsd:string ;
@@ -592,14 +502,6 @@ kev_catalog:required_action a owl:DatatypeProperty ;
     skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
     skos:note "BOD 22-01 specifies two acceptable actions: (1) apply updates per vendor instructions, or (2) remove the product from agency networks if it is end-of-life or cannot otherwise be updated. Temporary mitigations and workarounds may be applied while awaiting a vendor patch." .
 
-kev_catalog:short_description a owl:DatatypeProperty ;
-    rdfs:label "short_description" ;
-    rdfs:range xsd:string ;
-    skos:altLabel "shortDescription" ;
-    skos:definition "A brief description of the vulnerability." ;
-    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
-    skos:note "KEV inclusion criterion #2 requires reliable evidence that the vulnerability has been actively exploited in the wild. Active exploitation includes attempted and successful exploitation; scanning, security research, and public PoC alone do not qualify." .
-
 kev_catalog:vendor_project a owl:DatatypeProperty ;
     rdfs:label "vendor_project" ;
     rdfs:range xsd:string ;
@@ -607,34 +509,34 @@ kev_catalog:vendor_project a owl:DatatypeProperty ;
     skos:definition "The name of the vendor or project responsible for the affected product." ;
     skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
 
-kev_catalog:vulnerability_name a owl:DatatypeProperty ;
-    rdfs:label "vulnerability_name" ;
-    rdfs:range xsd:string ;
-    skos:altLabel "vulnerabilityName" ;
-    skos:definition "A short, descriptive name for the vulnerability." ;
-    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
-
 core:cpe_uri a owl:DatatypeProperty ;
     rdfs:label "cpe_uri" ;
     rdfs:range xsd:string ;
     skos:altLabel "cpeUri" ;
     skos:definition "CPE 2.2 URI identifying an affected product configuration." ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch <https://w3id.org/lmodel/nist-nvd/CPEMatch> .
 
 core:cve_id a owl:DatatypeProperty ;
     rdfs:label "cve_id" ;
     rdfs:range xsd:string ;
-    skos:altLabel "cveID" ;
+    skos:altLabel "cveId" ;
     skos:definition "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN." ;
-    skos:exactMatch schema1:identifier ;
+    skos:exactMatch schema1:identifier,
+        kev_catalog:cve_id,
+        <https://w3id.org/lmodel/nist-nvd/cve_id> ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
 core:cwe_id a owl:DatatypeProperty ;
     rdfs:label "cwe_id" ;
-    rdfs:range xsd:string ;
-    skos:altLabel "cweID" ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                        owl:onDatatype xsd:string ;
+                        owl:withRestrictions ( [ xsd:pattern "^CWE-[1-9][0-9]*$" ] ) ] ) ] ;
+    skos:altLabel "cweId" ;
     skos:definition "CWE identifier for the weakness classification (e.g. CWE-79)." ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch <https://w3id.org/lmodel/cwe/Weakness> .
 
 core:impact a owl:ObjectProperty ;
     rdfs:label "impact" ;
@@ -658,7 +560,8 @@ core:published_date a owl:DatatypeProperty ;
     rdfs:label "published_date" ;
     rdfs:range xsd:dateTime ;
     skos:definition "Date and time the vulnerability was first published." ;
-    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
+    skos:inScheme <https://w3id.org/lmodel/vulnerability-core> ;
+    skos:relatedMatch kev_catalog:date_added .
 
 core:score a owl:DatatypeProperty ;
     rdfs:label "score" ;
@@ -669,6 +572,7 @@ core:score a owl:DatatypeProperty ;
 core:severity a owl:ObjectProperty ;
     rdfs:label "severity" ;
     rdfs:range kev_catalog:ImpactSeverity ;
+    skos:closeMatch <https://w3id.org/lmodel/nist-nvd/CVSSMetric> ;
     skos:definition "Qualitative severity rating." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
@@ -681,6 +585,7 @@ core:source a owl:DatatypeProperty ;
 core:status a owl:ObjectProperty ;
     rdfs:label "status" ;
     rdfs:range kev_catalog:VulnerabilityStatus ;
+    skos:closeMatch <https://w3id.org/lmodel/nist-nvd/NVDWorkflowStatus> ;
     skos:definition "Current lifecycle state of the vulnerability record." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
@@ -693,6 +598,7 @@ core:url a owl:DatatypeProperty ;
 core:vector a owl:DatatypeProperty ;
     rdfs:label "vector" ;
     rdfs:range xsd:string ;
+    skos:closeMatch <https://w3id.org/lmodel/nist-nvd/CVSSMetric> ;
     skos:definition "CVSS vector string or equivalent scoring vector expression." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 
@@ -713,6 +619,110 @@ xsd:date a rdfs:Datatype ;
             owl:onDatatype xsd:string ;
             owl:withRestrictions ( [ xsd:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ] ) ] .
 
+kev_catalog:KevEntry a owl:Class ;
+    rdfs:label "KevEntry" ;
+    rdfs:seeAlso <https://www.cisa.gov/known-exploited-vulnerabilities-catalog> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom kev_catalog:KnownRansomwareCampaignUseEnum ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty kev_catalog:due_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:product ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:vendor_project ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:product ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:short_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:due_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:vulnerability_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:cve_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:notes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:product ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty kev_catalog:date_added ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty kev_catalog:known_ransomware_campaign_use ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:required_action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty kev_catalog:due_date ],
+        core:Vulnerability ;
+    skos:definition "A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists." ;
+    skos:exactMatch WIKIDATA:Q631425 ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "BOD 22-01 focuses on a small, high-signal subset of all vulnerabilities: as of 2022-07-15 the catalog contained 787 KEVs from a universe of ~179,383 CVEs, and approximately 20 of those KEVs were the most prevalent across the entire federal enterprise.",
+        "Three criteria must all be met for inclusion: (1) assigned CVE ID, (2) reliable evidence of active exploitation in the wild, and (3) clear remediation guidance (vendor update or EOL removal)." ;
+    skos:relatedMatch schema1:SoftwareApplication,
+        cve:AffectedProduct,
+        cve:CVERecord,
+        WIKIDATA:Q166142 .
+
 kev_catalog:KnownRansomwareCampaignUseEnum a owl:Class ;
     rdfs:label "KnownRansomwareCampaignUseEnum" ;
     owl:unionOf ( <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#known> <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> ) ;
@@ -722,9 +732,41 @@ kev_catalog:KnownRansomwareCampaignUseEnum a owl:Class ;
     linkml:permissible_values <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#known>,
         <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> .
 
+kev_catalog:date_added a owl:DatatypeProperty ;
+    rdfs:label "date_added" ;
+    rdfs:range xsd:date ;
+    skos:altLabel "dateAdded" ;
+    skos:definition "The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:relatedMatch cve:date_published .
+
+kev_catalog:notes a owl:DatatypeProperty ;
+    rdfs:label "notes" ;
+    rdfs:range xsd:string ;
+    skos:definition "Additional notes or references related to the vulnerability or its remediation." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
+kev_catalog:short_description a owl:DatatypeProperty ;
+    rdfs:label "short_description" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "shortDescription" ;
+    skos:closeMatch cve:description ;
+    skos:definition "A brief description of the vulnerability." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
+    skos:note "KEV inclusion criterion #2 requires reliable evidence that the vulnerability has been actively exploited in the wild. Active exploitation includes attempted and successful exploitation; scanning, security research, and public PoC alone do not qualify." .
+
+kev_catalog:vulnerability_name a owl:DatatypeProperty ;
+    rdfs:label "vulnerability_name" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "vulnerabilityName" ;
+    skos:closeMatch cve:title ;
+    skos:definition "A short, descriptive name for the vulnerability." ;
+    skos:inScheme <https://w3id.org/lmodel/kev-catalog> .
+
 core:description a owl:DatatypeProperty ;
     rdfs:label "description" ;
     rdfs:range xsd:string ;
+    skos:closeMatch kev_catalog:short_description ;
     skos:definition "Narrative description of the vulnerability." ;
     skos:exactMatch schema1:description ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
@@ -732,6 +774,7 @@ core:description a owl:DatatypeProperty ;
 core:title a owl:DatatypeProperty ;
     rdfs:label "title" ;
     rdfs:range xsd:string ;
+    skos:closeMatch kev_catalog:vulnerability_name ;
     skos:definition "Short human-readable title or name for this entity." ;
     skos:exactMatch schema1:name ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
@@ -762,7 +805,8 @@ kev_catalog:ImpactSeverity a owl:Class ;
 core:name a owl:DatatypeProperty ;
     rdfs:label "name" ;
     rdfs:range xsd:string ;
-    skos:altLabel "label" ;
+    skos:altLabel "label",
+        "product" ;
     skos:definition "Name of the entity (product, weakness, reference, etc.)." ;
     skos:inScheme <https://w3id.org/lmodel/vulnerability-core> .
 

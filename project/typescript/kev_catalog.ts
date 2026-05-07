@@ -55,7 +55,7 @@ export interface Vulnerability {
     /** Short human-readable title or name for this entity. */
     title?: string,
     /** Narrative description of the vulnerability. */
-    description: string,
+    description?: string,
     /** Date and time the vulnerability was first published. */
     published_date?: string,
     /** Date and time the vulnerability record was last modified. */

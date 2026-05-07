@@ -31,6 +31,10 @@
       "prefix_reference": "https://w3id.org/lmodel/kev-catalog/"
     },
     {
+      "prefix_prefix": "cve",
+      "prefix_reference": "https://w3id.org/lmodel/cve/"
+    },
+    {
       "prefix_prefix": "core",
       "prefix_reference": "https://w3id.org/lmodel/vulnerability-core/"
     },
@@ -395,6 +399,9 @@
       "definition_uri": "https://w3id.org/lmodel/vulnerability-core/CveId",
       "description": "A CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.",
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "exact_mappings": [
+        "cwe:CveId"
+      ],
       "base": "str",
       "uri": "http://www.w3.org/2001/XMLSchema#string",
       "pattern": "^CVE-[0-9]{4}-[0-9]+$",
@@ -544,6 +551,9 @@
       "mappings": [
         "http://purl.org/dc/terms/title"
       ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/cve/title"
+      ],
       "slot_uri": "http://purl.org/dc/terms/title",
       "owner": "KevEntry",
       "domain_of": [
@@ -563,6 +573,9 @@
       ],
       "mappings": [
         "http://purl.org/dc/terms/created"
+      ],
+      "related_mappings": [
+        "https://w3id.org/lmodel/cve/date_published"
       ],
       "slot_uri": "http://purl.org/dc/terms/created",
       "owner": "KevEntry",
@@ -586,6 +599,9 @@
       ],
       "mappings": [
         "http://purl.org/dc/terms/description"
+      ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/cve/description"
       ],
       "slot_uri": "http://purl.org/dc/terms/description",
       "owner": "KevEntry",
@@ -741,13 +757,15 @@
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
       "aliases": [
-        "cveID"
+        "cveId"
       ],
       "mappings": [
         "http://purl.org/dc/terms/identifier"
       ],
       "exact_mappings": [
-        "http://schema.org/identifier"
+        "http://schema.org/identifier",
+        "https://w3id.org/lmodel/nist-nvd/cve_id",
+        "https://w3id.org/lmodel/kev-catalog/cve_id"
       ],
       "slot_uri": "http://purl.org/dc/terms/identifier",
       "identifier": true,
@@ -773,6 +791,9 @@
       "exact_mappings": [
         "http://schema.org/name"
       ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/kev-catalog/vulnerability_name"
+      ],
       "slot_uri": "http://purl.org/dc/terms/title",
       "owner": "Vulnerability",
       "domain_of": [
@@ -796,6 +817,9 @@
       "exact_mappings": [
         "http://schema.org/description"
       ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/kev-catalog/short_description"
+      ],
       "slot_uri": "http://purl.org/dc/terms/description",
       "owner": "Weakness",
       "domain_of": [
@@ -815,6 +839,9 @@
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
       "mappings": [
         "http://purl.org/dc/terms/created"
+      ],
+      "related_mappings": [
+        "https://w3id.org/lmodel/kev-catalog/date_added"
       ],
       "slot_uri": "http://purl.org/dc/terms/created",
       "owner": "Vulnerability",
@@ -870,6 +897,9 @@
         "core"
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "related_mappings": [
+        "https://w3id.org/lmodel/cwe/Weakness"
+      ],
       "slot_uri": "https://w3id.org/lmodel/vulnerability-core/weaknesses",
       "owner": "Vulnerability",
       "domain_of": [
@@ -926,6 +956,9 @@
         "core"
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "https://w3id.org/lmodel/nist-nvd/NVDWorkflowStatus"
+      ],
       "slot_uri": "https://w3id.org/lmodel/vulnerability-core/status",
       "owner": "Vulnerability",
       "domain_of": [
@@ -956,7 +989,8 @@
       "description": "Name of the entity (product, weakness, reference, etc.).",
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
       "aliases": [
-        "label"
+        "label",
+        "product"
       ],
       "mappings": [
         "http://www.w3.org/2000/01/rdf-schema#label"
@@ -1039,10 +1073,13 @@
       "description": "CWE identifier for the weakness classification (e.g. CWE-79).",
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
       "aliases": [
-        "cweID"
+        "cweId"
       ],
       "mappings": [
         "http://purl.org/dc/terms/identifier"
+      ],
+      "related_mappings": [
+        "https://w3id.org/lmodel/cwe/Weakness"
       ],
       "slot_uri": "http://purl.org/dc/terms/identifier",
       "owner": "Weakness",
@@ -1050,6 +1087,7 @@
         "Weakness"
       ],
       "range": "string",
+      "pattern": "^CWE-[1-9][0-9]*$",
       "@type": "SlotDefinition"
     },
     {
@@ -1057,6 +1095,9 @@
       "definition_uri": "https://w3id.org/lmodel/vulnerability-core/severity",
       "description": "Qualitative severity rating.",
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "https://w3id.org/lmodel/nist-nvd/CVSSMetric"
+      ],
       "slot_uri": "https://w3id.org/lmodel/vulnerability-core/severity",
       "owner": "Impact",
       "domain_of": [
@@ -1070,6 +1111,9 @@
       "definition_uri": "https://w3id.org/lmodel/vulnerability-core/vector",
       "description": "CVSS vector string or equivalent scoring vector expression.",
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "https://w3id.org/lmodel/nist-nvd/CVSSMetric"
+      ],
       "slot_uri": "https://w3id.org/lmodel/vulnerability-core/vector",
       "owner": "Impact",
       "domain_of": [
@@ -1099,6 +1143,9 @@
       "aliases": [
         "cpeUri"
       ],
+      "related_mappings": [
+        "https://w3id.org/lmodel/nist-nvd/CPEMatch"
+      ],
       "slot_uri": "https://w3id.org/lmodel/vulnerability-core/cpe_uri",
       "owner": "Configuration",
       "domain_of": [
@@ -1121,6 +1168,38 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "KevEntry_cve_id",
+      "definition_uri": "https://w3id.org/lmodel/vulnerability-core/cve_id",
+      "description": "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.",
+      "in_subset": [
+        "metadata"
+      ],
+      "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "aliases": [
+        "cveId"
+      ],
+      "mappings": [
+        "http://purl.org/dc/terms/identifier"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/cve/cve_id"
+      ],
+      "is_a": "cve_id",
+      "domain": "KevEntry",
+      "slot_uri": "http://purl.org/dc/terms/identifier",
+      "identifier": true,
+      "alias": "cve_id",
+      "owner": "KevEntry",
+      "domain_of": [
+        "KevEntry"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "cve_id",
+      "range": "CveId",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "KevCatalog_title",
       "definition_uri": "https://w3id.org/lmodel/vulnerability-core/title",
       "description": "The title of the KEV catalog.",
@@ -1133,6 +1212,9 @@
       ],
       "exact_mappings": [
         "http://schema.org/name"
+      ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/kev-catalog/vulnerability_name"
       ],
       "is_a": "title",
       "domain": "KevCatalog",
@@ -1156,13 +1238,15 @@
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
       "aliases": [
-        "cveID"
+        "cveId"
       ],
       "mappings": [
         "http://purl.org/dc/terms/identifier"
       ],
       "exact_mappings": [
-        "http://schema.org/identifier"
+        "http://schema.org/identifier",
+        "https://w3id.org/lmodel/nist-nvd/cve_id",
+        "https://w3id.org/lmodel/kev-catalog/cve_id"
       ],
       "is_a": "cve_id",
       "domain": "Vulnerability",
@@ -1177,6 +1261,7 @@
       "usage_slot_name": "cve_id",
       "range": "CveId",
       "required": true,
+      "recommended": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1193,6 +1278,9 @@
       "exact_mappings": [
         "http://schema.org/description"
       ],
+      "close_mappings": [
+        "https://w3id.org/lmodel/kev-catalog/short_description"
+      ],
       "is_a": "description",
       "domain": "Vulnerability",
       "slot_uri": "http://purl.org/dc/terms/description",
@@ -1204,7 +1292,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "description",
       "range": "string",
-      "required": true,
+      "recommended": true,
       "@type": "SlotDefinition"
     }
   ],
@@ -1225,12 +1313,13 @@
         "WIKIDATA:Q631425"
       ],
       "related_mappings": [
+        "cve:CVERecord",
+        "cve:AffectedProduct",
         "schema:SoftwareApplication",
         "WIKIDATA:Q166142"
       ],
       "is_a": "Vulnerability",
       "slots": [
-        "Vulnerability_cve_id",
         "title",
         "Vulnerability_description",
         "published_date",
@@ -1248,7 +1337,8 @@
         "required_action",
         "due_date",
         "known_ransomware_campaign_use",
-        "notes"
+        "notes",
+        "KevEntry_cve_id"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/lmodel/kev-catalog/KevEntry",
@@ -1330,7 +1420,12 @@
         "WIKIDATA:Q631425"
       ],
       "related_mappings": [
-        "schema:SoftwareApplication"
+        "schema:SoftwareApplication",
+        "cwe:Weakness"
+      ],
+      "broad_mappings": [
+        "nvd:NVDEntry",
+        "kev_catalog:KevEntry"
       ],
       "abstract": true,
       "slots": [
@@ -1360,6 +1455,9 @@
       "exact_mappings": [
         "schema:SoftwareApplication"
       ],
+      "related_mappings": [
+        "kev_catalog:KevEntry"
+      ],
       "slots": [
         "vendor",
         "name",
@@ -1381,6 +1479,13 @@
       "exact_mappings": [
         "schema:CreativeWork"
       ],
+      "close_mappings": [
+        "cwe:ExternalReference",
+        "nvd:NVDReference"
+      ],
+      "related_mappings": [
+        "kev_catalog:notes"
+      ],
       "slots": [
         "url",
         "name",
@@ -1398,6 +1503,10 @@
         "core"
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "cwe:Weakness",
+        "nvd:NVDWeakness"
+      ],
       "slots": [
         "cwe_id",
         "name",
@@ -1415,6 +1524,9 @@
         "core"
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "nvd:CVSSMetric"
+      ],
       "slots": [
         "severity",
         "vector",
@@ -1432,6 +1544,9 @@
         "core"
       ],
       "from_schema": "https://w3id.org/lmodel/vulnerability-core",
+      "close_mappings": [
+        "nvd:CPEConfiguration"
+      ],
       "slots": [
         "cpe_uri",
         "operator"
@@ -1443,9 +1558,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "kev_catalog.yaml",
-  "source_file_date": "2026-04-17T16:28:21",
-  "source_file_size": 10444,
-  "generation_date": "2026-04-17T16:36:08",
+  "source_file_date": "2026-05-07T15:19:06",
+  "source_file_size": 10738,
+  "generation_date": "2026-05-07T15:20:35",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/kev_catalog.context.jsonld",

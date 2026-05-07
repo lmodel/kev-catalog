@@ -49,9 +49,8 @@ type KevCatalog
 
 type KevEntry
   {
-    cveId: CveId!
     title: String
-    description: String!
+    description: String
     publishedDate: String
     lastModifiedDate: String
     products: [Product]
@@ -68,6 +67,7 @@ type KevEntry
     dueDate: IsoDate!
     knownRansomwareCampaignUse: KnownRansomwareCampaignUseEnum
     notes: String
+    cveId: CveId!
   }
 
 type Product
@@ -89,7 +89,7 @@ interface Vulnerability
   {
     cveId: CveId!
     title: String
-    description: String!
+    description: String
     publishedDate: String
     lastModifiedDate: String
     products: [Product]

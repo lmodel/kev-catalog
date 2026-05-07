@@ -103,7 +103,7 @@ CREATE TABLE "KevEntry" (
 	notes TEXT,
 	cve_id TEXT NOT NULL,
 	title TEXT,
-	description TEXT NOT NULL,
+	description TEXT,
 	published_date DATETIME,
 	last_modified_date DATETIME,
 	status VARCHAR(10),
@@ -118,7 +118,7 @@ CREATE INDEX "ix_KevEntry_cve_id" ON "KevEntry" (cve_id);
 CREATE TABLE "Vulnerability" (
 	cve_id TEXT NOT NULL,
 	title TEXT,
-	description TEXT NOT NULL,
+	description TEXT,
 	published_date DATETIME,
 	last_modified_date DATETIME,
 	status VARCHAR(10),

@@ -1,0 +1,26 @@
+# curie_map:
+#   cve: https://w3id.org/lmodel/cve/
+#   kev_catalog: https://w3id.org/lmodel/kev-catalog/
+#   skos: http://www.w3.org/2004/02/skos/core#
+#   semapv: https://w3id.org/semapv/vocab/
+# license: https://creativecommons.org/publicdomain/zero/1.0/
+# mapping_set_id: https://w3id.org/lmodel/cve/mappings/cve-to-kev-catalog
+# mapping_set_title: CVE to CISA KEV Catalog LinkML schema mappings
+# mapping_set_description: |
+#   Element-level mappings between the lmodel CVE schema (https://w3id.org/lmodel/cve)
+#   and the lmodel CISA Known Exploited Vulnerabilities (KEV) Catalog schema
+#   (https://w3id.org/lmodel/kev-catalog). KEV is a thin enrichment layer that
+#   identifies CVEs known to be exploited in the wild and adds remediation-action
+#   metadata; mappings are mostly relatedMatch (KEV references CVE by ID rather
+#   than embedding the full record).
+# subject_source: https://w3id.org/lmodel/cve
+# object_source: https://w3id.org/lmodel/kev-catalog
+# mapping_provider: https://lmodel.github.io/cve
+# mapping_date: 2026-05-07
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	comment
+cve:CVERecord	CVERecord	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:ManualMappingCuration	A KEV entry references a CVE Record by cve_id and adds active-exploitation metadata; both extend Vulnerability from vulnerability_core but model different layers of evidence.
+cve:cve_id	cve_id	skos:exactMatch	kev_catalog:cve_id	cve_id	semapv:ManualMappingCuration	Inherited from vulnerability_core on both sides - same CVE identifier, same pattern.
+cve:title	title	skos:closeMatch	kev_catalog:vulnerability_name	vulnerability_name	semapv:ManualMappingCuration	Both label the vulnerability with a short human-readable name.
+cve:description	description	skos:closeMatch	kev_catalog:short_description	short_description	semapv:ManualMappingCuration	Both summarize the vulnerability; KEV's is constrained to a short blurb suitable for the catalog.
+cve:date_published	date_published	skos:relatedMatch	kev_catalog:date_added	date_added	semapv:ManualMappingCuration	CVE date_published is the public disclosure date; KEV date_added is the date CISA added the CVE to the catalog (typically later).
+cve:AffectedProduct	AffectedProduct	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:ManualMappingCuration	KEV's vendor_project and product slots flatten what CVE models as a structured AffectedProduct.

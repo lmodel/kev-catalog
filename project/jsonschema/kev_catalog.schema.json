@@ -123,7 +123,10 @@
                 },
                 "description": {
                     "description": "Narrative description of the vulnerability.",
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "due_date": {
                     "description": "The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01.",
@@ -238,8 +241,7 @@
                 "short_description",
                 "required_action",
                 "due_date",
-                "cve_id",
-                "description"
+                "cve_id"
             ],
             "title": "KevEntry",
             "type": "object"
@@ -339,6 +341,7 @@
             "properties": {
                 "cwe_id": {
                     "description": "CWE identifier for the weakness classification (e.g. CWE-79).",
+                    "pattern": "^CWE-[1-9][0-9]*$",
                     "type": [
                         "string",
                         "null"

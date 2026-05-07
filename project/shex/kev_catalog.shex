@@ -126,7 +126,7 @@ core:Reference CLOSED {
 core:Vulnerability  (
     {
        (  $core:Vulnerability_tes (  dct:title @linkml:String ? ;
-             dct:description @linkml:String ;
+             dct:description @linkml:String ? ;
              dct:created @linkml:Datetime ? ;
              dct:modified @linkml:Datetime ? ;
              core:products @core:Product * ;

@@ -27,7 +27,6 @@ message KevCatalog
 // A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.
 message KevEntry
  {
-  cveId cveId = 0
   string title = 0
   string description = 0
   datetime publishedDate = 0
@@ -46,6 +45,7 @@ message KevEntry
   isoDate dueDate = 0
   knownRansomwareCampaignUseEnum knownRansomwareCampaignUse = 0
   string notes = 0
+  cveId cveId = 0
  }
 // Software or hardware entity affected by the vulnerability.
 message Product
