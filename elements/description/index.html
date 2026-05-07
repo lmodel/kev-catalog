@@ -513,9 +513,9 @@ Alias: description</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../KevEntry/">KevEntry</a></td>
-<td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
-<td>no</td>
+<td><a href="../Vulnerability/">Vulnerability</a></td>
+<td>Abstract base representation of a security vulnerability</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../Weakness/">Weakness</a></td>
@@ -523,9 +523,9 @@ Alias: description</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Vulnerability/">Vulnerability</a></td>
-<td>Abstract base representation of a security vulnerability</td>
-<td>yes</td>
+<td><a href="../KevEntry/">KevEntry</a></td>
+<td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
@@ -598,6 +598,10 @@ Alias: description</p>
 <td>exact</td>
 <td>schema:description</td>
 </tr>
+<tr>
+<td>close</td>
+<td>kev_catalog:short_description</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -609,6 +613,8 @@ Alias: description</p>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/kev-catalog</span>
 <span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:description</span>
+<span class="nt">close_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kev_catalog:short_description</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:description</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>

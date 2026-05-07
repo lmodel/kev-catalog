@@ -524,13 +524,13 @@ Alias: cve_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../KevEntry/">KevEntry</a></td>
-<td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Vulnerability/">Vulnerability</a></td>
 <td>Abstract base representation of a security vulnerability</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../KevEntry/">KevEntry</a></td>
+<td>A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, rep...</td>
 <td>yes</td>
 </tr>
 </tbody>
@@ -598,7 +598,7 @@ Alias: cve_id</p>
 </ul>
 <h2 id="aliases">Aliases</h2>
 <ul>
-<li>cveID</li>
+<li>cveId</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -624,7 +624,7 @@ Alias: cve_id</p>
 </tr>
 <tr>
 <td>exact</td>
-<td>schema:identifier</td>
+<td>schema:identifier, nvd:cve_id, kev_catalog:cve_id</td>
 </tr>
 </tbody>
 </table>
@@ -637,9 +637,11 @@ Alias: cve_id</p>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metadata</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/kev-catalog</span>
 <span class="nt">aliases</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cveID</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cveId</span>
 <span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:identifier</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvd:cve_id</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kev_catalog:cve_id</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:identifier</span>
 <span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
