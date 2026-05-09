@@ -1285,7 +1285,7 @@ classes:
     class_uri: core:Configuration
 metamodel_version: 1.7.0
 source_file: kev_catalog.yaml
-source_file_date: '2026-05-07T14:22:09'
+source_file_date: '2026-05-09T00:13:38'
 source_file_size: 10738
-generation_date: '2026-05-07T14:22:18'
+generation_date: '2026-05-09T00:13:49'
 
