@@ -5,13 +5,13 @@
       "core": "https://w3id.org/lmodel/vulnerability-core/",
       "cve": "https://w3id.org/lmodel/cve/",
       "cwe": "https://w3id.org/lmodel/cwe/",
-      "dct": "http://purl.org/dc/terms/",
       "dcterms": "http://purl.org/dc/terms/",
       "kev_catalog": "https://w3id.org/lmodel/kev-catalog/",
       "linkml": "https://w3id.org/linkml/",
       "nvd": "https://w3id.org/lmodel/nist-nvd/",
       "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
       "schema": "http://schema.org/",
+      "schema_vulnerability_core": "https://w3id.org/lmodel/vulnerability-core/schema/",
       "skos": "http://www.w3.org/2004/02/skos/core#",
       "@vocab": "https://w3id.org/lmodel/kev-catalog/",
       "catalog_version": {
@@ -26,7 +26,7 @@
       },
       "cve_id": "@id",
       "cwe_id": {
-         "@id": "dct:identifier"
+         "@id": "dcterms:identifier"
       },
       "date_added": {
          "@type": "xsd:date",
@@ -36,7 +36,7 @@
          "@id": "date_released"
       },
       "description": {
-         "@id": "dct:description"
+         "@id": "dcterms:description"
       },
       "due_date": {
          "@type": "xsd:date",
@@ -56,7 +56,7 @@
       },
       "last_modified_date": {
          "@type": "xsd:dateTime",
-         "@id": "dct:modified"
+         "@id": "dcterms:modified"
       },
       "name": {
          "@id": "rdfs:label"
@@ -79,7 +79,7 @@
       },
       "published_date": {
          "@type": "xsd:dateTime",
-         "@id": "dct:created"
+         "@id": "dcterms:created"
       },
       "references": {
          "@type": "@id",
@@ -104,7 +104,7 @@
          "@id": "dcterms:description"
       },
       "source": {
-         "@id": "dct:source"
+         "@id": "dcterms:source"
       },
       "status": {
          "@context": {
@@ -115,7 +115,7 @@
          "@id": "core:status"
       },
       "title": {
-         "@id": "dct:title"
+         "@id": "dcterms:title"
       },
       "url": {
          "@type": "xsd:anyURI",

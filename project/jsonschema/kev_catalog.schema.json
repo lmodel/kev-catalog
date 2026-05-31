@@ -314,6 +314,7 @@
                 },
                 "url": {
                     "description": "URL pointing to the reference resource.",
+                    "format": "uri",
                     "type": [
                         "string",
                         "null"
@@ -321,6 +322,97 @@
                 }
             },
             "title": "Reference",
+            "type": "object"
+        },
+        "Vulnerability": {
+            "additionalProperties": false,
+            "description": "Abstract base representation of a security vulnerability. Extended by source-specific schemas (KEV, CVE, NVD).",
+            "properties": {
+                "cve_id": {
+                    "description": "The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN.",
+                    "pattern": "^CVE-[0-9]{4}-[0-9]+$",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Narrative description of the vulnerability.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "impact": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Impact"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Impact and severity assessment for this vulnerability."
+                },
+                "last_modified_date": {
+                    "description": "Date and time the vulnerability record was last modified.",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "products": {
+                    "description": "Products affected by this vulnerability.",
+                    "items": {
+                        "$ref": "#/$defs/Product"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "published_date": {
+                    "description": "Date and time the vulnerability was first published.",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "references": {
+                    "description": "External references such as advisories and articles.",
+                    "items": {
+                        "$ref": "#/$defs/Reference"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "$ref": "#/$defs/VulnerabilityStatus",
+                    "description": "Current lifecycle state of the vulnerability record."
+                },
+                "title": {
+                    "description": "Short human-readable title or name for this entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "weaknesses": {
+                    "description": "Weakness classifications (e.g. CWE) associated with this vulnerability.",
+                    "items": {
+                        "$ref": "#/$defs/Weakness"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "cve_id"
+            ],
+            "title": "Vulnerability",
             "type": "object"
         },
         "VulnerabilityStatus": {
@@ -370,7 +462,7 @@
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
     "description": "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.",
-    "metamodel_version": "1.7.0",
+    "metamodel_version": "1.11.0",
     "properties": {
         "catalog_version": {
             "description": "The version string of the KEV catalog release.",

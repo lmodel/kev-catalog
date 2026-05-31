@@ -1,5 +1,5 @@
 # Auto generated from kev_catalog.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-07T15:20:47
+# Generation date: 2026-05-31T01:20:54
 # Schema: kev-catalog
 #
 # id: https://w3id.org/lmodel/kev-catalog
@@ -62,7 +62,31 @@ from rdflib import (
 from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String, Uri
 from linkml_runtime.utils.metamodelcore import URI, XSDDateTime
 
-metamodel_version = "1.7.0"
+# fix-protocol patch: enum hash/eq
+from linkml_runtime.linkml_model.meta import PermissibleValue as _PV
+from linkml_runtime.utils.enumerations import EnumDefinitionImpl as _EDI
+if not getattr(_PV, "_fix_protocol_patched", False):
+    _orig_pv_eq = _PV.__eq__
+    def _pv_eq(self, other):
+        if isinstance(other, str):
+            return self.text == other
+        return _orig_pv_eq(self, other)
+    _PV.__eq__ = _pv_eq
+    _PV.__hash__ = lambda self: hash(self.text)
+    _PV._fix_protocol_patched = True
+if not getattr(_EDI, "_fix_protocol_patched", False):
+    _orig_edi_eq = _EDI.__eq__
+    def _edi_eq(self, other):
+        if isinstance(other, str):
+            return str(self) == other
+        return _orig_edi_eq(self, other)
+    # Bypass EnumDefinitionMeta.__setattr__, which routes assignments on
+    # enum subclasses through PermissibleValue handling.
+    type.__setattr__(_EDI, "__eq__", _edi_eq)
+    type.__setattr__(_EDI, "__hash__", lambda self: hash(str(self)))
+    type.__setattr__(_EDI, "_fix_protocol_patched", True)
+
+metamodel_version = "1.11.0"
 version = "1.0"
 
 # Namespaces
@@ -70,13 +94,13 @@ WIKIDATA = CurieNamespace('WIKIDATA', 'https://www.wikidata.org/wiki/')
 CORE = CurieNamespace('core', 'https://w3id.org/lmodel/vulnerability-core/')
 CVE = CurieNamespace('cve', 'https://w3id.org/lmodel/cve/')
 CWE = CurieNamespace('cwe', 'https://w3id.org/lmodel/cwe/')
-DCT = CurieNamespace('dct', 'http://purl.org/dc/terms/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 KEV_CATALOG = CurieNamespace('kev_catalog', 'https://w3id.org/lmodel/kev-catalog/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NVD = CurieNamespace('nvd', 'https://w3id.org/lmodel/nist-nvd/')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
+SCHEMA_VULNERABILITY_CORE = CurieNamespace('schema_vulnerability_core', 'https://w3id.org/lmodel/vulnerability-core/schema/')
 SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = KEV_CATALOG
@@ -97,6 +121,79 @@ class IsoDate(str):
     type_class_curie = "xsd:date"
     type_name = "IsoDate"
     type_model_uri = KEV_CATALOG.IsoDate
+
+
+
+
+# Enumerations
+class KnownRansomwareCampaignUseEnum(EnumDefinitionImpl):
+    """
+    Whether the vulnerability is known to have been used in ransomware campaigns.
+    """
+    known = PermissibleValue(
+        text="known",
+        description="The vulnerability is known to have been used in a ransomware campaign.")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="It is not known whether the vulnerability has been used in a ransomware campaign.")
+
+    _defn = EnumDefinition(
+        name="KnownRansomwareCampaignUseEnum",
+        description="Whether the vulnerability is known to have been used in ransomware campaigns.",
+    )
+
+class VulnerabilityStatus(EnumDefinitionImpl):
+    """
+    Lifecycle state of a vulnerability record.
+    """
+    ACTIVE = PermissibleValue(
+        text="ACTIVE",
+        description="Vulnerability is actively maintained and published.")
+    REJECTED = PermissibleValue(
+        text="REJECTED",
+        description="CVE ID was rejected and should not be used.")
+    DISPUTED = PermissibleValue(
+        text="DISPUTED",
+        description="The vulnerability details are disputed by a party.")
+    RESERVED = PermissibleValue(
+        text="RESERVED",
+        description="CVE ID is reserved but details are not yet published.")
+    DEPRECATED = PermissibleValue(
+        text="DEPRECATED",
+        description="Entry has been superseded or withdrawn.")
+
+    _defn = EnumDefinition(
+        name="VulnerabilityStatus",
+        description="Lifecycle state of a vulnerability record.",
+    )
+
+class ImpactSeverity(EnumDefinitionImpl):
+    """
+    CVSS qualitative severity rating.
+    """
+    NONE = PermissibleValue(
+        text="NONE",
+        description="No measurable impact.")
+    LOW = PermissibleValue(
+        text="LOW",
+        description="Limited impact; exploitation requires specific conditions.")
+    MEDIUM = PermissibleValue(
+        text="MEDIUM",
+        description="Moderate impact; partial compromise of security properties.")
+    HIGH = PermissibleValue(
+        text="HIGH",
+        description="High impact; significant compromise of security properties.")
+    CRITICAL = PermissibleValue(
+        text="CRITICAL",
+        description="Critical impact; complete compromise; remote exploitation likely.")
+    UNKNOWN = PermissibleValue(
+        text="UNKNOWN",
+        description="Severity has not been assessed or is unavailable.")
+
+    _defn = EnumDefinition(
+        name="ImpactSeverity",
+        description="CVSS qualitative severity rating.",
+    )
 
 
 # Class references
@@ -426,77 +523,6 @@ class Configuration(YAMLRoot):
 
         super().__post_init__(**kwargs)
 
-
-# Enumerations
-class KnownRansomwareCampaignUseEnum(EnumDefinitionImpl):
-    """
-    Whether the vulnerability is known to have been used in ransomware campaigns.
-    """
-    known = PermissibleValue(
-        text="known",
-        description="The vulnerability is known to have been used in a ransomware campaign.")
-    unknown = PermissibleValue(
-        text="unknown",
-        description="It is not known whether the vulnerability has been used in a ransomware campaign.")
-
-    _defn = EnumDefinition(
-        name="KnownRansomwareCampaignUseEnum",
-        description="Whether the vulnerability is known to have been used in ransomware campaigns.",
-    )
-
-class VulnerabilityStatus(EnumDefinitionImpl):
-    """
-    Lifecycle state of a vulnerability record.
-    """
-    ACTIVE = PermissibleValue(
-        text="ACTIVE",
-        description="Vulnerability is actively maintained and published.")
-    REJECTED = PermissibleValue(
-        text="REJECTED",
-        description="CVE ID was rejected and should not be used.")
-    DISPUTED = PermissibleValue(
-        text="DISPUTED",
-        description="The vulnerability details are disputed by a party.")
-    RESERVED = PermissibleValue(
-        text="RESERVED",
-        description="CVE ID is reserved but details are not yet published.")
-    DEPRECATED = PermissibleValue(
-        text="DEPRECATED",
-        description="Entry has been superseded or withdrawn.")
-
-    _defn = EnumDefinition(
-        name="VulnerabilityStatus",
-        description="Lifecycle state of a vulnerability record.",
-    )
-
-class ImpactSeverity(EnumDefinitionImpl):
-    """
-    CVSS qualitative severity rating.
-    """
-    NONE = PermissibleValue(
-        text="NONE",
-        description="No measurable impact.")
-    LOW = PermissibleValue(
-        text="LOW",
-        description="Limited impact; exploitation requires specific conditions.")
-    MEDIUM = PermissibleValue(
-        text="MEDIUM",
-        description="Moderate impact; partial compromise of security properties.")
-    HIGH = PermissibleValue(
-        text="HIGH",
-        description="High impact; significant compromise of security properties.")
-    CRITICAL = PermissibleValue(
-        text="CRITICAL",
-        description="Critical impact; complete compromise; remote exploitation likely.")
-    UNKNOWN = PermissibleValue(
-        text="UNKNOWN",
-        description="Severity has not been assessed or is unavailable.")
-
-    _defn = EnumDefinition(
-        name="ImpactSeverity",
-        description="CVSS qualitative severity rating.",
-    )
-
 # Slots
 class slots:
     pass
@@ -540,19 +566,19 @@ slots.count = Slot(uri=KEV_CATALOG.count, name="count", curie=KEV_CATALOG.curie(
 slots.vulnerabilities = Slot(uri=KEV_CATALOG.vulnerabilities, name="vulnerabilities", curie=KEV_CATALOG.curie('vulnerabilities'),
                    model_uri=KEV_CATALOG.vulnerabilities, domain=None, range=Optional[Union[dict[Union[str, KevEntryCveId], Union[dict, KevEntry]], list[Union[dict, KevEntry]]]])
 
-slots.cve_id = Slot(uri=DCT.identifier, name="cve_id", curie=DCT.curie('identifier'),
+slots.cve_id = Slot(uri=DCTERMS.identifier, name="cve_id", curie=DCTERMS.curie('identifier'),
                    model_uri=KEV_CATALOG.cve_id, domain=None, range=URIRef)
 
-slots.title = Slot(uri=DCT.title, name="title", curie=DCT.curie('title'),
+slots.title = Slot(uri=DCTERMS.title, name="title", curie=DCTERMS.curie('title'),
                    model_uri=KEV_CATALOG.title, domain=None, range=Optional[str])
 
-slots.description = Slot(uri=DCT.description, name="description", curie=DCT.curie('description'),
+slots.description = Slot(uri=DCTERMS.description, name="description", curie=DCTERMS.curie('description'),
                    model_uri=KEV_CATALOG.description, domain=None, range=Optional[str])
 
-slots.published_date = Slot(uri=DCT.created, name="published_date", curie=DCT.curie('created'),
+slots.published_date = Slot(uri=DCTERMS.created, name="published_date", curie=DCTERMS.curie('created'),
                    model_uri=KEV_CATALOG.published_date, domain=None, range=Optional[Union[str, XSDDateTime]])
 
-slots.last_modified_date = Slot(uri=DCT.modified, name="last_modified_date", curie=DCT.curie('modified'),
+slots.last_modified_date = Slot(uri=DCTERMS.modified, name="last_modified_date", curie=DCTERMS.curie('modified'),
                    model_uri=KEV_CATALOG.last_modified_date, domain=None, range=Optional[Union[str, XSDDateTime]])
 
 slots.products = Slot(uri=CORE.products, name="products", curie=CORE.curie('products'),
@@ -585,10 +611,10 @@ slots.platforms = Slot(uri=CORE.platforms, name="platforms", curie=CORE.curie('p
 slots.url = Slot(uri=SCHEMA.url, name="url", curie=SCHEMA.curie('url'),
                    model_uri=KEV_CATALOG.url, domain=None, range=Optional[Union[str, URI]])
 
-slots.source = Slot(uri=DCT.source, name="source", curie=DCT.curie('source'),
+slots.source = Slot(uri=DCTERMS.source, name="source", curie=DCTERMS.curie('source'),
                    model_uri=KEV_CATALOG.source, domain=None, range=Optional[str])
 
-slots.cwe_id = Slot(uri=DCT.identifier, name="cwe_id", curie=DCT.curie('identifier'),
+slots.cwe_id = Slot(uri=DCTERMS.identifier, name="cwe_id", curie=DCTERMS.curie('identifier'),
                    model_uri=KEV_CATALOG.cwe_id, domain=None, range=Optional[str],
                    pattern=re.compile(r'^CWE-[1-9][0-9]*$'))
 
@@ -607,14 +633,14 @@ slots.cpe_uri = Slot(uri=CORE.cpe_uri, name="cpe_uri", curie=CORE.curie('cpe_uri
 slots.operator = Slot(uri=CORE.operator, name="operator", curie=CORE.curie('operator'),
                    model_uri=KEV_CATALOG.operator, domain=None, range=Optional[str])
 
-slots.KevEntry_cve_id = Slot(uri=DCT.identifier, name="KevEntry_cve_id", curie=DCT.curie('identifier'),
+slots.KevEntry_cve_id = Slot(uri=DCTERMS.identifier, name="KevEntry_cve_id", curie=DCTERMS.curie('identifier'),
                    model_uri=KEV_CATALOG.KevEntry_cve_id, domain=KevEntry, range=Union[str, KevEntryCveId])
 
-slots.KevCatalog_title = Slot(uri=DCT.title, name="KevCatalog_title", curie=DCT.curie('title'),
+slots.KevCatalog_title = Slot(uri=DCTERMS.title, name="KevCatalog_title", curie=DCTERMS.curie('title'),
                    model_uri=KEV_CATALOG.KevCatalog_title, domain=KevCatalog, range=Optional[str])
 
-slots.Vulnerability_cve_id = Slot(uri=DCT.identifier, name="Vulnerability_cve_id", curie=DCT.curie('identifier'),
+slots.Vulnerability_cve_id = Slot(uri=DCTERMS.identifier, name="Vulnerability_cve_id", curie=DCTERMS.curie('identifier'),
                    model_uri=KEV_CATALOG.Vulnerability_cve_id, domain=Vulnerability, range=Union[str, VulnerabilityCveId])
 
-slots.Vulnerability_description = Slot(uri=DCT.description, name="Vulnerability_description", curie=DCT.curie('description'),
+slots.Vulnerability_description = Slot(uri=DCTERMS.description, name="Vulnerability_description", curie=DCTERMS.curie('description'),
                    model_uri=KEV_CATALOG.Vulnerability_description, domain=Vulnerability, range=Optional[str])

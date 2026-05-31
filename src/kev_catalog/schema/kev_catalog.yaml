@@ -58,12 +58,14 @@ prefixes:
   skos:   "http://www.w3.org/2004/02/skos/core#"
   WIKIDATA: https://www.wikidata.org/wiki/
 
+  schema_vulnerability_core: https://w3id.org/lmodel/vulnerability-core/schema/
+
 default_prefix: kev_catalog
 default_range: string
 
 imports:
   - linkml:types
-  - ./vulnerability_core
+  - schema_vulnerability_core:vulnerability_core
 
 types: {}  # no additional types beyond vulnerability_core
 

@@ -104,13 +104,16 @@ testdoc: gen-doc _serve
 # Generate the Python data models (dataclasses & pydantic)
 gen-python:
   uv run gen-project -d  {{pymodel}} -I python {{source_schema_path}}
+  uv run python scripts/patch_pythongen.py {{pymodel}}/{{schema_name}}.py
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
 
 # Generate project files including Python data model
 [group('model development')]
 gen-project:
   uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
-  mv {{dest}}/*.py {{pymodel}}
+  mkdir -p {{pymodel}}
+  mv {{dest}}/*.py {{pymodel}}/
+  uv run python scripts/patch_pythongen.py {{pymodel}}/{{schema_name}}.py
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
 
   @# Some generators ignore config_yaml or cannot create directories, so we run them separately.
@@ -178,9 +181,9 @@ _check-config:
 _update-template:
   copier update --trust --skip-answered
 
-# Update LinkML to latest version
+# Update LinkML runtime and LinkML to latest versions
 _update-linkml:
-  uv add linkml --upgrade-package linkml
+  uv lock --upgrade-package linkml-runtime --upgrade-package linkml
 
 # Test schema generation
 _test-schema:
@@ -192,7 +195,7 @@ _test-python: gen-python
 
 # Run example tests
 _test-examples: _ensure_examples_output
-  uv run linkml-run-examples \
+  uv run python scripts/run_examples_patched.py \
     --input-formats json \
     --input-formats yaml \
     --output-formats json \
@@ -205,7 +208,7 @@ _test-examples: _ensure_examples_output
 # Add the merged model to docs/schema.
 _gen-yaml:
   -mkdir -p {{distrib_schema_path}}
-  uv run gen-yaml {{source_schema_path}} > {{distrib_schema_path}}/{{schema_name}}.yaml
+  uv run python scripts/gen_yaml_patched.py {{source_schema_path}} > {{distrib_schema_path}}/{{schema_name}}.yaml
 
 # Overridable recipe to add project-specific artifacts to the distribution schema path
 _add-artifacts:

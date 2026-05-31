@@ -173,5 +173,5 @@ CREATE TABLE "Product_platforms" (
 	PRIMARY KEY ("Product_id", platforms),
 	FOREIGN KEY("Product_id") REFERENCES "Product" (id)
 );
-CREATE INDEX "ix_Product_platforms_Product_id" ON "Product_platforms" ("Product_id");
 CREATE INDEX "ix_Product_platforms_platforms" ON "Product_platforms" (platforms);
+CREATE INDEX "ix_Product_platforms_Product_id" ON "Product_platforms" ("Product_id");

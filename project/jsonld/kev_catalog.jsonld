@@ -22,7 +22,7 @@
   "version": "1.0",
   "imports": [
     "linkml:types",
-    "./vulnerability_core"
+    "schema_vulnerability_core:vulnerability_core"
   ],
   "license": "Apache-2.0",
   "prefixes": [
@@ -65,6 +65,10 @@
     {
       "prefix_prefix": "WIKIDATA",
       "prefix_reference": "https://www.wikidata.org/wiki/"
+    },
+    {
+      "prefix_prefix": "schema_vulnerability_core",
+      "prefix_reference": "https://w3id.org/lmodel/vulnerability-core/schema/"
     }
   ],
   "default_prefix": "kev_catalog",
@@ -91,7 +95,7 @@
       "definition_uri": "https://w3id.org/linkml/String",
       "description": "A character string",
       "notes": [
-        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
@@ -764,8 +768,8 @@
       ],
       "exact_mappings": [
         "http://schema.org/identifier",
-        "https://w3id.org/lmodel/nist-nvd/cve_id",
-        "https://w3id.org/lmodel/kev-catalog/cve_id"
+        "https://w3id.org/lmodel/kev-catalog/cve_id",
+        "https://w3id.org/lmodel/nist-nvd/cve_id"
       ],
       "slot_uri": "http://purl.org/dc/terms/identifier",
       "identifier": true,
@@ -1245,8 +1249,8 @@
       ],
       "exact_mappings": [
         "http://schema.org/identifier",
-        "https://w3id.org/lmodel/nist-nvd/cve_id",
-        "https://w3id.org/lmodel/kev-catalog/cve_id"
+        "https://w3id.org/lmodel/kev-catalog/cve_id",
+        "https://w3id.org/lmodel/nist-nvd/cve_id"
       ],
       "is_a": "cve_id",
       "domain": "Vulnerability",
@@ -1483,9 +1487,6 @@
         "cwe:ExternalReference",
         "nvd:NVDReference"
       ],
-      "related_mappings": [
-        "kev_catalog:notes"
-      ],
       "slots": [
         "url",
         "name",
@@ -1556,16 +1557,16 @@
       "@type": "ClassDefinition"
     }
   ],
-  "metamodel_version": "1.7.0",
+  "metamodel_version": "1.11.0",
   "source_file": "kev_catalog.yaml",
-  "source_file_date": "2026-05-07T15:19:06",
-  "source_file_size": 10738,
-  "generation_date": "2026-05-07T15:20:35",
+  "source_file_date": "2026-05-31T01:19:56",
+  "source_file_size": 10843,
+  "generation_date": "2026-05-31T01:20:24",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/kev_catalog.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
-    "./vulnerability_core.context.jsonld",
+    "https://w3id.org/lmodel/vulnerability-core/schema/vulnerability_core.context.jsonld",
     {
       "@base": "https://w3id.org/lmodel/kev-catalog/"
     }

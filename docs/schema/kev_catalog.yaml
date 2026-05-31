@@ -39,7 +39,7 @@ id: https://w3id.org/lmodel/kev-catalog
 version: '1.0'
 imports:
 - linkml:types
-- ./vulnerability_core
+- schema_vulnerability_core:vulnerability_core
 license: Apache-2.0
 prefixes:
   kev_catalog:
@@ -72,6 +72,9 @@ prefixes:
   WIKIDATA:
     prefix_prefix: WIKIDATA
     prefix_reference: https://www.wikidata.org/wiki/
+  schema_vulnerability_core:
+    prefix_prefix: schema_vulnerability_core
+    prefix_reference: https://w3id.org/lmodel/vulnerability-core/schema/
 default_prefix: kev_catalog
 default_range: string
 subsets:
@@ -92,8 +95,8 @@ types:
     description: A character string
     notes:
     - In RDF serializations, a slot with range of string is treated as a literal or
-      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
-      referenced with the lower case "string".
+      type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced
+      with the lower case "string".
     from_schema: https://w3id.org/linkml/types
     imported_from: linkml:types
     exact_mappings:
@@ -652,12 +655,12 @@ slots:
     aliases:
     - cveId
     mappings:
-    - dct:identifier
+    - dcterms:identifier
     exact_mappings:
     - schema:identifier
-    - nvd:cve_id
     - kev_catalog:cve_id
-    slot_uri: dct:identifier
+    - nvd:cve_id
+    slot_uri: dcterms:identifier
     identifier: true
     owner: Vulnerability
     domain_of:
@@ -672,12 +675,12 @@ slots:
     - metadata
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:title
+    - dcterms:title
     exact_mappings:
     - schema:name
     close_mappings:
     - kev_catalog:vulnerability_name
-    slot_uri: dct:title
+    slot_uri: dcterms:title
     owner: Vulnerability
     domain_of:
     - KevCatalog
@@ -691,12 +694,12 @@ slots:
     - core
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:description
+    - dcterms:description
     exact_mappings:
     - schema:description
     close_mappings:
     - kev_catalog:short_description
-    slot_uri: dct:description
+    slot_uri: dcterms:description
     owner: Weakness
     domain_of:
     - Vulnerability
@@ -710,10 +713,10 @@ slots:
     - core
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:created
+    - dcterms:created
     related_mappings:
     - kev_catalog:date_added
-    slot_uri: dct:created
+    slot_uri: dcterms:created
     owner: Vulnerability
     domain_of:
     - Vulnerability
@@ -726,8 +729,8 @@ slots:
     - core
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:modified
-    slot_uri: dct:modified
+    - dcterms:modified
+    slot_uri: dcterms:modified
     owner: Vulnerability
     domain_of:
     - Vulnerability
@@ -877,8 +880,8 @@ slots:
     description: Source or origin of the reference or data.
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:source
-    slot_uri: dct:source
+    - dcterms:source
+    slot_uri: dcterms:source
     owner: Reference
     domain_of:
     - Reference
@@ -891,10 +894,10 @@ slots:
     aliases:
     - cweId
     mappings:
-    - dct:identifier
+    - dcterms:identifier
     related_mappings:
     - cwe:Weakness
-    slot_uri: dct:identifier
+    slot_uri: dcterms:identifier
     owner: Weakness
     domain_of:
     - Weakness
@@ -969,12 +972,12 @@ slots:
     aliases:
     - cveId
     mappings:
-    - dct:identifier
+    - dcterms:identifier
     exact_mappings:
     - cve:cve_id
     is_a: cve_id
     domain: KevEntry
-    slot_uri: dct:identifier
+    slot_uri: dcterms:identifier
     identifier: true
     alias: cve_id
     owner: KevEntry
@@ -992,14 +995,14 @@ slots:
     - metadata
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:title
+    - dcterms:title
     exact_mappings:
     - schema:name
     close_mappings:
     - kev_catalog:vulnerability_name
     is_a: title
     domain: KevCatalog
-    slot_uri: dct:title
+    slot_uri: dcterms:title
     alias: title
     owner: KevCatalog
     domain_of:
@@ -1018,14 +1021,14 @@ slots:
     aliases:
     - cveId
     mappings:
-    - dct:identifier
+    - dcterms:identifier
     exact_mappings:
     - schema:identifier
-    - nvd:cve_id
     - kev_catalog:cve_id
+    - nvd:cve_id
     is_a: cve_id
     domain: Vulnerability
-    slot_uri: dct:identifier
+    slot_uri: dcterms:identifier
     identifier: true
     alias: cve_id
     owner: Vulnerability
@@ -1044,14 +1047,14 @@ slots:
     - core
     from_schema: https://w3id.org/lmodel/vulnerability-core
     mappings:
-    - dct:description
+    - dcterms:description
     exact_mappings:
     - schema:description
     close_mappings:
     - kev_catalog:short_description
     is_a: description
     domain: Vulnerability
-    slot_uri: dct:description
+    slot_uri: dcterms:description
     alias: description
     owner: Vulnerability
     domain_of:
@@ -1234,8 +1237,6 @@ classes:
     close_mappings:
     - cwe:ExternalReference
     - nvd:NVDReference
-    related_mappings:
-    - kev_catalog:notes
     slots:
     - url
     - name
@@ -1283,9 +1284,9 @@ classes:
     - cpe_uri
     - operator
     class_uri: core:Configuration
-metamodel_version: 1.7.0
+metamodel_version: 1.11.0
 source_file: kev_catalog.yaml
-source_file_date: '2026-05-07T15:19:06'
-source_file_size: 10738
-generation_date: '2026-05-07T15:20:41'
+source_file_date: '2026-05-31T01:19:56'
+source_file_size: 10843
+generation_date: '2026-05-31T01:20:38'
 

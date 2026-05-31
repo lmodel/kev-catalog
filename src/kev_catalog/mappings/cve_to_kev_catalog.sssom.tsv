@@ -18,9 +18,9 @@
 # mapping_provider: https://lmodel.github.io/cve
 # mapping_date: 2026-05-07
 subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	comment
-cve:CVERecord	CVERecord	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:ManualMappingCuration	A KEV entry references a CVE Record by cve_id and adds active-exploitation metadata; both extend Vulnerability from vulnerability_core but model different layers of evidence.
-cve:cve_id	cve_id	skos:exactMatch	kev_catalog:cve_id	cve_id	semapv:ManualMappingCuration	Inherited from vulnerability_core on both sides - same CVE identifier, same pattern.
-cve:title	title	skos:closeMatch	kev_catalog:vulnerability_name	vulnerability_name	semapv:ManualMappingCuration	Both label the vulnerability with a short human-readable name.
-cve:description	description	skos:closeMatch	kev_catalog:short_description	short_description	semapv:ManualMappingCuration	Both summarize the vulnerability; KEV's is constrained to a short blurb suitable for the catalog.
-cve:date_published	date_published	skos:relatedMatch	kev_catalog:date_added	date_added	semapv:ManualMappingCuration	CVE date_published is the public disclosure date; KEV date_added is the date CISA added the CVE to the catalog (typically later).
-cve:AffectedProduct	AffectedProduct	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:ManualMappingCuration	KEV's vendor_project and product slots flatten what CVE models as a structured AffectedProduct.
+cve:CVERecord	CVERecord	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:LLMBasedMatching	A KEV entry references a CVE Record by cve_id and adds active-exploitation metadata; both extend Vulnerability from vulnerability_core but model different layers of evidence.
+cve:cve_id	cve_id	skos:exactMatch	kev_catalog:cve_id	cve_id	semapv:LLMBasedMatching	Inherited from vulnerability_core on both sides - same CVE identifier, same pattern.
+cve:title	title	skos:closeMatch	kev_catalog:vulnerability_name	vulnerability_name	semapv:LLMBasedMatching	Both label the vulnerability with a short human-readable name.
+cve:description	description	skos:closeMatch	kev_catalog:short_description	short_description	semapv:LLMBasedMatching	Both summarize the vulnerability; KEV's is constrained to a short blurb suitable for the catalog.
+cve:date_published	date_published	skos:relatedMatch	kev_catalog:date_added	date_added	semapv:LLMBasedMatching	CVE date_published is the public disclosure date; KEV date_added is the date CISA added the CVE to the catalog (typically later).
+cve:AffectedProduct	AffectedProduct	skos:relatedMatch	kev_catalog:KevEntry	KevEntry	semapv:LLMBasedMatching	KEV's vendor_project and product slots flatten what CVE models as a structured AffectedProduct.

@@ -1,6 +1,7 @@
-# metamodel_version: 1.7.0
+# metamodel_version: 1.11.0
 # version: 1.0
 BASE <https://w3id.org/lmodel/kev-catalog/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -8,7 +9,6 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX core: <https://w3id.org/lmodel/vulnerability-core/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX schema1: <http://schema.org/>
-PREFIX dct: <http://purl.org/dc/terms/>
 
 
 linkml:String xsd:string
@@ -76,7 +76,7 @@ core:Impact CLOSED {
 }
 
 <KevCatalog> CLOSED {
-    (  $<KevCatalog_tes> (  dct:title @linkml:String ? ;
+    (  $<KevCatalog_tes> (  dcterms:title @linkml:String ? ;
           <catalog_version> @linkml:String ? ;
           <date_released> @linkml:String ? ;
           <count> @linkml:Integer ? ;
@@ -91,9 +91,9 @@ core:Impact CLOSED {
           rdf:type [ core:Vulnerability ] ? ;
           schema1:Organization @linkml:String ;
           schema1:name @linkml:String ;
-          dct:title @linkml:String ;
-          dct:created @core:IsoDate ;
-          dct:description @linkml:String ;
+          dcterms:title @linkml:String ;
+          dcterms:created @core:IsoDate ;
+          dcterms:description @linkml:String ;
           <required_action> @linkml:String ;
           <due_date> @core:IsoDate ;
           <known_ransomware_campaign_use> [ <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#known>
@@ -117,7 +117,7 @@ core:Product CLOSED {
 core:Reference CLOSED {
     (  $core:Reference_tes (  schema1:url @linkml:Uri ? ;
           rdfs:label @linkml:String ? ;
-          dct:source @linkml:String ?
+          dcterms:source @linkml:String ?
        ) ;
        rdf:type [ core:Reference ] ?
     )
@@ -125,10 +125,10 @@ core:Reference CLOSED {
 
 core:Vulnerability  (
     {
-       (  $core:Vulnerability_tes (  dct:title @linkml:String ? ;
-             dct:description @linkml:String ? ;
-             dct:created @linkml:Datetime ? ;
-             dct:modified @linkml:Datetime ? ;
+       (  $core:Vulnerability_tes (  dcterms:title @linkml:String ? ;
+             dcterms:description @linkml:String ? ;
+             dcterms:created @linkml:Datetime ? ;
+             dcterms:modified @linkml:Datetime ? ;
              core:products @core:Product * ;
              core:weaknesses @core:Weakness * ;
              core:references @core:Reference * ;
@@ -145,9 +145,9 @@ core:Vulnerability  (
 )
 
 core:Weakness CLOSED {
-    (  $core:Weakness_tes (  dct:identifier @linkml:String ? ;
+    (  $core:Weakness_tes (  dcterms:identifier @linkml:String ? ;
           rdfs:label @linkml:String ? ;
-          dct:description @linkml:String ?
+          dcterms:description @linkml:String ?
        ) ;
        rdf:type [ core:Weakness ] ?
     )
