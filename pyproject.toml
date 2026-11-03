@@ -75,12 +75,14 @@ skip = [
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
-ignore-words-list = "linke"
+# CNA is a CVE Numbering Authority, which the CVE Record Format names.
+ignore-words-list = "linke,cna"
 quiet-level = 3
 
 # Ref.: https://github.com/crate-ci/typos (spell checker)
 [tool.typos.default.extend-words]
 linke = "linke"
+cna = "cna"
 
 [tool.typos.files]
 extend-exclude = [
