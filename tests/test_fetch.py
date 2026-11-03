@@ -85,7 +85,9 @@ def test_a_download_that_differs_is_deleted(fetcher, monkeypatch, tmp_path, body
     arrives at the file's place."""
     _stub_download(fetcher, monkeypatch, body)
     problems = fetcher.fetch(tmp_path, {"fetched": {"file.json": _pin()}})
-    assert problems == ["file.json: the download does not match its pinned size and hashes"]
+    assert problems == [
+        "file.json: the download does not match its pinned size and hashes"
+    ]
     assert not list(tmp_path.iterdir())
 
 
@@ -123,10 +125,14 @@ def test_a_redirect_off_the_pinned_host_is_refused(fetcher):
     with pytest.raises(ValueError, match="is not an https address"):
         handler.redirect_request(req, None, 302, "Found", {}, "https://example.org/x")
     moved = "https://raw.githubusercontent.com/cisagov/kev-data/def/file.json"
-    assert handler.redirect_request(req, None, 301, "Moved", {}, moved).full_url == moved
+    assert (
+        handler.redirect_request(req, None, 301, "Moved", {}, moved).full_url == moved
+    )
 
 
-def test_a_failed_download_is_reported_and_leaves_nothing(fetcher, monkeypatch, tmp_path):
+def test_a_failed_download_is_reported_and_leaves_nothing(
+    fetcher, monkeypatch, tmp_path
+):
     """A failure stops that file, says so, and leaves no partial file behind."""
 
     def fail(url, part, size):

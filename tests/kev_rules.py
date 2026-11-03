@@ -16,7 +16,9 @@ def catalogue_faults(record):
     faults = []
     entries = record.get("vulnerabilities") or []
     if record.get("count") != len(entries):
-        faults.append(f"count says {record.get('count')}, the list holds {len(entries)}")
+        faults.append(
+            f"count says {record.get('count')}, the list holds {len(entries)}"
+        )
     repeated = sorted(
         cve for cve, n in Counter(e.get("cveID") for e in entries).items() if n > 1
     )

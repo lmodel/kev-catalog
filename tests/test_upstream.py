@@ -217,20 +217,26 @@ def test_every_definition_has_a_class():
     assert set(CLASS_FOR.values()) == set(SV.all_classes())
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS)
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS
+)
 def test_every_property_has_its_slot(pointer, class_name, name, prop):
     """Each upstream property is a slot of its class, under its own name."""
     assert name in SV.class_slots(class_name), (class_name, name)
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS)
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS
+)
 def test_cardinality_matches(pointer, class_name, name, prop):
     """An upstream array is a multivalued slot, and anything else a single value."""
     slot = SV.induced_slot(name, class_name)
     assert bool(slot.multivalued) == (prop.get("type") == "array"), (class_name, name)
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS)
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS
+)
 def test_range_matches(pointer, class_name, name, prop):
     """A string, date, date-time or integer has its range, and a reference or an
     array of them has the class or the type of its items. The enums are the listed
@@ -248,7 +254,9 @@ def test_range_matches(pointer, class_name, name, prop):
         assert slot.range == RANGE_FOR_TYPE[item["type"]]
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS)
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "name", "prop"), PROPERTIES, ids=PROPERTY_IDS
+)
 def test_pattern_matches(pointer, class_name, name, prop):
     """A pattern is written as the upstream writes it, anchors and all, on the value
     or on each item, and nowhere else."""
@@ -256,19 +264,27 @@ def test_pattern_matches(pointer, class_name, name, prop):
     assert slot.pattern == prop.get("items", prop).get("pattern"), (class_name, name)
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "node"), [o for o in _objects()], ids=lambda v: v if isinstance(v, str) else "")
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "node"),
+    [o for o in _objects()],
+    ids=lambda v: v if isinstance(v, str) else "",
+)
 def test_required_matches(pointer, class_name, node):
     """The class's required slots are exactly the upstream's required list."""
     required = {
-        s
-        for s in SV.class_slots(class_name)
-        if SV.induced_slot(s, class_name).required
+        s for s in SV.class_slots(class_name) if SV.induced_slot(s, class_name).required
     }
     assert required == set(node["required"]), class_name
 
 
-@pytest.mark.parametrize(("pointer", "class_name", "node"), [o for o in _objects()], ids=lambda v: v if isinstance(v, str) else "")
-def test_no_slot_goes_beyond_the_upstream_but_the_listed_ones(pointer, class_name, node):
+@pytest.mark.parametrize(
+    ("pointer", "class_name", "node"),
+    [o for o in _objects()],
+    ids=lambda v: v if isinstance(v, str) else "",
+)
+def test_no_slot_goes_beyond_the_upstream_but_the_listed_ones(
+    pointer, class_name, node
+):
     """A class's slots are the upstream's properties and the listed extra keys."""
     expected = set(node["properties"]) | set(EXTRA_KEYS.get(class_name, {}))
     assert set(SV.class_slots(class_name)) == expected, class_name
@@ -288,7 +304,11 @@ def test_an_enum_holds_the_values_its_description_names(name):
 def test_every_element_is_described_and_its_path_resolves():
     """Each class, slot and enum has a description, and each `upstream_path`
     annotation names a node of the copy. A key from the file alone says so."""
-    elements = [*SV.all_classes().values(), *SV.all_slots().values(), *SV.all_enums().values()]
+    elements = [
+        *SV.all_classes().values(),
+        *SV.all_slots().values(),
+        *SV.all_enums().values(),
+    ]
     for element in elements:
         assert element.description, element.name
         annotations = element.annotations or {}
@@ -328,7 +348,11 @@ def test_no_description_pastes_the_upstream():
         runs |= {tuple(words[i : i + 5]) for i in range(len(words) - 4)}
     mine = [
         (e.name, e.description)
-        for e in [*SV.all_classes().values(), *SV.all_slots().values(), *SV.all_enums().values()]
+        for e in [
+            *SV.all_classes().values(),
+            *SV.all_slots().values(),
+            *SV.all_enums().values(),
+        ]
     ]
     for enum in SV.all_enums().values():
         mine += [(v.text, v.description) for v in enum.permissible_values.values()]

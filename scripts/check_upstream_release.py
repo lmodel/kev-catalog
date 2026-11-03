@@ -273,7 +273,9 @@ def check_cisa() -> tuple[list[str], bool]:
             "two may differ: read both before moving the pins."
         )
         return report, True
-    report.append(f"- The JSON schema CISA serves is the pinned edition, {CISA_SCHEMA}.")
+    report.append(
+        f"- The JSON schema CISA serves is the pinned edition, {CISA_SCHEMA}."
+    )
     return report, False
 
 

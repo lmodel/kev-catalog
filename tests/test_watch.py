@@ -19,7 +19,9 @@ import pytest
 
 ROOT = Path(__file__).parent.parent
 SCRIPT = ROOT / "scripts" / "check_upstream_release.py"
-SCHEMA_COPY = ROOT / "tests" / "upstream" / "known_exploited_vulnerabilities_schema.json"
+SCHEMA_COPY = (
+    ROOT / "tests" / "upstream" / "known_exploited_vulnerabilities_schema.json"
+)
 
 NEW_COMMIT = "1" * 40
 OTHER_BLOB = "b" * 40
@@ -61,7 +63,9 @@ def _answers(watch, head=None, branch="develop", latest_files=None, pinned_files
     return answers
 
 
-def _newest(watch, answers, sha=NEW_COMMIT, date="2027-01-15T10:00:00Z", branch="develop"):
+def _newest(
+    watch, answers, sha=NEW_COMMIT, date="2027-01-15T10:00:00Z", branch="develop"
+):
     """Add the answer to the question of which commit last touched the schema."""
     query = f"path={watch.SCHEMA_FILE}&sha={branch}&per_page=1"
     answers[f"{watch.API}/commits?{query}"] = [
@@ -95,7 +99,9 @@ def _run(watch, tmp_path):
 
 
 def _forbidden():
-    return urllib.error.HTTPError("https://www.cisa.gov/x", 403, "Forbidden", None, None)
+    return urllib.error.HTTPError(
+        "https://www.cisa.gov/x", 403, "Forbidden", None, None
+    )
 
 
 def test_nothing_changed(watch, tmp_path):

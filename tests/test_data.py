@@ -190,7 +190,9 @@ def test_the_extract_covers_what_the_format_varies():
     assert any(len(e["cveID"].split("-")[2]) == 4 for e in entries)
     assert any(len(e["cveID"].split("-")[2]) > 5 for e in entries)
     assert any(e["product"] != e["product"].strip() for e in entries)
-    assert any(e["vulnerabilityName"] != e["vulnerabilityName"].strip() for e in entries)
+    assert any(
+        e["vulnerabilityName"] != e["vulnerabilityName"].strip() for e in entries
+    )
     assert any(" ; " in e["notes"] for e in entries)
 
 
@@ -220,8 +222,14 @@ HEAD = {"catalogVersion": "2026.10.30", "dateReleased": "2026-10-30T17:02:45.366
 @pytest.mark.parametrize(
     ("record", "fault"),
     [
-        ({**HEAD, "count": 2, "vulnerabilities": [ENTRY]}, "count says 2, the list holds 1"),
-        ({**HEAD, "count": 0, "vulnerabilities": [ENTRY]}, "count says 0, the list holds 1"),
+        (
+            {**HEAD, "count": 2, "vulnerabilities": [ENTRY]},
+            "count says 2, the list holds 1",
+        ),
+        (
+            {**HEAD, "count": 0, "vulnerabilities": [ENTRY]},
+            "count says 0, the list holds 1",
+        ),
         (
             {**HEAD, "count": 2, "vulnerabilities": [ENTRY, ENTRY]},
             "repeats CVE-2021-44228",
