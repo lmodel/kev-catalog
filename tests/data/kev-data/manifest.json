@@ -1,0 +1,14 @@
+{
+  "repository": "cisagov/kev-data",
+  "commit": "7ccba8e1223ccec82d12c7736bf3fae11e5bee86",
+  "commit_date": "2026-10-30",
+  "catalogVersion": "2026.10.30",
+  "fetched": {
+    "known_exploited_vulnerabilities.json": {
+      "url": "https://raw.githubusercontent.com/cisagov/kev-data/7ccba8e1223ccec82d12c7736bf3fae11e5bee86/known_exploited_vulnerabilities.json",
+      "size": 1826755,
+      "sha256": "3aa9cf3c01f116362a29d111702979175453c425e3733bde80fc4f6f8e2294e5",
+      "git_blob": "db92859466f6a30543a4c4252f61f10c4226801e"
+    }
+  }
+}
