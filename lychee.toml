@@ -18,6 +18,10 @@ exclude = [
   # The documentation site, which answers once the knowledge-website
   # workflow first deploys it to Pages. Drop this then.
   '^https://lmodel\.github\.io/kev-catalog',
+  # CISA's site answers some automated clients with 403 and others with 200, so a
+  # refusal from a CI runner would say nothing about the link. The upstream watch
+  # reads the one CISA file this project depends on.
+  '^https://www\.cisa\.gov/',
   # Development-only addresses printed in setup instructions.
   '^http://localhost',
   '^http://127\.0\.0\.1',
