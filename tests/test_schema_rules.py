@@ -205,3 +205,14 @@ def test_names_are_safe_for_every_generator():
     names = slots | set(doc["classes"]) | set(doc["enums"]) | {doc["name"]}
     lowered = Counter(name.lower() for name in names)
     assert not [name for name, n in lowered.items() if n > 1]
+
+
+def test_prefixes_agree_with_lokf_and_the_neighbours():
+    """A prefix the copy shares with LOKF or a neighbour binds the same namespace,
+    so a composite that imports them does not bind one prefix twice."""
+    mine = _load(COPY)["prefixes"]
+    others = [LOKF, *(NEIGHBOUR_DIR / name for name in NEIGHBOURS)]
+    for path in others:
+        theirs = _load(path).get("prefixes") or {}
+        for prefix in mine.keys() & theirs.keys():
+            assert mine[prefix] == theirs[prefix], (path.name, prefix)
