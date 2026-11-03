@@ -1,7 +1,7 @@
-package None;
+package example;
 
-/* metamodel_version: 1.11.0 */
-/* version: 1.0 */
+/* metamodel_version: 1.12.0 */
+/* version: 2026-09-17 */
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.*;
 
 /**
-  The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.
+  One published release of the KEV catalog, with the entries it lists.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -18,9 +18,9 @@ public class KevCatalog  {
 
   private String title;
   private String catalogVersion;
-  private String dateReleased;
-  private Integer count;
-  private List<KevEntry> vulnerabilities;
+  private ZonedDateTime dateReleased;
+  private int count;
+  private List<KevVulnerability> vulnerabilities;
 
 
 }

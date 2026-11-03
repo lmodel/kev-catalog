@@ -1,14 +1,9 @@
-# metamodel_version: 1.11.0
-# version: 1.0
+# metamodel_version: 1.12.0
+# version: 2026-09-17
 BASE <https://w3id.org/lmodel/kev-catalog/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX core: <https://w3id.org/lmodel/vulnerability-core/>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX schema1: <http://schema.org/>
 
 
 linkml:String xsd:string
@@ -49,106 +44,32 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-core:CveId xsd:string
-
-core:IsoDate xsd:date
-
-core:Configuration CLOSED {
-    (  $core:Configuration_tes (  core:cpe_uri @linkml:String ? ;
-          core:operator @linkml:String ?
-       ) ;
-       rdf:type [ core:Configuration ] ?
-    )
-}
-
-core:Impact CLOSED {
-    (  $core:Impact_tes (  core:severity [ <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#NONE>
-             <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#LOW>
-             <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#MEDIUM>
-             <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#HIGH>
-             <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#CRITICAL>
-             <https://w3id.org/lmodel/vulnerability-core/ImpactSeverity#UNKNOWN> ] ? ;
-          core:vector @linkml:String ? ;
-          core:score @linkml:Float ?
-       ) ;
-       rdf:type [ core:Impact ] ?
-    )
-}
-
 <KevCatalog> CLOSED {
-    (  $<KevCatalog_tes> (  dcterms:title @linkml:String ? ;
-          <catalog_version> @linkml:String ? ;
-          <date_released> @linkml:String ? ;
-          <count> @linkml:Integer ? ;
-          <vulnerabilities> @<KevEntry> *
+    (  $<KevCatalog_tes> (  <title> @linkml:String ? ;
+          <catalogVersion> @linkml:String ;
+          <dateReleased> @linkml:Datetime ;
+          <count> @linkml:Integer ;
+          <vulnerabilities> @<KevVulnerability> +
        ) ;
        rdf:type [ <KevCatalog> ] ?
     )
 }
 
-<KevEntry> CLOSED {
-    (  $<KevEntry_tes> (  &core:Vulnerability_tes ;
-          rdf:type [ core:Vulnerability ] ? ;
-          schema1:Organization @linkml:String ;
-          schema1:name @linkml:String ;
-          dcterms:title @linkml:String ;
-          dcterms:created @core:IsoDate ;
-          dcterms:description @linkml:String ;
-          <required_action> @linkml:String ;
-          <due_date> @core:IsoDate ;
-          <known_ransomware_campaign_use> [ <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#known>
-             <https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum#unknown> ] ? ;
-          skos:note @linkml:String ?
+<KevVulnerability> CLOSED {
+    (  $<KevVulnerability_tes> (  <vendorProject> @linkml:String ;
+          <product> @linkml:String ;
+          <vulnerabilityName> @linkml:String ;
+          <dateAdded> @linkml:Date ;
+          <shortDescription> @linkml:String ;
+          <requiredAction> @linkml:String ;
+          <dueDate> @linkml:Date ;
+          <knownRansomwareCampaignUse> [ <https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse#Known>
+             <https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse#Unknown> ] ? ;
+          <forensicTriage> [ <https://w3id.org/lmodel/kev-catalog/KevForensicTriage#Yes>
+             <https://w3id.org/lmodel/kev-catalog/KevForensicTriage#No> ] ? ;
+          <notes> @linkml:String ? ;
+          <cwes> @linkml:String *
        ) ;
-       rdf:type [ <KevEntry> ]
-    )
-}
-
-core:Product CLOSED {
-    (  $core:Product_tes (  schema1:name @linkml:String ? ;
-          rdfs:label @linkml:String ? ;
-          schema1:version @linkml:String ? ;
-          core:platforms @linkml:String *
-       ) ;
-       rdf:type [ core:Product ] ?
-    )
-}
-
-core:Reference CLOSED {
-    (  $core:Reference_tes (  schema1:url @linkml:Uri ? ;
-          rdfs:label @linkml:String ? ;
-          dcterms:source @linkml:String ?
-       ) ;
-       rdf:type [ core:Reference ] ?
-    )
-}
-
-core:Vulnerability  (
-    {
-       (  $core:Vulnerability_tes (  dcterms:title @linkml:String ? ;
-             dcterms:description @linkml:String ? ;
-             dcterms:created @linkml:Datetime ? ;
-             dcterms:modified @linkml:Datetime ? ;
-             core:products @core:Product * ;
-             core:weaknesses @core:Weakness * ;
-             core:references @core:Reference * ;
-             core:impact @core:Impact ? ;
-             core:status [ <https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus#ACTIVE>
-                <https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus#REJECTED>
-                <https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus#DISPUTED>
-                <https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus#RESERVED>
-                <https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus#DEPRECATED> ] ?
-          ) ;
-          rdf:type [ core:Vulnerability ]
-       )
-    } OR @<KevEntry>
-)
-
-core:Weakness CLOSED {
-    (  $core:Weakness_tes (  dcterms:identifier @linkml:String ? ;
-          rdfs:label @linkml:String ? ;
-          dcterms:description @linkml:String ?
-       ) ;
-       rdf:type [ core:Weakness ] ?
+       rdf:type [ <KevVulnerability> ]
     )
 }

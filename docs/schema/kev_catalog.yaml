@@ -1,45 +1,46 @@
-name: kev-catalog
-description: 'LinkML schema for the CISA Known Exploited Vulnerabilities (KEV) Catalog.
-
-  The KEV catalog is the authoritative source of vulnerabilities that have
-
-  been exploited in the wild, maintained by the Cybersecurity and
-
-  Infrastructure Security Agency (CISA).'
-title: CISA Known Exploited Vulnerabilities (KEV) Catalog
+name: kev_catalog
+annotations:
+  upstream_schema_commit:
+    tag: upstream_schema_commit
+    value: d98075f22b11ca60ede428f4397966d3523dc692
+  upstream_schema_blob:
+    tag: upstream_schema_blob
+    value: ec422845b354f58250d2e99cdfcce17a18659423
+  upstream_schema_sha256:
+    tag: upstream_schema_sha256
+    value: 0d5865c98694c5bfba2c78a26caf814f406b3fce8bfb81bef79e99c7f288b0e7
+  upstream_schema_draft:
+    tag: upstream_schema_draft
+    value: http://json-schema.org/draft-07/schema#
+  upstream_license:
+    tag: upstream_license
+    value: CC0-1.0
+description: A LinkML model of the JSON format of the Known Exploited Vulnerabilities
+  (KEV) catalog that the Cybersecurity and Infrastructure Security Agency (CISA) publishes.
+  CISA's keys and values are the schema's, so a real KEV file validates unchanged.
+title: CISA Known Exploited Vulnerabilities Catalog
 notes:
-- This is a Schema. The KEV database is distributed under the CC0 1.0 Universal license.
-  You may use this data in any legal manner but note that information  provided at
-  any 3rd party links included in the KEV database are bound by the policies and licenses
-  of those 3rd party websites. Use of the information does not authorize you to use
-  the CISA Logo or DHS Seal, nor should such use be interpreted as an endorsement
-  by CISA or DHS.
-- Mandated by Binding Operational Directive (BOD) 22-01, "Reducing the Significant
-  Risk of Known Exploited Vulnerabilities", issued under the authority of Section
-  3553(b)(2) of title 44, U.S. Code.
-- BOD 22-01 applies to all federal civilian executive branch (FCEB) departments and
-  agencies. It does NOT apply to statutorily defined national security systems nor
-  to systems operated by the Department of Defense or the Intelligence Community.
-- "BOD 22-01 key compliance milestones: Nov 17 2021 \u2014 remediate CVEs assigned\
-  \ 2021+; Jan 2 2022 \u2014 update agency policies; Jan 17 2022 \u2014 first CyberScope\
-  \ status report; May 3 2022 \u2014 remediate pre-2021 CVEs; Oct 1 2022 \u2014 reporting\
-  \ via CDM Federal Dashboard."
-- As of 2022-07-15 the KEV catalog contained 787 entries drawn from a universe of
-  ~179,383 total CVEs (56,342 Critical/High by CVSS).
-- 'Contact: CyberDirectives@cisa.dhs.gov for questions about BOD 22-01 and the KEV
-  catalog; CyberLiaison@cisa.dhs.gov for all other CISA questions.'
-source: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json
+- 'KEV''s authority has moved to Binding Operational Directive (BOD) 26-04, which
+  the upstream''s README and its forensicTriage description cite. Directive terms,
+  dates and counts belong at their source, so none is restated here. CISA''s directive
+  pages answered a plain client with 403 on 2026-11-03: see https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk'
+comments:
+- CISA's JSON schema states no version, so the version here is the date of the commit
+  that last changed the file in cisagov/kev-data. tests/upstream/ copies the file,
+  and scripts/check_upstream_release.py reports when it moves.
+- CISA states its data's terms as CC0 1.0, and says that third-party links in the
+  data keep their own terms and that use of the data gives no right to the CISA Logo
+  or the DHS Seal and is no endorsement. NOTICE says the same.
+source: https://github.com/cisagov/kev-data/blob/d98075f22b11ca60ede428f4397966d3523dc692/known_exploited_vulnerabilities_schema.json
 see_also:
 - https://lmodel.github.io/kev-catalog
 - https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-- https://www.cisa.gov/directives
-- https://www.cisa.gov/binding-operational-directive-22-01
-- https://weis2020.econinfosec.org/wp-content/uploads/sites/8/2020/06/weis20-final6.pdf
+- https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json
+- https://github.com/cisagov/kev-data
 id: https://w3id.org/lmodel/kev-catalog
-version: '1.0'
+version: '2026-09-17'
 imports:
 - linkml:types
-- schema_vulnerability_core:vulnerability_core
 license: Apache-2.0
 prefixes:
   kev_catalog:
@@ -48,46 +49,35 @@ prefixes:
   cve:
     prefix_prefix: cve
     prefix_reference: https://w3id.org/lmodel/cve/
-  core:
-    prefix_prefix: core
-    prefix_reference: https://w3id.org/lmodel/vulnerability-core/
+  stix:
+    prefix_prefix: stix
+    prefix_reference: https://w3id.org/lmodel/stix/
+  spdx3:
+    prefix_prefix: spdx3
+    prefix_reference: https://spdx.org/rdf/3.0.1/terms/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  schema:
-    prefix_prefix: schema
-    prefix_reference: http://schema.org/
+  dcat:
+    prefix_prefix: dcat
+    prefix_reference: http://www.w3.org/ns/dcat#
   dcterms:
     prefix_prefix: dcterms
     prefix_reference: http://purl.org/dc/terms/
-  xsd:
-    prefix_prefix: xsd
-    prefix_reference: http://www.w3.org/2001/XMLSchema#
-  rdfs:
-    prefix_prefix: rdfs
-    prefix_reference: http://www.w3.org/2000/01/rdf-schema#
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  sepses_cve:
+    prefix_prefix: sepses_cve
+    prefix_reference: http://w3id.org/sepses/vocab/ref/cve#
   skos:
     prefix_prefix: skos
     prefix_reference: http://www.w3.org/2004/02/skos/core#
-  WIKIDATA:
-    prefix_prefix: WIKIDATA
-    prefix_reference: https://www.wikidata.org/wiki/
-  schema_vulnerability_core:
-    prefix_prefix: schema_vulnerability_core
-    prefix_reference: https://w3id.org/lmodel/vulnerability-core/schema/
+  wd:
+    prefix_prefix: wd
+    prefix_reference: http://www.wikidata.org/entity/
 default_prefix: kev_catalog
 default_range: string
-subsets:
-  core:
-    name: core
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Core
-    description: Cross-program vulnerability metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-  metadata:
-    name: metadata
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Metadata
-    description: Identification and reference fields
-    from_schema: https://w3id.org/lmodel/vulnerability-core
 types:
   string:
     name: string
@@ -357,936 +347,546 @@ types:
     base: str
     uri: xsd:string
     repr: str
-  CveId:
-    name: CveId
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/CveId
-    description: 'A CVE identifier assigned by a CVE Numbering Authority (CNA). Format:
-      CVE-YYYY-NNNNN.'
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    exact_mappings:
-    - cwe:CveId
-    base: str
-    uri: xsd:string
-    pattern: ^CVE-[0-9]{4}-[0-9]+$
-  IsoDate:
-    name: IsoDate
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/IsoDate
-    description: A calendar date in ISO 8601 format (YYYY-MM-DD).
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    base: str
-    uri: xsd:date
-    pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
 enums:
-  KnownRansomwareCampaignUseEnum:
-    name: KnownRansomwareCampaignUseEnum
-    definition_uri: https://w3id.org/lmodel/kev-catalog/KnownRansomwareCampaignUseEnum
-    description: Whether the vulnerability is known to have been used in ransomware
-      campaigns.
-    comments:
-    - CISA uses this field to signal whether the KEV entry has been observed as part
-      of ransomware activity, enabling organizations to further prioritize their remediation
-      efforts beyond the base BOD 22-01 timeline.
+  KevRansomwareCampaignUse:
+    name: KevRansomwareCampaignUse
+    definition_uri: https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/knownRansomwareCampaignUse'
+    description: What CISA can say about a vulnerability's use in ransomware campaigns.
     from_schema: https://w3id.org/lmodel/kev-catalog
     permissible_values:
-      known:
-        text: known
-        description: The vulnerability is known to have been used in a ransomware
-          campaign.
-      unknown:
-        text: unknown
-        description: It is not known whether the vulnerability has been used in a
-          ransomware campaign.
-  VulnerabilityStatus:
-    name: VulnerabilityStatus
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/VulnerabilityStatus
-    description: Lifecycle state of a vulnerability record.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
+      Known:
+        text: Known
+        description: CISA knows of a ransomware campaign that has used it.
+      Unknown:
+        text: Unknown
+        description: CISA has no confirmation that a ransomware campaign has used
+          it.
+  KevForensicTriage:
+    name: KevForensicTriage
+    definition_uri: https://w3id.org/lmodel/kev-catalog/KevForensicTriage
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/forensicTriage'
+    description: Whether BOD 26-04 calls for forensic triage of a vulnerability.
+    from_schema: https://w3id.org/lmodel/kev-catalog
     permissible_values:
-      ACTIVE:
-        text: ACTIVE
-        description: Vulnerability is actively maintained and published.
-      REJECTED:
-        text: REJECTED
-        description: CVE ID was rejected and should not be used.
-      DISPUTED:
-        text: DISPUTED
-        description: The vulnerability details are disputed by a party.
-      RESERVED:
-        text: RESERVED
-        description: CVE ID is reserved but details are not yet published.
-      DEPRECATED:
-        text: DEPRECATED
-        description: Entry has been superseded or withdrawn.
-  ImpactSeverity:
-    name: ImpactSeverity
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/ImpactSeverity
-    description: CVSS qualitative severity rating.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    permissible_values:
-      NONE:
-        text: NONE
-        description: No measurable impact.
-      LOW:
-        text: LOW
-        description: Limited impact; exploitation requires specific conditions.
-      MEDIUM:
-        text: MEDIUM
-        description: Moderate impact; partial compromise of security properties.
-      HIGH:
-        text: HIGH
-        description: High impact; significant compromise of security properties.
-      CRITICAL:
-        text: CRITICAL
-        description: Critical impact; complete compromise; remote exploitation likely.
-      UNKNOWN:
-        text: UNKNOWN
-        description: Severity has not been assessed or is unavailable.
+      'Yes':
+        text: 'Yes'
+        description: The directive calls for forensic triage of this vulnerability.
+      'No':
+        text: 'No'
+        description: The directive does not call for forensic triage of this vulnerability.
 slots:
-  vendor_project:
-    name: vendor_project
-    definition_uri: https://w3id.org/lmodel/kev-catalog/vendor_project
-    description: The name of the vendor or project responsible for the affected product.
+  title:
+    name: title
+    definition_uri: https://w3id.org/lmodel/kev-catalog/title
+    annotations:
+      upstream_file_key:
+        tag: upstream_file_key
+        value: title
+    description: The catalog's human-readable name.
+    comments:
+    - Every KEV file carries this key, though CISA's JSON schema lists it under no
+      property. It is optional here for that reason.
     from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - vendorProject
     mappings:
-    - schema:Organization
-    slot_uri: schema:Organization
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: string
-    required: true
-  product:
-    name: product
-    definition_uri: https://w3id.org/lmodel/kev-catalog/product
-    description: The name of the affected product.
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - product
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: string
-    required: true
-  vulnerability_name:
-    name: vulnerability_name
-    definition_uri: https://w3id.org/lmodel/kev-catalog/vulnerability_name
-    description: A short, descriptive name for the vulnerability.
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - vulnerabilityName
-    mappings:
+    - kev_catalog:title
+    exact_mappings:
     - dcterms:title
-    close_mappings:
-    - cve:title
-    slot_uri: dcterms:title
-    owner: KevEntry
+    slot_uri: kev_catalog:title
+    owner: KevCatalog
     domain_of:
-    - KevEntry
+    - KevCatalog
     range: string
-    required: true
-  date_added:
-    name: date_added
-    definition_uri: https://w3id.org/lmodel/kev-catalog/date_added
-    description: The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog.
+  catalogVersion:
+    name: catalogVersion
+    definition_uri: https://w3id.org/lmodel/kev-catalog/catalogVersion
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/properties/catalogVersion'
+    description: The version label of this release of the catalog.
+    comments:
+    - The value reads as a date, such as 2026.10.30, but CISA states only a string,
+      so no pattern is given.
+    examples:
+    - value: 2026.10.30
     from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - dateAdded
+    see_also:
+    - https://www.w3.org/TR/vocab-dcat-3/#Property:resource_version
     mappings:
-    - dcterms:created
-    related_mappings:
-    - cve:date_published
-    slot_uri: dcterms:created
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: IsoDate
-    required: true
-  short_description:
-    name: short_description
-    definition_uri: https://w3id.org/lmodel/kev-catalog/short_description
-    description: A brief description of the vulnerability.
-    comments:
-    - 'KEV inclusion criterion #2 requires reliable evidence that the vulnerability
-      has been actively exploited in the wild. Active exploitation includes attempted
-      and successful exploitation; scanning, security research, and public PoC alone
-      do not qualify.'
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - shortDescription
-    mappings:
-    - dcterms:description
+    - kev_catalog:catalogVersion
+    exact_mappings:
+    - dcat:version
     close_mappings:
-    - cve:description
-    slot_uri: dcterms:description
-    owner: KevEntry
+    - schema:version
+    slot_uri: kev_catalog:catalogVersion
+    owner: KevCatalog
     domain_of:
-    - KevEntry
+    - KevCatalog
     range: string
     required: true
-  required_action:
-    name: required_action
-    definition_uri: https://w3id.org/lmodel/kev-catalog/required_action
-    description: The remediation action required, e.g. "Apply updates per vendor instructions."
-    comments:
-    - 'BOD 22-01 specifies two acceptable actions: (1) apply updates per vendor instructions,
-      or (2) remove the product from agency networks if it is end-of-life or cannot
-      otherwise be updated. Temporary mitigations and workarounds may be applied while
-      awaiting a vendor patch.'
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - requiredAction
-    slot_uri: kev_catalog:required_action
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: string
-    required: true
-  due_date:
-    name: due_date
-    definition_uri: https://w3id.org/lmodel/kev-catalog/due_date
-    description: The date (YYYY-MM-DD) by which federal civilian executive branch
-      (FCEB) agencies must remediate the vulnerability per BOD 22-01.
-    comments:
-    - Deadline set by CISA. Under BOD 19-02, internet-accessible critical vulnerabilities
-      (CVSS >9.0) must be remediated within 15 calendar days and high vulnerabilities
-      (7.0-9.0) within 30 calendar days of initial detection; BOD 22-01 due dates
-      may be tighter and apply to all agency systems, not only internet-accessible
-      ones.
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - dueDate
-    slot_uri: kev_catalog:due_date
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: IsoDate
-    required: true
-  known_ransomware_campaign_use:
-    name: known_ransomware_campaign_use
-    definition_uri: https://w3id.org/lmodel/kev-catalog/known_ransomware_campaign_use
-    description: Whether the vulnerability is known to have been leveraged as part
-      of a ransomware campaign.
+  dateReleased:
+    name: dateReleased
+    definition_uri: https://w3id.org/lmodel/kev-catalog/dateReleased
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/properties/dateReleased'
+    description: The date and time this release of the catalog came out.
     notes:
-    - CISA encourages organizations with evidence of exploited vulnerabilities not
-      listed in the KEV to submit them to vulnerability@mail.cisa.dhs.gov.
+    - DCAT 3's dcterms:issued is a resource's first known date of issuance. CISA's
+      value moves with each release of a living catalog, so the mapping is close,
+      not exact.
+    examples:
+    - value: '2026-10-30T17:02:45.3665Z'
     from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - knownRansomwareCampaignUse
-    slot_uri: kev_catalog:known_ransomware_campaign_use
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: KnownRansomwareCampaignUseEnum
-    required: false
-  notes:
-    name: notes
-    definition_uri: https://w3id.org/lmodel/kev-catalog/notes
-    description: Additional notes or references related to the vulnerability or its
-      remediation.
-    from_schema: https://w3id.org/lmodel/kev-catalog
+    see_also:
+    - https://www.w3.org/TR/vocab-dcat-3/#Property:resource_release_date
     mappings:
-    - skos:note
-    slot_uri: skos:note
-    owner: KevEntry
-    domain_of:
-    - KevEntry
-    range: string
-    required: false
-  catalog_version:
-    name: catalog_version
-    definition_uri: https://w3id.org/lmodel/kev-catalog/catalog_version
-    description: The version string of the KEV catalog release.
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - catalogVersion
-    slot_uri: kev_catalog:catalog_version
+    - kev_catalog:dateReleased
+    close_mappings:
+    - dcterms:issued
+    - schema:datePublished
+    slot_uri: kev_catalog:dateReleased
     owner: KevCatalog
     domain_of:
     - KevCatalog
-    range: string
-  date_released:
-    name: date_released
-    definition_uri: https://w3id.org/lmodel/kev-catalog/date_released
-    description: The ISO 8601 timestamp at which this catalog version was released.
-    from_schema: https://w3id.org/lmodel/kev-catalog
-    aliases:
-    - dateReleased
-    slot_uri: kev_catalog:date_released
-    owner: KevCatalog
-    domain_of:
-    - KevCatalog
-    range: string
+    range: datetime
+    required: true
   count:
     name: count
     definition_uri: https://w3id.org/lmodel/kev-catalog/count
-    description: The total number of vulnerabilities in this catalog version.
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/properties/count'
+    description: How many entries CISA says the catalog holds.
+    notes:
+    - schema.org's numberOfItems is declared on ItemList, not Dataset, so the mapping
+      is only related.
+    comments:
+    - CISA calls this the catalog's total. No validator here compares it with the
+      list; tests/test_data.py does that in Python, over the examples and the pinned
+      catalogue.
     from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:count
+    related_mappings:
+    - schema:numberOfItems
     slot_uri: kev_catalog:count
     owner: KevCatalog
     domain_of:
     - KevCatalog
     range: integer
+    required: true
   vulnerabilities:
     name: vulnerabilities
     definition_uri: https://w3id.org/lmodel/kev-catalog/vulnerabilities
-    description: The list of known exploited vulnerabilities.
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/properties/vulnerabilities'
+    description: The entries this release of the catalog lists.
     from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:vulnerabilities
+    broad_mappings:
+    - dcterms:hasPart
     slot_uri: kev_catalog:vulnerabilities
     owner: KevCatalog
     domain_of:
     - KevCatalog
-    range: KevEntry
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  cve_id:
-    name: cve_id
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/cve_id
-    description: 'The CVE identifier assigned by a CVE Numbering Authority (CNA).
-      Format: CVE-YYYY-NNNNN.'
-    in_subset:
-    - metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - cveId
-    mappings:
-    - dcterms:identifier
-    exact_mappings:
-    - schema:identifier
-    - kev_catalog:cve_id
-    - nvd:cve_id
-    slot_uri: dcterms:identifier
-    identifier: true
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: CveId
+    range: KevVulnerability
     required: true
-  title:
-    name: title
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/title
-    description: Short human-readable title or name for this entity.
-    in_subset:
-    - metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  cveID:
+    name: cveID
+    definition_uri: https://w3id.org/lmodel/kev-catalog/cveID
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/cveID'
+    description: The CVE identifier of the listed vulnerability, which identifies
+      the entry.
+    notes:
+    - 'Exact: a seeded sample of 120 entries on 2026-11-03 found each entry''s value
+      equal to cveMetadata.cveId in the CVE record of that name.'
+    examples:
+    - value: CVE-2021-44228
+    from_schema: https://w3id.org/lmodel/kev-catalog
     mappings:
-    - dcterms:title
+    - kev_catalog:cveID
     exact_mappings:
-    - schema:name
-    close_mappings:
-    - kev_catalog:vulnerability_name
-    slot_uri: dcterms:title
-    owner: Vulnerability
-    domain_of:
-    - KevCatalog
-    - Vulnerability
-    range: string
-  description:
-    name: description
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/description
-    description: Narrative description of the vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - dcterms:description
-    exact_mappings:
-    - schema:description
-    close_mappings:
-    - kev_catalog:short_description
-    slot_uri: dcterms:description
-    owner: Weakness
-    domain_of:
-    - Vulnerability
-    - Weakness
-    range: string
-  published_date:
-    name: published_date
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/published_date
-    description: Date and time the vulnerability was first published.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - dcterms:created
-    related_mappings:
-    - kev_catalog:date_added
-    slot_uri: dcterms:created
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: datetime
-  last_modified_date:
-    name: last_modified_date
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/last_modified_date
-    description: Date and time the vulnerability record was last modified.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - dcterms:modified
-    slot_uri: dcterms:modified
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: datetime
-  products:
-    name: products
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/products
-    description: Products affected by this vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:products
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: Product
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  weaknesses:
-    name: weaknesses
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/weaknesses
-    description: Weakness classifications (e.g. CWE) associated with this vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    related_mappings:
-    - cwe:Weakness
-    slot_uri: core:weaknesses
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: Weakness
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  references:
-    name: references
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/references
-    description: External references such as advisories and articles.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:references
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: Reference
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  impact:
-    name: impact
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/impact
-    description: Impact and severity assessment for this vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:impact
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: Impact
-    inlined: true
-    inlined_as_list: true
-  status:
-    name: status
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/status
-    description: Current lifecycle state of the vulnerability record.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - nvd:NVDWorkflowStatus
-    slot_uri: core:status
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    range: VulnerabilityStatus
-  vendor:
-    name: vendor
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/vendor
-    description: Name of the vendor or organization responsible for the product.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    owner: Product
-    domain_of:
-    - Product
-    range: string
-  name:
-    name: name
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/name
-    description: Name of the entity (product, weakness, reference, etc.).
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - label
-    - product
-    mappings:
-    - rdfs:label
-    slot_uri: rdfs:label
-    owner: Weakness
-    domain_of:
-    - Product
-    - Reference
-    - Weakness
-    range: string
-  version:
-    name: version
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/version
-    description: Version string of the affected product.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - schema:version
-    slot_uri: schema:version
-    owner: Product
-    domain_of:
-    - Product
-    range: string
-  platforms:
-    name: platforms
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/platforms
-    description: Platforms or operating environments affected.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:platforms
-    owner: Product
-    domain_of:
-    - Product
-    range: string
-    multivalued: true
-  url:
-    name: url
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/url
-    description: URL pointing to the reference resource.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - schema:url
-    slot_uri: schema:url
-    owner: Reference
-    domain_of:
-    - Reference
-    range: uri
-  source:
-    name: source
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/source
-    description: Source or origin of the reference or data.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - dcterms:source
-    slot_uri: dcterms:source
-    owner: Reference
-    domain_of:
-    - Reference
-    range: string
-  cwe_id:
-    name: cwe_id
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/cwe_id
-    description: CWE identifier for the weakness classification (e.g. CWE-79).
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - cweId
-    mappings:
-    - dcterms:identifier
-    related_mappings:
-    - cwe:Weakness
-    slot_uri: dcterms:identifier
-    owner: Weakness
-    domain_of:
-    - Weakness
-    range: string
-    pattern: ^CWE-[1-9][0-9]*$
-  severity:
-    name: severity
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/severity
-    description: Qualitative severity rating.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - nvd:CVSSMetric
-    slot_uri: core:severity
-    owner: Impact
-    domain_of:
-    - Impact
-    range: ImpactSeverity
-  vector:
-    name: vector
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/vector
-    description: CVSS vector string or equivalent scoring vector expression.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - nvd:CVSSMetric
-    slot_uri: core:vector
-    owner: Impact
-    domain_of:
-    - Impact
-    range: string
-  score:
-    name: score
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/score
-    description: Numeric vulnerability score (e.g. CVSS base score).
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:score
-    owner: Impact
-    domain_of:
-    - Impact
-    range: float
-  cpe_uri:
-    name: cpe_uri
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/cpe_uri
-    description: CPE 2.2 URI identifying an affected product configuration.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - cpeUri
-    related_mappings:
-    - nvd:CPEMatch
-    slot_uri: core:cpe_uri
-    owner: Configuration
-    domain_of:
-    - Configuration
-    range: string
-  operator:
-    name: operator
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/operator
-    description: Logical operator (AND/OR) used in configuration node groupings.
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    slot_uri: core:operator
-    owner: Configuration
-    domain_of:
-    - Configuration
-    range: string
-  KevEntry_cve_id:
-    name: KevEntry_cve_id
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/cve_id
-    description: 'The CVE identifier assigned by a CVE Numbering Authority (CNA).
-      Format: CVE-YYYY-NNNNN.'
-    in_subset:
-    - metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - cveId
-    mappings:
-    - dcterms:identifier
-    exact_mappings:
-    - cve:cve_id
-    is_a: cve_id
-    domain: KevEntry
-    slot_uri: dcterms:identifier
+    - cve:cveId
+    slot_uri: kev_catalog:cveID
     identifier: true
-    alias: cve_id
-    owner: KevEntry
+    owner: KevVulnerability
     domain_of:
-    - KevEntry
-    is_usage_slot: true
-    usage_slot_name: cve_id
-    range: CveId
-    required: true
-  KevCatalog_title:
-    name: KevCatalog_title
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/title
-    description: The title of the KEV catalog.
-    in_subset:
-    - metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    mappings:
-    - dcterms:title
-    exact_mappings:
-    - schema:name
-    close_mappings:
-    - kev_catalog:vulnerability_name
-    is_a: title
-    domain: KevCatalog
-    slot_uri: dcterms:title
-    alias: title
-    owner: KevCatalog
-    domain_of:
-    - KevCatalog
-    is_usage_slot: true
-    usage_slot_name: title
+    - KevVulnerability
     range: string
-  Vulnerability_cve_id:
-    name: Vulnerability_cve_id
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/cve_id
-    description: 'The CVE identifier assigned by a CVE Numbering Authority (CNA).
-      Format: CVE-YYYY-NNNNN.'
-    in_subset:
-    - metadata
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    aliases:
-    - cveId
-    mappings:
-    - dcterms:identifier
-    exact_mappings:
-    - schema:identifier
-    - kev_catalog:cve_id
-    - nvd:cve_id
-    is_a: cve_id
-    domain: Vulnerability
-    slot_uri: dcterms:identifier
-    identifier: true
-    alias: cve_id
-    owner: Vulnerability
-    domain_of:
-    - Vulnerability
-    is_usage_slot: true
-    usage_slot_name: cve_id
-    range: CveId
     required: true
-    recommended: true
-  Vulnerability_description:
-    name: Vulnerability_description
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/description
-    description: Narrative description of the vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
+    pattern: ^CVE-[0-9]{4}-[0-9]{4,19}$
+  vendorProject:
+    name: vendorProject
+    definition_uri: https://w3id.org/lmodel/kev-catalog/vendorProject
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/vendorProject'
+    description: The vendor or project behind the affected product, as CISA names
+      it.
+    notes:
+    - 'Close, not exact: both name who is responsible for the product, but in the
+      sample of 120 entries the value matched a CNA''s affected vendor on only 54,
+      as CNAs often write a longer legal name or n/a.'
+    examples:
+    - value: Apache
+    from_schema: https://w3id.org/lmodel/kev-catalog
     mappings:
-    - dcterms:description
-    exact_mappings:
-    - schema:description
+    - kev_catalog:vendorProject
     close_mappings:
-    - kev_catalog:short_description
-    is_a: description
-    domain: Vulnerability
-    slot_uri: dcterms:description
-    alias: description
-    owner: Vulnerability
+    - cve:vendor
+    slot_uri: kev_catalog:vendorProject
+    owner: KevVulnerability
     domain_of:
-    - Vulnerability
-    is_usage_slot: true
-    usage_slot_name: description
+    - KevVulnerability
     range: string
-    recommended: true
-classes:
-  KevEntry:
-    name: KevEntry
-    definition_uri: https://w3id.org/lmodel/kev-catalog/KevEntry
-    description: A single entry in the CISA Known Exploited Vulnerabilities (KEV)
-      catalog, representing one CVE that has been confirmed exploited in the wild
-      and for which clear remediation guidance exists.
-    comments:
-    - 'Three criteria must all be met for inclusion: (1) assigned CVE ID, (2) reliable
-      evidence of active exploitation in the wild, and (3) clear remediation guidance
-      (vendor update or EOL removal).'
-    - 'BOD 22-01 focuses on a small, high-signal subset of all vulnerabilities: as
-      of 2022-07-15 the catalog contained 787 KEVs from a universe of ~179,383 CVEs,
-      and approximately 20 of those KEVs were the most prevalent across the entire
-      federal enterprise.'
+    required: true
+  product:
+    name: product
+    definition_uri: https://w3id.org/lmodel/kev-catalog/product
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/product'
+    description: The affected product, as CISA names it.
+    notes:
+    - 'Close, not exact: both name the affected product, but in the sample of 120
+      entries the value matched a CNA''s affected product on only 14, as CNAs often
+      name a release line or write n/a.'
+    examples:
+    - value: Log4j2
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:product
+    close_mappings:
+    - cve:product
+    slot_uri: kev_catalog:product
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+    required: true
+  vulnerabilityName:
+    name: vulnerabilityName
+    definition_uri: https://w3id.org/lmodel/kev-catalog/vulnerabilityName
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/vulnerabilityName'
+    description: The name CISA gives the vulnerability.
+    notes:
+    - 'Related: this is CISA''s own wording. In the sample of 120 entries only 39
+      CVE records had a CNA title at all, and 2 of those equalled it.'
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:vulnerabilityName
+    related_mappings:
+    - cve:title
+    slot_uri: kev_catalog:vulnerabilityName
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+    required: true
+  dateAdded:
+    name: dateAdded
+    definition_uri: https://w3id.org/lmodel/kev-catalog/dateAdded
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/dateAdded'
+    description: The day CISA added the vulnerability to the catalog.
+    notes:
+    - DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a
+      dataset or service. An entry here lists a vulnerability, so the mapping is close.
+    examples:
+    - value: '2021-12-10'
     from_schema: https://w3id.org/lmodel/kev-catalog
     see_also:
-    - https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-    exact_mappings:
-    - WIKIDATA:Q631425
+    - https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date
+    mappings:
+    - kev_catalog:dateAdded
+    close_mappings:
+    - dcterms:issued
+    slot_uri: kev_catalog:dateAdded
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: date
+    required: true
+  shortDescription:
+    name: shortDescription
+    definition_uri: https://w3id.org/lmodel/kev-catalog/shortDescription
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/shortDescription'
+    description: A brief account of the vulnerability, in CISA's words.
+    notes:
+    - 'Related: this is CISA''s own account. In the sample of 120 entries none equalled
+      a description in the CVE record''s CNA container.'
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:shortDescription
     related_mappings:
-    - cve:CVERecord
-    - cve:AffectedProduct
-    - schema:SoftwareApplication
-    - WIKIDATA:Q166142
-    is_a: Vulnerability
-    slots:
-    - title
-    - Vulnerability_description
-    - published_date
-    - last_modified_date
-    - products
-    - weaknesses
-    - references
-    - impact
-    - status
-    - vendor_project
-    - product
-    - vulnerability_name
-    - date_added
-    - short_description
-    - required_action
-    - due_date
-    - known_ransomware_campaign_use
-    - notes
-    - KevEntry_cve_id
-    slot_usage:
-      cve_id:
-        name: cve_id
-        exact_mappings:
-        - cve:cve_id
-    class_uri: kev_catalog:KevEntry
+    - cve:descriptions
+    slot_uri: kev_catalog:shortDescription
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+    required: true
+  requiredAction:
+    name: requiredAction
+    definition_uri: https://w3id.org/lmodel/kev-catalog/requiredAction
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/requiredAction'
+    description: What CISA says must be done about the vulnerability.
+    notes:
+    - 'Related: a CVE record''s solutions say what a CNA offers as a fix, and this
+      says what CISA requires, often by pointing to the vendor''s instructions. STIX''s
+      course-of-action is a kind of object, not a key, so no slot mapping reaches
+      it.'
+    comments:
+    - Free text. Older entries' text may name a directive since replaced, and the
+      schema leaves the text as CISA wrote it.
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:requiredAction
+    related_mappings:
+    - cve:solutions
+    slot_uri: kev_catalog:requiredAction
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+    required: true
+  dueDate:
+    name: dueDate
+    definition_uri: https://w3id.org/lmodel/kev-catalog/dueDate
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/dueDate'
+    description: The day by which CISA wants the required action done.
+    comments:
+    - CISA states no relation between this and dateAdded, so the schema adds none.
+    examples:
+    - value: '2021-12-24'
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:dueDate
+    slot_uri: kev_catalog:dueDate
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: date
+    required: true
+  knownRansomwareCampaignUse:
+    name: knownRansomwareCampaignUse
+    definition_uri: https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/knownRansomwareCampaignUse'
+    description: Whether CISA knows of the vulnerability's use in a ransomware campaign.
+    comments:
+    - CISA types this as a string and names its two values only in the property's
+      description, so the enum rests on that sentence and on the pinned catalogue.
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:knownRansomwareCampaignUse
+    slot_uri: kev_catalog:knownRansomwareCampaignUse
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: KevRansomwareCampaignUse
+  forensicTriage:
+    name: forensicTriage
+    definition_uri: https://w3id.org/lmodel/kev-catalog/forensicTriage
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/forensicTriage'
+    description: Whether the vulnerability calls for forensic triage under BOD 26-04.
+    comments:
+    - CISA types this as a string and names its two values only in the property's
+      description, so the enum rests on that sentence and on the pinned catalogue.
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:forensicTriage
+    slot_uri: kev_catalog:forensicTriage
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: KevForensicTriage
+  notes:
+    name: notes
+    definition_uri: https://w3id.org/lmodel/kev-catalog/notes
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/notes'
+    description: Anything else CISA adds about the entry, as free text.
+    comments:
+    - Often holds addresses separated by " ; ", with empty places between them. The
+      schema keeps it one string and parses nothing, since CISA states no form for
+      it. Those addresses are third parties', under their own terms.
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:notes
+    close_mappings:
+    - skos:note
+    slot_uri: kev_catalog:notes
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+  cwes:
+    name: cwes
+    definition_uri: https://w3id.org/lmodel/kev-catalog/cwes
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability/properties/cwes'
+    description: The CWE codes CISA associates with the vulnerability.
+    notes:
+    - 'Close, not exact: both give an entry''s CWE codes, but in the sample of 120
+      entries the list equalled the codes of the CVE record''s CNA and ADP containers
+      together on 94. SEPSES''s hasCWE links a CVE to a CWE resource, not a code,
+      so it is only related.'
+    comments:
+    - The list may be empty, as it is on some entries of the pinned catalogue.
+    examples:
+    - value: CWE-502
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    mappings:
+    - kev_catalog:cwes
+    close_mappings:
+    - cve:cweId
+    related_mappings:
+    - sepses_cve:hasCWE
+    slot_uri: kev_catalog:cwes
+    owner: KevVulnerability
+    domain_of:
+    - KevVulnerability
+    range: string
+    multivalued: true
+    pattern: ^CWE-([0-9])+$
+classes:
   KevCatalog:
     name: KevCatalog
     definition_uri: https://w3id.org/lmodel/kev-catalog/KevCatalog
     annotations:
-      directive_id:
-        tag: directive_id
-        value: BOD 22-01
-      directive_date:
-        tag: directive_date
-        value: '2021-11-03'
-      legal_authority:
-        tag: legal_authority
-        value: "44 U.S.C. \xA7 3553(b)(2)"
-      issuing_body:
-        tag: issuing_body
-        value: Department of Homeland Security / CISA
-      contact_directives:
-        tag: contact_directives
-        value: CyberDirectives@cisa.dhs.gov
-      contact_general:
-        tag: contact_general
-        value: CyberLiaison@cisa.dhs.gov
-    description: "The CISA Known Exploited Vulnerabilities (KEV) Catalog \u2014 the\
-      \ authoritative source of vulnerabilities confirmed exploited in the wild, maintained\
-      \ by CISA per Binding Operational Directive (BOD) 22-01."
+      upstream_path:
+        tag: upstream_path
+        value: '#'
+    description: One published release of the KEV catalog, with the entries it lists.
+    notes:
+    - DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources
+      such as datasets, and an entry here describes a vulnerability, so that mapping
+      is only related despite the shared word. A KEV release is a kind of dataset,
+      so dcat:Dataset and schema:Dataset are broader terms, not equivalents.
     comments:
-    - BOD 22-01, "Reducing the Significant Risk of Known Exploited Vulnerabilities",
-      was issued under Section 3553(b)(2) of title 44, U.S. Code by the Secretary
-      of Homeland Security. It is a compulsory direction to all FCEB departments and
-      agencies.
-    - "CISA strongly recommends all organizations \u2014 including state, local, tribal\
-      \ and territorial (SLTT) governments and private sector \u2014 prioritize remediation\
-      \ of KEV catalog entries as part of their vulnerability management plan, even\
-      \ though BOD 22-01 itself only binds FCEB agencies."
-    - 'BOD 22-01 does not apply to: national security systems (as defined by statute),
-      systems operated by the Department of Defense, or systems operated by the Intelligence
-      Community.'
+    - 'Each release is a whole file: the catalog is republished as a new file, with
+      a new catalogVersion and dateReleased, when an entry is added or changed.'
+    - CISA's objects are open, so a key the schema does not name passes CISA's JSON
+      schema. This class is closed, so a new key fails here until the schema names
+      it.
     from_schema: https://w3id.org/lmodel/kev-catalog
     see_also:
-    - https://www.cisa.gov/directives
-    - https://www.cisa.gov/binding-operational-directive-22-01
-    close_mappings:
-    - schema:Dataset
+    - https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset
+    - https://schema.org/Dataset
+    exact_mappings:
+    - kev_catalog:KevCatalog
+    related_mappings:
+    - dcat:Catalog
     broad_mappings:
-    - WIKIDATA:Q2352616
+    - dcat:Dataset
+    - schema:Dataset
     slots:
-    - KevCatalog_title
-    - catalog_version
-    - date_released
+    - title
+    - catalogVersion
+    - dateReleased
     - count
     - vulnerabilities
-    slot_usage:
-      title:
-        name: title
-        description: The title of the KEV catalog.
     class_uri: kev_catalog:KevCatalog
     tree_root: true
-  Vulnerability:
-    name: Vulnerability
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Vulnerability
-    description: Abstract base representation of a security vulnerability. Extended
-      by source-specific schemas (KEV, CVE, NVD).
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
+  KevVulnerability:
+    name: KevVulnerability
+    definition_uri: https://w3id.org/lmodel/kev-catalog/KevVulnerability
+    annotations:
+      upstream_path:
+        tag: upstream_path
+        value: '#/$defs/vulnerability'
+    description: One entry of the KEV catalog, naming a CVE that CISA lists as exploited
+      and the action it asks for by a due date.
+    notes:
+    - An entry is a statement in a catalog about a vulnerability, not the vulnerability
+      itself. Wikidata's Q631425, STIX's vulnerability object and SPDX 3.0.1's Security/Vulnerability
+      describe the weakness and carry nothing about exploitation or a required action,
+      so each is only related. SPDX 3.0.1's Security/ExploitCatalogVulnAssessmentRelationship
+      says that a vulnerability is listed in an exploit catalog, and names KEV as
+      one, so it is close. dcat:CatalogRecord is related, since DCAT's record registers
+      a dataset or a service.
+    comments:
+    - 'Four keys are optional in CISA''s JSON schema though every entry of the pinned
+      catalogue carries them: knownRansomwareCampaignUse, forensicTriage, notes and
+      cwes. The schema follows CISA''s JSON schema.'
+    from_schema: https://w3id.org/lmodel/kev-catalog
+    see_also:
+    - https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/ExploitCatalogVulnAssessmentRelationship/
+    - https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/Vulnerability/
+    - https://www.wikidata.org/wiki/Q631425
+    - https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record
     exact_mappings:
-    - WIKIDATA:Q631425
+    - kev_catalog:KevVulnerability
+    close_mappings:
+    - spdx3:Security/ExploitCatalogVulnAssessmentRelationship
     related_mappings:
-    - schema:SoftwareApplication
-    - cwe:Weakness
-    broad_mappings:
-    - nvd:NVDEntry
-    - kev_catalog:KevEntry
-    abstract: true
+    - wd:Q631425
+    - stix:StixVulnerability
+    - spdx3:Security/Vulnerability
+    - sepses_cve:CVE
+    - dcat:CatalogRecord
+    - cve:CveRecord
     slots:
-    - Vulnerability_cve_id
-    - title
-    - Vulnerability_description
-    - published_date
-    - last_modified_date
-    - products
-    - weaknesses
-    - references
-    - impact
-    - status
-    slot_usage:
-      cve_id:
-        name: cve_id
-        recommended: true
-      description:
-        name: description
-        recommended: true
-    class_uri: core:Vulnerability
-  Product:
-    name: Product
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Product
-    description: Software or hardware entity affected by the vulnerability.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    exact_mappings:
-    - schema:SoftwareApplication
-    related_mappings:
-    - kev_catalog:KevEntry
-    slots:
-    - vendor
-    - name
-    - version
-    - platforms
-    class_uri: core:Product
-  Reference:
-    name: Reference
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Reference
-    description: External reference such as an advisory or article.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    exact_mappings:
-    - schema:CreativeWork
-    close_mappings:
-    - cwe:ExternalReference
-    - nvd:NVDReference
-    slots:
-    - url
-    - name
-    - source
-    class_uri: core:Reference
-  Weakness:
-    name: Weakness
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Weakness
-    description: Weakness classification from CWE or a similar taxonomy.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - cwe:Weakness
-    - nvd:NVDWeakness
-    slots:
-    - cwe_id
-    - name
-    - description
-    class_uri: core:Weakness
-  Impact:
-    name: Impact
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Impact
-    description: Assessment of the vulnerability's impact and severity.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - nvd:CVSSMetric
-    slots:
-    - severity
-    - vector
-    - score
-    class_uri: core:Impact
-  Configuration:
-    name: Configuration
-    definition_uri: https://w3id.org/lmodel/vulnerability-core/Configuration
-    description: Logical grouping of CPE match expressions.
-    in_subset:
-    - core
-    from_schema: https://w3id.org/lmodel/vulnerability-core
-    close_mappings:
-    - nvd:CPEConfiguration
-    slots:
-    - cpe_uri
-    - operator
-    class_uri: core:Configuration
-metamodel_version: 1.11.0
+    - cveID
+    - vendorProject
+    - product
+    - vulnerabilityName
+    - dateAdded
+    - shortDescription
+    - requiredAction
+    - dueDate
+    - knownRansomwareCampaignUse
+    - forensicTriage
+    - notes
+    - cwes
+    class_uri: kev_catalog:KevVulnerability
+metamodel_version: 1.12.0
 source_file: kev_catalog.yaml
-source_file_date: '2026-05-31T01:19:56'
-source_file_size: 10843
-generation_date: '2026-05-31T01:20:38'
+source_file_date: '2026-11-03T21:32:29'
+source_file_size: 15875
 
