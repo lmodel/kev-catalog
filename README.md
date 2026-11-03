@@ -66,7 +66,7 @@ The copy roots both classes on `Concept`, so a concept may name either as its `t
 KevCatalog, KevVulnerability
 ```
 
-In the copy, LOKF's `id` replaces `cveID`, and `title` becomes `kev_title` with its IRI kept. The keys `count` and `product` are lmodel/stix's too, under another IRI there. `tests/test_schema_rules.py` lists every shared name and fails on a new one.
+In the copy, LOKF's `id` replaces `cveID`, and `title` becomes `kev_title` with its IRI kept. The keys `count` and `product` are lmodel/stix's too, and `product` is lmodel/cve's, each under another IRI there. `tests/test_schema_rules.py` lists every shared name and fails on a new one.
 
 ## License
 

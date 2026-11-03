@@ -11,9 +11,9 @@ ROOT = Path(__file__).parent.parent
 
 # What a host may import beside this schema's adapt copy: LOKF's schema, pinned by
 # the sidecar, and the adapt copies other lmodel repositories release. Each
-# neighbour is the schema asset of the newest release that carries one, downloaded
-# and checked against the release's .sha256 and its build-provenance attestation on
-# 2026-11-03, and pinned here by that checksum.
+# neighbour but cve is the schema asset of the newest release that carries one,
+# downloaded and checked against the release's .sha256 and its build-provenance
+# attestation on 2026-11-03, and pinned here by that checksum.
 SOURCE = ROOT / "src" / "kev_catalog" / "schema" / "kev_catalog.yaml"
 COPY = ROOT / ".lokf" / "kev-catalog.yaml"
 LOKF = ROOT / ".lokf" / "lokf.yaml"
@@ -30,6 +30,10 @@ NEIGHBOURS = {
     "spdx.yaml": "3411cf5d19b1955f0362988c542984e4c817417c7b7b7892647aba1adf1ddd4a",
     # lmodel/stix v0.1.0, schema-v0.1.0-stix.yaml
     "stix.yaml": "3837d097c0cd48e0d2a98d118003c099d1290333f5b973aee85a7017bae344c9",
+    # lmodel/cve is not released yet, so this is .lokf/cve.yaml on its feat/first-release
+    # branch at dc1b8a7. Replace it with the release's schema asset, checked against its
+    # .sha256 and attestation, once that release is out.
+    "cve.yaml": "a6d164f72a0b76bd414b1e35307064d2d541bd7109c2826af8dc8a25cd2d925d",
     # lmodel/uco v0.3.0, schema-v0.3.0-uco.yaml
     "uco.yaml": "78bc3a266fa463ba380da7290adcbdfb1b8e1b7cef1ceb992bf8b1bed9b7b758",
 }
@@ -43,6 +47,7 @@ ELEMENT_KINDS = ("classes", "enums", "types", "subsets")
 # lokf issue #169 asks `lokf adapt` for a --beside option that would rename them in
 # the copy. A new overlap fails this test. No class, enum or type is shared.
 SHARED_WITH_NEIGHBOURS = {name: set() for name in NEIGHBOURS} | {
+    "cve.yaml": {"product"},
     "stix.yaml": {"count", "product"},
 }
 
