@@ -2,6 +2,7 @@
 
 ## 2026-11-03
 
+* **Prose**: reworded 15 concept bodies in plain English. No fact, link, number or frontmatter changed.
 * **Added**: kev-catalog LinkML schema.
 * **Added**: The pinned KEV catalogue release.
 * **Added**: The entry for CVE-2021-44228.

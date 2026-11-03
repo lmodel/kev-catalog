@@ -19,6 +19,6 @@ status: draft
 
 # Upstream watch (upstream-watch.yaml)
 
-`.github/workflows/upstream-watch.yaml` runs every Monday at 07:00 UTC and by hand. Its one job, `kev-sources`, reads the checkout and holds `issues: write`. It runs `scripts/check_upstream_release.py` on the runner's Python, with the workflow's token, which the script sends to `api.github.com` alone. On a finding, `.github/scripts/report-issue.sh` opens the issue titled "Upstream watch: the KEV JSON schema or licence has changed", or comments on the one already open. The catalogue's daily data is no finding.[^upstream-watch.yaml]
+`.github/workflows/upstream-watch.yaml` runs every Monday at 07:00 UTC and by hand. Its one job, `kev-sources`, reads the checkout and holds `issues: write`. It runs `scripts/check_upstream_release.py` on the runner's Python, with the workflow's token, which the script sends to `api.github.com` alone. On a finding, `.github/scripts/report-issue.sh` opens the issue titled "Upstream watch: the KEV JSON schema or licence has changed", or comments on the one already open. A change in the catalogue's daily data is not a finding.[^upstream-watch.yaml]
 
 [^upstream-watch.yaml]: .github/workflows/upstream-watch.yaml, the header comment, the on key and the jobs

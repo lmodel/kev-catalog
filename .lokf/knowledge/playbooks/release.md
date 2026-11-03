@@ -27,7 +27,7 @@ status: draft
 # Release a version
 
 1. Write each change under `## [Unreleased]` in `CHANGELOG.md`. The release job refuses an empty section.[^contributing.md]
-2. Type the commit for what it is. Only `feat:`, `fix:`, `security:` and a breaking change start a release, and below 1.0.0 a breaking change bumps the minor version.[^releaserc]
+2. Give the commit the type that says what it is. Only `feat:`, `fix:`, `security:` and a breaking change start a release, and below 1.0.0 a breaking change bumps the minor version.[^releaserc]
 3. Before the first releasing merge, push the `v0.0.0` baseline tag on `main`, so the first release is 0.1.0.[^changelog]
 4. On the merge, `semantic-release.yml` retitles the section, commits `CHANGELOG.md`, tags `vX.Y.Z` and publishes the GitHub release. Once `KNOWLEDGE_RELEASE_ENABLED` is `true`, it dispatches the knowledge release, which attaches `schema-<tag>-kev-catalog.yaml`, the bundle zip and the Copilot skill zip, each with its `.sha256` and attestation.[^contributing.md]
 

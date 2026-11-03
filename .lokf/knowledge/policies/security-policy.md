@@ -30,9 +30,9 @@ status: draft
 
 # Security policy
 
-`SECURITY.md` asks for a vulnerability to be reported through GitHub's private vulnerability reporting, not in a public issue. One person maintains the repository, so a first reply takes days, and there is no bounty. Only the latest release receives fixes. A vulnerability in a product goes to its vendor, and a report of exploitation goes to CISA.[^security.md]
+`SECURITY.md` asks for a vulnerability to be reported through GitHub's private vulnerability reporting, not in a public issue. One person maintains the repository, so a first reply takes days, and there is no bounty. Only the latest release receives fixes. `SECURITY.md` sends a vulnerability in a product to the product's vendor, and a report of exploitation to CISA.[^security.md]
 
-A release carries the schema and the Python models generated from it. Nothing goes to PyPI. When the bundle or the schema changed, the knowledge release attaches three assets, each with its `.sha256` and a build-provenance attestation: the schema's adapt copy, the bundle as a zip and a Microsoft 365 Copilot skill zip.[^security.md]
+A release carries the schema and the Python models generated from it. Nothing is published to PyPI. When the bundle or the schema changed, the knowledge release attaches three assets, each with its `.sha256` and a build-provenance attestation: the schema's adapt copy, the bundle as a zip and a Microsoft 365 Copilot skill zip.[^security.md]
 
 `scripts/check_upstream_release.py` runs only in the upstream watch. It sends the workflow's token, which can write issues, to `api.github.com` alone. It reads at most 5 MB of an answer, and follows a redirect only over https to `www.cisa.gov` or `api.github.com`. `scripts/fetch_kev_data.py` takes the catalogue only from `raw.githubusercontent.com`, and refuses a file whose size or hashes are not the pinned ones.[^security.md]
 

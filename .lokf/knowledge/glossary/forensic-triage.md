@@ -20,9 +20,9 @@ status: draft
 
 # Forensic triage (forensicTriage)
 
-`forensicTriage` says whether BOD 26-04 calls for forensic triage of the vulnerability. Its values are `Yes` and `No`. CISA types the key as a string, and names the two values in its description, so the schema's `KevForensicTriage` enum rests on that sentence. The key is optional in CISA's JSON schema.[^kev_catalog.yaml]
+`forensicTriage` says whether BOD 26-04 calls for forensic triage of the vulnerability. Its values are `Yes` and `No`. CISA types the key as a string, and names the two values in its description, so the schema's `KevForensicTriage` enum takes its values from that sentence. The key is optional in CISA's JSON schema.[^kev_catalog.yaml]
 
-In YAML, quote the values: unquoted, YAML reads them as booleans, and they fail. CISA's JSON has no such trap.[^index.md]
+In YAML, quote the values: unquoted, YAML reads them as booleans, and they fail. CISA's JSON does not have this problem.[^index.md]
 
 [^kev_catalog.yaml]: src/kev_catalog/schema/kev_catalog.yaml, the forensicTriage slot and the KevForensicTriage enum
 [^index.md]: docs/index.md, the Validating data section

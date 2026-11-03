@@ -28,7 +28,7 @@ status: draft
 
 Run `linkml-validate -s src/kev_catalog/schema/kev_catalog.yaml -C KevCatalog known_exploited_vulnerabilities.json`. The validator checks the required keys, the form of `cveID` and each code in `cwes`, the dates, the two enums, and that no object has a key the schema does not name.[^index.md]
 
-Two rules are out of its reach. `tests/kev_rules.py` checks that `count` is the length of the list and that no two entries name one CVE.[^kev_rules.py]
+The validator cannot check two rules. `tests/kev_rules.py` checks that `count` is the length of the list and that no two entries name one CVE.[^kev_rules.py]
 
 To validate the pinned catalogue, run `just test-kev-data`.[^project.justfile]
 

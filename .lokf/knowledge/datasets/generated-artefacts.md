@@ -29,9 +29,9 @@ status: draft
 
 # Generated artefacts
 
-`just gen-project` writes `project/` and the Python models in `src/kev_catalog/datamodel/`, and `just gen-doc` writes the element pages in `docs/elements/`, which git ignores, and the merged schema in `docs/schema/`. `.linkml/generators.yaml` holds the generators' settings, and `config.public.mk` names that file.[^justfile]
+`just gen-project` writes `project/` and the Python models in `src/kev_catalog/datamodel/`. `just gen-doc` writes the merged schema in `docs/schema/` and the element pages in `docs/elements/`, which git ignores. `.linkml/generators.yaml` holds the generators' settings, and `config.public.mk` names that file.[^justfile]
 
-`tests/test_data.py` holds the examples to the committed `project/jsonschema/kev_catalog.schema.json`, under the draft that file declares.[^test_data.py]
+`tests/test_data.py` checks the examples against the committed `project/jsonschema/kev_catalog.schema.json`, under the draft that file declares.[^test_data.py]
 
 `just gen-project` also rewrites parts that carry no change, such as the date in the Excel file.[^generators.yaml]
 

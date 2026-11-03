@@ -29,9 +29,9 @@ status: draft
 
 `tests/data/kev-data/manifest.json` pins this release by its address at commit `7ccba8e1223c`, its size of 1,826,755 bytes, its SHA-256 and its git object hash `db928594`.[^manifest.json]
 
-`just test-kev-data` fetches the file into `tmp/kev-data/` and validates it unchanged through the LinkML validator, the committed JSON Schema and both generated models. `tests/test_kev_data.py` also holds the numbers the file shows:[^test_kev_data.py]
+`just test-kev-data` fetches the file into `tmp/kev-data/` and validates it unchanged through the LinkML validator, the committed JSON Schema and both generated models. `tests/test_kev_data.py` also checks the numbers the file shows:[^test_kev_data.py]
 
-- 1,766 entries, with a `count` equal to that length and no CVE twice;
+- the file has 1,766 entries, with a `count` equal to that length and no CVE listed twice;
 - `knownRansomwareCampaignUse` is `Known` on 361 entries and `Unknown` on 1,405;
 - `forensicTriage` is `Yes` on 96 entries and `No` on 1,670;
 - `cwes` is empty on 175 entries;

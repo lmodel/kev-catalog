@@ -27,7 +27,7 @@ status: draft
 
 # Mappings and how each kind was chosen
 
-The schema's mappings are the one home for mappings. The earlier hand-kept SSSOM file is gone, since its rows named removed elements and no source confirmed them. `tests/test_mappings.py` checks each mapping's kind and bound prefix, and that a target in a neighbour's namespace is in that neighbour's copy.[^test_mappings.py]
+The schema is the one place that states mappings. The earlier hand-kept SSSOM file was deleted, because its rows named removed elements and no source confirmed them. `tests/test_mappings.py` checks each mapping's kind and bound prefix, and that a target in a neighbour's namespace is in that neighbour's copy.[^test_mappings.py]
 
 **The catalogue.** DCAT 3 defines a catalog as a curated collection of metadata about resources, and an entry here describes a vulnerability, so `dcat:Catalog` is only related. A KEV release is a kind of dataset, so `dcat:Dataset` and `schema:Dataset` are broad.[^kev_catalog.yaml]
 
@@ -37,11 +37,11 @@ The schema's mappings are the one home for mappings. The earlier hand-kept SSSOM
 
 - `cveID` matched `cveMetadata.cveId` on all 120, so `cve:cveId` is exact.
 - `vendorProject` matched the affected vendor that a CVE Numbering Authority (CNA) wrote on 54, and `product` matched an affected product on 14, so `cve:vendor` and `cve:product` are close.
-- `cwes` equalled the codes of the CNA and ADP containers together on 94, so `cve:cweId` is close.
+- `cwes` equalled the codes of the CNA and Authorized Data Publisher (ADP) containers together on 94, so `cve:cweId` is close.
 - `vulnerabilityName` equalled a CNA title on 2 of the 39 records that had one, and `shortDescription` equalled no CNA description, so `cve:title` and `cve:descriptions` are related.
-- `dateAdded` equalled the date in CISA's ADP container on all 120, but that metric's content is free-form, so no slot mapping reaches it.
+- `dateAdded` equalled the date in CISA's ADP container on all 120. That date sits in a metric whose content is free-form, so no slot mapping reaches it.
 
-Mappings across the lmodel family point from this schema to `cve`, and this schema imports neither.
+Mappings across the lmodel family point from this schema to `cve`, and this schema does not import it.
 
 [^test_mappings.py]: tests/test_mappings.py, the table and the checks
 [^kev_catalog.yaml]: src/kev_catalog/schema/kev_catalog.yaml, the mappings and their notes

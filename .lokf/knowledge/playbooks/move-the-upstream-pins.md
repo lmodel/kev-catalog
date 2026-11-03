@@ -31,7 +31,7 @@ status: draft
 
 1. Read what changed, and decide whether the schema moves to it.
 2. Replace the copy under `tests/upstream/`, and move `PINNED_EDITION`, `PINNED_COMMIT`, `PINNED_BLOBS` and `PINNED_SHA256` in `scripts/check_upstream_release.py`.
-3. Move the schema header's `version`, `source` and annotations. `tests/test_upstream.py` holds these and the pins equal, and reports any part of the new file with no element.[^test_upstream.py]
+3. Move the schema header's `version`, `source` and annotations. `tests/test_upstream.py` checks that these equal the pins, and reports any part of the new file with no element.[^test_upstream.py]
 4. When the licence changed, read what it allows, and update NOTICE.
 
 **The catalogue.** The watch does not report new data. To move the pin, change the commit, size and hashes in `tests/data/kev-data/manifest.json` together, then read what `tests/test_kev_data.py` reports: its `PROFILE` and `KNOWN_DATA_DEPARTURES` say what the file holds.[^tests-data-kev-data-readme.md]

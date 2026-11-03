@@ -22,7 +22,7 @@ status: draft
 
 # cisagov/kev-data
 
-`cisagov/kev-data` mirrors the data files CISA serves, updated shortly after the source. Its default branch is `develop`. It holds the catalogue as JSON and CSV, the JSON schema and a LICENSE file. The LICENSE file opens with CISA's statement of the terms and goes on with CC0 1.0.[^license]
+`cisagov/kev-data` mirrors the data files CISA serves, updated shortly after the source. Its default branch is `develop`. It holds the catalogue as JSON and CSV, the JSON schema and a LICENSE file. The LICENSE file opens with CISA's statement of the terms and continues with CC0 1.0.[^license]
 
 `scripts/check_upstream_release.py` watches the JSON schema and the licence there, and `scripts/fetch_kev_data.py` fetches the pinned catalogue from `raw.githubusercontent.com` alone.[^fetch_kev_data.py]
 

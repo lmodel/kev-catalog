@@ -28,7 +28,7 @@ status: draft
 
 The schema and the code are under the Apache License 2.0, and the bundle is under CC BY 4.0.[^readme.md]
 
-CISA distributes the KEV data under CC0 1.0. The mirror's LICENSE file opens with CISA's statement: third-party links in the data keep their own terms, and use of the information does not authorize use of the CISA Logo or the DHS Seal and is no endorsement by CISA or DHS.[^license] NOTICE states this position, names the copies this repository holds, and says this project is not CISA's or DHS's.[^notice]
+CISA distributes the KEV data under CC0 1.0. The mirror's LICENSE file opens with CISA's statement. Third-party links in the data keep their own terms. Use of the information does not authorize use of the CISA Logo or the DHS Seal, and it is no endorsement by CISA or DHS.[^license] NOTICE states this position, names the copies this repository holds, and says this project is not CISA's or DHS's.[^notice]
 
 NOTICE also carries the MIT notice of linkml-project-copier, and says the sidecar's scripts and workflows and the website derive from Knowledge Trust Ladder templates under Apache-2.0.[^notice]
 
