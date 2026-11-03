@@ -31,9 +31,9 @@ NEIGHBOURS = {
     # lmodel/stix v0.1.0, schema-v0.1.0-stix.yaml
     "stix.yaml": "3837d097c0cd48e0d2a98d118003c099d1290333f5b973aee85a7017bae344c9",
     # lmodel/cve is not released yet, so this is .lokf/cve.yaml on its feat/first-release
-    # branch at dc1b8a7. Replace it with the release's schema asset, checked against its
+    # branch at 5e83ca6. Replace it with the release's schema asset, checked against its
     # .sha256 and attestation, once that release is out.
-    "cve.yaml": "a6d164f72a0b76bd414b1e35307064d2d541bd7109c2826af8dc8a25cd2d925d",
+    "cve.yaml": "464e2c4b21e6a6eb6ed12010f06261b8096c2f657166a6824dcd231ac3f86145",
     # lmodel/uco v0.3.0, schema-v0.3.0-uco.yaml
     "uco.yaml": "78bc3a266fa463ba380da7290adcbdfb1b8e1b7cef1ceb992bf8b1bed9b7b758",
 }
