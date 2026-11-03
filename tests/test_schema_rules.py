@@ -1,6 +1,8 @@
 """Checks that the adapt copy can sit beside LOKF and the neighbours' copies."""
 
 import hashlib
+import keyword
+from collections import Counter
 from pathlib import Path
 
 import yaml
@@ -190,3 +192,16 @@ def test_mappings_use_a_bound_prefix():
     for mapping in mappings:
         prefix, sep, _ = mapping.partition(":")
         assert sep and prefix in prefixes, mapping
+
+
+def test_names_are_safe_for_every_generator():
+    """No slot is a Python keyword, which breaks the dataclasses, or `index`, whose
+    page would overwrite the docs index, and no two names differ only by case, which
+    collide on a case-insensitive filesystem."""
+    doc = _load(SOURCE)
+    slots = set(doc["slots"])
+    assert not {s for s in slots if keyword.iskeyword(s)}
+    assert "index" not in slots
+    names = slots | set(doc["classes"]) | set(doc["enums"]) | {doc["name"]}
+    lowered = Counter(name.lower() for name in names)
+    assert not [name for name, n in lowered.items() if n > 1]

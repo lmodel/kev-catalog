@@ -21,6 +21,7 @@ import jsonschema
 import pytest
 import yaml
 from linkml.validator import validate
+from linkml_runtime import SchemaView
 from linkml_runtime.loaders import yaml_loader
 
 import kev_catalog.datamodel.kev_catalog
@@ -146,6 +147,42 @@ def test_every_class_has_an_example():
     type."""
     classes = set(yaml.safe_load(SCHEMA.read_text(encoding="utf-8"))["classes"])
     assert classes <= {_class(p) for p in VALID}
+
+
+def _invalid_of(class_name):
+    return [p for p in INVALID if _class(p) == class_name]
+
+
+def test_every_required_key_has_a_counter_example_without_it():
+    """For each required key of each class, one counter-example lacks that key
+    alone among the required ones and fails at the class's own level."""
+    view = SchemaView(str(SCHEMA))
+    for class_name in view.all_classes():
+        required = {
+            s
+            for s in view.class_slots(class_name)
+            if view.induced_slot(s, class_name).required
+        }
+        for key in required:
+            found = [
+                p
+                for p in _invalid_of(class_name)
+                if _fails_at(p) == "/" and required - set(_load(p)) == {key}
+            ]
+            assert found, (class_name, key)
+
+
+def test_every_slot_has_a_counter_example_at_its_pointer():
+    """For each key of each class, one counter-example fails at that key, so each
+    range, pattern and enum the schema states is held by a file."""
+    view = SchemaView(str(SCHEMA))
+    for class_name in view.all_classes():
+        pointers = {_fails_at(p) for p in _invalid_of(class_name)}
+        for key in view.class_slots(class_name):
+            assert any(
+                pointer == f"/{key}" or pointer.startswith(f"/{key}/")
+                for pointer in pointers
+            ), (class_name, key)
 
 
 def _extract():
