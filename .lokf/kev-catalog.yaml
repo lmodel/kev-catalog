@@ -209,8 +209,8 @@ slots:
     - value: Apache
     notes:
     - 'Close, not exact: both name who is responsible for the product, but in the sample of 120 entries
-      the value matched a CNA''s affected vendor on only 54, as CNAs often write a longer legal name or
-      n/a.'
+      the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as
+      CNAs often write a longer legal name or n/a.'
     close_mappings:
     - cve:vendor
     annotations:

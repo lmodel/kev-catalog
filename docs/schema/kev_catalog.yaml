@@ -545,8 +545,9 @@ slots:
       it.
     notes:
     - 'Close, not exact: both name who is responsible for the product, but in the
-      sample of 120 entries the value matched a CNA''s affected vendor on only 54,
-      as CNAs often write a longer legal name or n/a.'
+      sample of 120 entries the value matched the affected vendor that a CVE Numbering
+      Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or
+      n/a.'
     examples:
     - value: Apache
     from_schema: https://w3id.org/lmodel/kev-catalog
@@ -887,6 +888,6 @@ classes:
     class_uri: kev_catalog:KevVulnerability
 metamodel_version: 1.12.0
 source_file: kev_catalog.yaml
-source_file_date: '2026-11-03T21:32:29'
-source_file_size: 15875
+source_file_date: '2026-11-03T21:55:21'
+source_file_size: 15914
 

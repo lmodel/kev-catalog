@@ -673,7 +673,7 @@
       ],
       "description": "The vendor or project behind the affected product, as CISA names it.",
       "notes": [
-        "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched a CNA's affected vendor on only 54, as CNAs often write a longer legal name or n/a."
+        "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or n/a."
       ],
       "examples": [
         {
@@ -1128,8 +1128,8 @@
   ],
   "metamodel_version": "1.12.0",
   "source_file": "kev_catalog.yaml",
-  "source_file_date": "2026-11-03T21:32:29",
-  "source_file_size": 15875,
+  "source_file_date": "2026-11-03T21:55:21",
+  "source_file_size": 15914,
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/kev_catalog.context.jsonld",

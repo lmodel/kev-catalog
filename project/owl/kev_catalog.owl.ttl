@@ -206,7 +206,7 @@ kev_catalog:vendorProject a owl:DatatypeProperty ;
 	rdfs:range xsd:string ;
 	skos:closeMatch cve:vendor ;
 	skos:definition "The vendor or project behind the affected product, as CISA names it." ;
-	skos:editorialNote "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched a CNA's affected vendor on only 54, as CNAs often write a longer legal name or n/a." ;
+	skos:editorialNote "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or n/a." ;
 	skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
 	kev_catalog:upstream_path "#/$defs/vulnerability/properties/vendorProject" .
 kev_catalog:vulnerabilities a owl:ObjectProperty ;

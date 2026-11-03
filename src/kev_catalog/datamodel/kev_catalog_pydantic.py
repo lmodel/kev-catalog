@@ -277,9 +277,9 @@ class KevVulnerability(ConfiguredBaseModel):
          'domain_of': ['KevVulnerability'],
          'examples': [{'value': 'Apache'}],
          'notes': ['Close, not exact: both name who is responsible for the product, '
-                   "but in the sample of 120 entries the value matched a CNA's "
-                   'affected vendor on only 54, as CNAs often write a longer legal '
-                   'name or n/a.'],
+                   'but in the sample of 120 entries the value matched the affected '
+                   'vendor that a CVE Numbering Authority (CNA) wrote on only 54, as '
+                   'CNAs often write a longer legal name or n/a.'],
          'slot_uri': 'kev_catalog:vendorProject'} })
     product: str = Field(default=..., description="""The affected product, as CISA names it.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_path': {'tag': 'upstream_path',
                                            'value': '#/$defs/vulnerability/properties/product'}},
