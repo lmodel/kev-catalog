@@ -53,6 +53,8 @@ PROFILE = {
     "forensicTriage": {"No": 1670, "Yes": 96},
     "cwes empty": 175,
     "cve number over four digits": 1055,
+    "requiredAction names BOD 26-04": 149,
+    "requiredAction names BOD 22-01": 340,
 }
 
 
@@ -149,6 +151,12 @@ def test_the_file_holds_the_profile():
         "cwes empty": sum(not e["cwes"] for e in entries),
         "cve number over four digits": sum(
             len(e["cveID"].split("-")[2]) > 4 for e in entries
+        ),
+        "requiredAction names BOD 26-04": sum(
+            "BOD 26-04" in e["requiredAction"] for e in entries
+        ),
+        "requiredAction names BOD 22-01": sum(
+            "BOD 22-01" in e["requiredAction"] for e in entries
         ),
     }
     assert found == PROFILE
