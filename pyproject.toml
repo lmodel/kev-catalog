@@ -3,15 +3,17 @@ requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
 
 [project]
-name = "kev_catalog"
-description = "Catalog of Known Exploited Vunerabilities (KEV) LinkML Schema"
+# Named like lmodel/slsa's slsa-linkml, so the PyPI name says what it holds;
+# the import package stays kev_catalog. PyPI publishing is off.
+name = "kev-catalog-linkml"
+description = "CISA Known Exploited Vulnerabilities (KEV) Catalog (LinkML)"
 authors = [
   {name = "Noel McLoughlin", email = "noel.mcloughlin@gmail.com"},
 ]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 readme = "README.md"
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10"
 dynamic = ["version"]
 
 dependencies = [
@@ -28,6 +30,9 @@ dev = [
     "mknotebooks>= 0.8.0",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/kev_catalog"]
+
 # See https://hatch.pypa.io/latest/config/build/#file-selection for how to
 # explicitly include files other than default into the build distributions.
 
@@ -43,6 +48,14 @@ fallback-version = "0.0.0"
 # Ref.: https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+exclude = [
+    "src/kev_catalog/_version.py",
+]
+# Set oldest supported Python version
+target-version = "py310"
 
 # Ref.: https://github.com/codespell-project/codespell
 [tool.codespell]
@@ -62,6 +75,7 @@ quiet-level = 3
 # Ref.: https://github.com/crate-ci/typos (spell checker)
 [tool.typos.default.extend-words]
 linke = "linke"
+
 [tool.typos.files]
 extend-exclude = [
   "LICENSE",
