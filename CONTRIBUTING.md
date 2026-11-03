@@ -36,7 +36,7 @@ npx skills add noelmcloughlin/knowledge-trust-ladder --skill ktl-curator --yes  
 
 ## Before opening a pull request
 
-- **Edit the schema, then regenerate.** Edit `src/kev_catalog/schema/kev_catalog.yaml`, run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit the output. `project/`, `src/kev_catalog/datamodel/`, `docs/schema/` and `.lokf/kev_catalog.yaml` are generated.
+- **Edit the schema, then regenerate.** Edit `src/kev_catalog/schema/kev_catalog.yaml`, run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit the output. `project/`, `src/kev_catalog/datamodel/`, `docs/schema/` and `.lokf/kev-catalog.yaml` are generated.
 - **Keep CISA's keys and values.** `tests/test_upstream.py` walks the copy of CISA's JSON schema under `tests/upstream/` and fails on any part with no element here; a departure is listed there with its reason.
 - **State only what CISA states**: no bound or rule of your own. [AI_COVENANT.md](AI_COVENANT.md) says why.
 - **Render the pinned edition.** The schema header, `scripts/check_upstream_release.py` and the copy under `tests/upstream/` name the same edition, and `tests/test_upstream.py` holds them equal.

@@ -70,7 +70,7 @@ jobs:
       - name: Run test suite
         run: just test
 
-      # .lokf/kev_catalog.yaml is the copy the knowledge bundle validates against
+      # .lokf/kev-catalog.yaml is the copy the knowledge bundle validates against
       # and the release attaches, so it must match the schema and lokf.yaml.
       - name: Check the adapted schema copy
         if: matrix.python-version == '3.13'

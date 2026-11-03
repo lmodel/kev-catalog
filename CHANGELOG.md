@@ -13,7 +13,7 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 - **The full catalogue of 2026-10-30, all 1,766 entries, validated unchanged** by `just test-kev-data` and a CI job that fetches it from `raw.githubusercontent.com`, pinned by its git object hash, and twelve real entries in a committed extract.
 - **Mappings to DCAT, schema.org, Dublin Core, SKOS, Wikidata, SPDX 3.0.1, SEPSES, lmodel/stix and lmodel/cve**, each read at its source and held by a test.
 - **A weekly upstream watch** that reports a changed JSON schema, a changed licence, a different copy at CISA, or a check that could not finish.
-- **`.lokf/kev_catalog.yaml`, the schema's `lokf adapt` copy, rooted on `KevCatalog` and `KevVulnerability`.** The knowledge release attaches it as `schema-<tag>-kev_catalog.yaml`, and tests hold its names apart from those of the Linked Open Knowledge Format (LOKF) and of the released lmodel copies.
+- **`.lokf/kev-catalog.yaml`, the schema's `lokf adapt` copy, rooted on `KevCatalog` and `KevVulnerability`.** The knowledge release attaches it as `schema-<tag>-kev-catalog.yaml`, and tests hold its names apart from those of the Linked Open Knowledge Format (LOKF) and of the released lmodel copies.
 - **An example of each class and a counter-example for each constraint**, each counter-example held to the one place it fails.
 - **The repository's Knowledge Trust Ladder (KTL) knowledge bundle and its sidecar automation**, from the KTL v0.61.0 templates with the lokf floor at 0.9.0, and a knowledge website that replaces the mkdocs site.
 - **The governance files**: SECURITY.md, AI_COVENANT.md, NOTICE, a CONTRIBUTING checklist, and semantic-release from a v0.0.0 baseline.

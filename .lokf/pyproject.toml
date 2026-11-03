@@ -25,4 +25,4 @@ package = false
 # copy `lokf adapt` writes beside the bundle, the file the justfile's
 # `schema :=` line names too. The path is relative to this file.
 [tool.lokf]
-schema = "kev_catalog.yaml"
+schema = "kev-catalog.yaml"
