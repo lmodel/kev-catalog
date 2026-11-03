@@ -249,8 +249,10 @@ slots:
     examples:
     - value: '2021-12-10'
     notes:
-    - DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service.
-      An entry here lists a vulnerability, so the mapping is close.
+    - 'DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service.
+      An entry here lists a vulnerability, so the mapping is close. A CVE record repeats this date in
+      CISA''s ADP container, in a metric of type kev: on all 120 of the sample it was equal. That metric''s
+      content is free-form, so no slot mapping reaches it.'
     close_mappings:
     - dcterms:issued
     see_also:

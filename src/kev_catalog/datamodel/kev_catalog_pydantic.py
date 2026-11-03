@@ -305,7 +305,10 @@ class KevVulnerability(ConfiguredBaseModel):
          'examples': [{'value': '2021-12-10'}],
          'notes': ['DCAT 3 uses dcterms:issued on a catalog record for the date of '
                    'listing, of a dataset or service. An entry here lists a '
-                   'vulnerability, so the mapping is close.'],
+                   'vulnerability, so the mapping is close. A CVE record repeats this '
+                   "date in CISA's ADP container, in a metric of type kev: on all 120 "
+                   "of the sample it was equal. That metric's content is free-form, so "
+                   'no slot mapping reaches it.'],
          'see_also': ['https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date'],
          'slot_uri': 'kev_catalog:dateAdded'} })
     shortDescription: str = Field(default=..., description="""A brief account of the vulnerability, in CISA's words.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_path': {'tag': 'upstream_path',

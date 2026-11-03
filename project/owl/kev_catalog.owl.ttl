@@ -127,7 +127,7 @@ kev_catalog:dateAdded a owl:DatatypeProperty ;
 	rdfs:seeAlso <https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date> ;
 	skos:closeMatch dcterms:issued ;
 	skos:definition "The day CISA added the vulnerability to the catalog." ;
-	skos:editorialNote "DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service. An entry here lists a vulnerability, so the mapping is close." ;
+	skos:editorialNote "DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service. An entry here lists a vulnerability, so the mapping is close. A CVE record repeats this date in CISA's ADP container, in a metric of type kev: on all 120 of the sample it was equal. That metric's content is free-form, so no slot mapping reaches it." ;
 	skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
 	kev_catalog:upstream_path "#/$defs/vulnerability/properties/dateAdded" .
 kev_catalog:dateReleased a owl:DatatypeProperty ;
