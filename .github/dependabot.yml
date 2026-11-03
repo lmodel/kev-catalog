@@ -41,3 +41,16 @@ updates:
       interval: monthly
     commit-message:
       prefix: "chore(lokf)"
+
+  # The knowledge website's packages (website/package.json + package-lock.json).
+  # A bump makes the lock differ from the ktl-website template; that is expected.
+  - package-ecosystem: npm
+    directory: "/website"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(website)"
+    groups:
+      website:
+        patterns:
+          - "*"
