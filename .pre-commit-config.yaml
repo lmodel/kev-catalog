@@ -1,5 +1,23 @@
 ---
 # https://pre-commit.com/
+# No hook may rewrite a file this repository does not write by hand: what the
+# LinkML generators and `lokf adapt` write, which the next run would rewrite back;
+# CISA's files under tests/upstream/ and the real entries under tests/data/, which
+# tests hold to their hashes or to the pinned catalogue; the neighbours' released
+# copies, which tests hold to their checksums; npm's lockfile for the release tools;
+# and the KTL sidecar's scripts, which the weekly sync replaces.
+exclude: >-
+  (?x)^(
+    src/kev_catalog/datamodel/|
+    project/|
+    docs/schema/|
+    \.lokf/(scripts|m365)/|
+    \.lokf/(lokf|kev_catalog)\.yaml$|
+    \.github/release/package-lock\.json$|
+    tests/neighbours/|
+    tests/upstream/|
+    tests/data/kev-data/extract/
+  )
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

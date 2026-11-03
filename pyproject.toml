@@ -66,6 +66,17 @@ skip = [
   "project/*",
   "src/kev_catalog/datamodel/kev_catalog_pydantic.py",
   "src/kev_catalog/datamodel/kev_catalog.py",
+  # The neighbours' adapt copies, copied as released; CISA's own files and real
+  # entries, copied unchanged; and files copied in by the KTL sidecar sync or
+  # written by npm, not by hand.
+  "tests/neighbours/*",
+  "tests/upstream/*",
+  "tests/data/kev-data/extract/*",
+  "tests/data/valid/*",
+  "tests/data/invalid/*",
+  "tests/data/problem/valid/*",
+  ".lokf/scripts/*",
+  "website/package-lock.json",
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
@@ -84,4 +95,12 @@ extend-exclude = [
   "project/*",
   "src/kev_catalog/datamodel/kev_catalog_pydantic.py",
   "src/kev_catalog/datamodel/kev_catalog.py",
+  "tests/neighbours/*",
+  "tests/upstream/*",
+  "tests/data/kev-data/extract/*",
+  "tests/data/valid/*",
+  "tests/data/invalid/*",
+  "tests/data/problem/valid/*",
+  ".lokf/scripts/*",
+  "website/package-lock.json",
 ]
