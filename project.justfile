@@ -4,6 +4,32 @@
 # name in this file is not possible until a known issue in just is fixed,
 # https://github.com/casey/just/issues/2540
 
+# ============ Knowledge bundle: the adapted domain schema ============
+
+# `.lokf/kev_catalog.yaml` is the copy `lokf adapt` writes from the schema so that
+# it can sit beside `.lokf/lokf.yaml` (`lokf adapt --help` lists the moves). The
+# roots are the schema's two classes, so a concept may name either as its `type`:
+# a release of the catalog, or one entry. adapt replaces the identifier `cveID`
+# with LOKF's own `id`, and refuses a class that lists an identifier without
+# descending from a root, so KevVulnerability must be one. KevCatalog has no
+# identifier, and it is a root so that a concept can stand for a release. The
+# prefix names what the copy renames to keep apart from LOKF, which today is
+# `title`, as kev_title with its IRI kept. The recipes run the `lokf` the
+# sidecar's floor pins (0.9.0 or later); LOKF_CMD runs another, such as a checkout:
+# LOKF_CMD="uv run --project ../lokf lokf" just lokf-adapt
+lokf_cmd := env_var_or_default("LOKF_CMD", "uv run --project .lokf lokf")
+lokf_adapt_roots := "--root KevCatalog --root KevVulnerability --prefix kev"
+
+# Rewrite .lokf/kev_catalog.yaml from the schema (run after every schema change)
+[group('knowledge bundle')]
+lokf-adapt:
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/kev_catalog.yaml
+
+# Fail when .lokf/kev_catalog.yaml is stale against the schema or .lokf/lokf.yaml
+[group('knowledge bundle')]
+lokf-adapt-check:
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/kev_catalog.yaml --check
+
 # ============ The pinned KEV catalogue ============
 
 # Download the pinned catalogue into tmp/kev-data/, checking it against the size
