@@ -17,13 +17,13 @@ sources:
   - resource: tests/neighbours
 generated:
   by: process:ktl-librarian
-  at: "2026-11-03T22:15:22Z"
+  at: "2026-11-04T21:49:33Z"
 status: draft
 ---
 
 # Neighbours' adapt copies
 
-`tests/neighbours/` holds each neighbour's schema release asset, pinned by SHA-256 in `tests/test_schema_rules.py`, which names the release of each. The test keeps the adapt copy's names apart from LOKF's and the neighbours'. No class, enum or type is shared. lmodel/stix's copy shares the keys `count` and `product`, and lmodel/cve's shares `product`. Each has another IRI in the neighbour's copy. They are shared because they are CISA's own keys. lmodel/cve is not released yet, so its copy comes from its `feat/first-release` branch at commit `5e83ca6`. The release's asset replaces that copy once it is published.[^test_schema_rules.py]
+`tests/neighbours/` holds each neighbour's schema release asset, pinned by SHA-256 in `tests/test_schema_rules.py`, which names the release of each. The test keeps the adapt copy's names apart from LOKF's and the neighbours'. No class, enum or type is shared. lmodel/stix's copy shares the keys `count` and `product`, and lmodel/cve's shares `product`. Each has another IRI in the neighbour's copy. They are shared because they are CISA's own keys.[^test_schema_rules.py]
 
 `tests/test_mappings.py` also reads these copies: a mapping to a term of lmodel/cve, lmodel/stix or lmodel/spdx must name a term the copy declares.[^test_mappings.py]
 

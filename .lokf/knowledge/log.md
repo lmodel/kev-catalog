@@ -1,5 +1,9 @@
 # Change Log
 
+## 2026-11-04
+
+* **Changed**: lmodel/cve's neighbour copy is its v0.1.0 release asset.
+
 ## 2026-11-03
 
 * **Prose**: reworded 15 concept bodies in plain English. No fact, link, number or frontmatter changed.
