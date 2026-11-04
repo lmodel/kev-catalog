@@ -1,0 +1,84 @@
+CISA Known Exploited Vulnerabilities (KEV) Catalog LinkML Schema (kev-catalog)
+Copyright 2026 Noel McLoughlin
+
+The code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). The work it models is third-party work under
+its own terms, described below.
+
+The Known Exploited Vulnerabilities (KEV) catalog
+-------------------------------------------------
+
+src/kev_catalog/schema/kev_catalog.yaml, src/kev_catalog/datamodel/, project/
+and the examples under tests/data/ model the JSON format of the Known Exploited
+Vulnerabilities (KEV) catalog, which the Cybersecurity and Infrastructure
+Security Agency (CISA) of the United States publishes at
+https://www.cisa.gov/known-exploited-vulnerabilities-catalog. CISA's data files
+and JSON schema are mirrored at https://github.com/cisagov/kev-data.
+
+CISA's JSON schema states no version. This project names the edition it renders
+by the date of the commit that last changed the file in kev-data, 2026-09-17
+(commit d98075f22b11), and pins the file by its git object hash and SHA-256.
+
+The KEV data is distributed under Creative Commons Zero 1.0 Universal (CC0 1.0).
+The kev-data repository's LICENSE file opens with CISA's own statement of the
+position, which this project keeps to: the data may be used in any legal way;
+information at a third-party link in the data is bound by that third party's
+policies and licences; and use of the information does not authorize use of the
+CISA Logo or the DHS Seal, and must not be read as an endorsement by CISA or the
+Department of Homeland Security (DHS). This project is not CISA's or DHS's, and
+its use implies no endorsement by either.
+
+Under those terms this repository holds exact copies:
+tests/upstream/known_exploited_vulnerabilities_schema.json, tests/upstream/LICENSE
+(the file above, with the full CC0 1.0 text), and the entries under
+tests/data/kev-data/extract/. The free text in those entries, and the addresses
+it names, are CISA's. The schema's descriptions are this project's own words.
+
+linkml-project-copier
+---------------------
+
+This project was generated from linkml-project-copier
+(https://github.com/linkml/linkml-project-copier), and its justfile,
+configuration and documentation scaffolding derive from that template:
+
+  The MIT License (MIT)
+  Copyright (c) 2025 David Linke
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to permit
+  persons to whom the Software is furnished to do so, subject to the
+  following conditions:
+
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+  NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+  USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Knowledge bundle
+----------------
+
+This product maintains its documentation as a Linked Open Knowledge Format
+(LOKF) bundle under .lokf/: https://lokf.nolan-nichols.com/specification/
+
+LOKF is a semantic profile of the Open Knowledge Format (OKF) specification
+by Google Cloud Platform:
+https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md
+
+The scripts under .lokf/scripts/ and .lokf/m365/ and the
+knowledge-librarian, knowledge-registrar, knowledge-release and
+knowledge-sync workflows under .github/workflows/ are copies of the
+ktl-sidecar templates in knowledge-trust-ladder
+(https://github.com/noelmcloughlin/knowledge-trust-ladder). The site under
+website/ and the knowledge-website workflow derive from the ktl-website
+templates in the same repository, and website/NOTICE lists the part
+adapted from the LOKF toolkit's site. All of them are licensed under the
+Apache License, Version 2.0.

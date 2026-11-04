@@ -1,182 +1,71 @@
-export type VulnerabilityCveId = string;
-export type KevEntryCveId = string;
+export type KevVulnerabilityCveID = string;
 /**
-* Lifecycle state of a vulnerability record.
+* What CISA can say about a vulnerability's use in ransomware campaigns.
 */
-export enum VulnerabilityStatus {
+export enum KevRansomwareCampaignUse {
     
-    /** Vulnerability is actively maintained and published. */
-    ACTIVE = "ACTIVE",
-    /** CVE ID was rejected and should not be used. */
-    REJECTED = "REJECTED",
-    /** The vulnerability details are disputed by a party. */
-    DISPUTED = "DISPUTED",
-    /** CVE ID is reserved but details are not yet published. */
-    RESERVED = "RESERVED",
-    /** Entry has been superseded or withdrawn. */
-    DEPRECATED = "DEPRECATED",
+    /** CISA knows of a ransomware campaign that has used it. */
+    Known = "Known",
+    /** CISA has no confirmation that a ransomware campaign has used it. */
+    Unknown = "Unknown",
 };
 /**
-* CVSS qualitative severity rating.
+* Whether BOD 26-04 calls for forensic triage of a vulnerability.
 */
-export enum ImpactSeverity {
+export enum KevForensicTriage {
     
-    /** No measurable impact. */
-    NONE = "NONE",
-    /** Limited impact; exploitation requires specific conditions. */
-    LOW = "LOW",
-    /** Moderate impact; partial compromise of security properties. */
-    MEDIUM = "MEDIUM",
-    /** High impact; significant compromise of security properties. */
-    HIGH = "HIGH",
-    /** Critical impact; complete compromise; remote exploitation likely. */
-    CRITICAL = "CRITICAL",
-    /** Severity has not been assessed or is unavailable. */
-    UNKNOWN = "UNKNOWN",
-};
-/**
-* Whether the vulnerability is known to have been used in ransomware campaigns.
-*/
-export enum KnownRansomwareCampaignUseEnum {
-    
-    /** The vulnerability is known to have been used in a ransomware campaign. */
-    known = "known",
-    /** It is not known whether the vulnerability has been used in a ransomware campaign. */
-    unknown = "unknown",
+    /** The directive calls for forensic triage of this vulnerability. */
+    Yes = "Yes",
+    /** The directive does not call for forensic triage of this vulnerability. */
+    No = "No",
 };
 
 
 /**
- * Abstract base representation of a security vulnerability. Extended by source-specific schemas (KEV, CVE, NVD).
- */
-export interface Vulnerability {
-    /** The CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN. */
-    cve_id: string,
-    /** Short human-readable title or name for this entity. */
-    title?: string,
-    /** Narrative description of the vulnerability. */
-    description?: string,
-    /** Date and time the vulnerability was first published. */
-    published_date?: string,
-    /** Date and time the vulnerability record was last modified. */
-    last_modified_date?: string,
-    /** Products affected by this vulnerability. */
-    products?: Product[],
-    /** Weakness classifications (e.g. CWE) associated with this vulnerability. */
-    weaknesses?: Weakness[],
-    /** External references such as advisories and articles. */
-    references?: Reference[],
-    /** Impact and severity assessment for this vulnerability. */
-    impact?: Impact,
-    /** Current lifecycle state of the vulnerability record. */
-    status?: string,
-}
-
-
-/**
- * Software or hardware entity affected by the vulnerability.
- */
-export interface Product {
-    /** Name of the vendor or organization responsible for the product. */
-    vendor?: string,
-    /** Name of the entity (product, weakness, reference, etc.). */
-    name?: string,
-    /** Version string of the affected product. */
-    version?: string,
-    /** Platforms or operating environments affected. */
-    platforms?: string[],
-}
-
-
-/**
- * External reference such as an advisory or article.
- */
-export interface Reference {
-    /** URL pointing to the reference resource. */
-    url?: string,
-    /** Name of the entity (product, weakness, reference, etc.). */
-    name?: string,
-    /** Source or origin of the reference or data. */
-    source?: string,
-}
-
-
-/**
- * Weakness classification from CWE or a similar taxonomy.
- */
-export interface Weakness {
-    /** CWE identifier for the weakness classification (e.g. CWE-79). */
-    cwe_id?: string,
-    /** Name of the entity (product, weakness, reference, etc.). */
-    name?: string,
-    /** Narrative description of the vulnerability. */
-    description?: string,
-}
-
-
-/**
- * Assessment of the vulnerability's impact and severity.
- */
-export interface Impact {
-    /** Qualitative severity rating. */
-    severity?: string,
-    /** CVSS vector string or equivalent scoring vector expression. */
-    vector?: string,
-    /** Numeric vulnerability score (e.g. CVSS base score). */
-    score?: number,
-}
-
-
-/**
- * Logical grouping of CPE match expressions.
- */
-export interface Configuration {
-    /** CPE 2.2 URI identifying an affected product configuration. */
-    cpe_uri?: string,
-    /** Logical operator (AND/OR) used in configuration node groupings. */
-    operator?: string,
-}
-
-
-/**
- * A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been confirmed exploited in the wild and for which clear remediation guidance exists.
- */
-export interface KevEntry extends Vulnerability {
-    /** The name of the vendor or project responsible for the affected product. */
-    vendor_project: string,
-    /** The name of the affected product. */
-    product: string,
-    /** A short, descriptive name for the vulnerability. */
-    vulnerability_name: string,
-    /** The date (YYYY-MM-DD) the vulnerability was added to the KEV catalog. */
-    date_added: string,
-    /** A brief description of the vulnerability. */
-    short_description: string,
-    /** The remediation action required, e.g. "Apply updates per vendor instructions." */
-    required_action: string,
-    /** The date (YYYY-MM-DD) by which federal civilian executive branch (FCEB) agencies must remediate the vulnerability per BOD 22-01. */
-    due_date: string,
-    /** Whether the vulnerability is known to have been leveraged as part of a ransomware campaign. */
-    known_ransomware_campaign_use?: string,
-    /** Additional notes or references related to the vulnerability or its remediation. */
-    notes?: string,
-}
-
-
-/**
- * The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.
+ * One published release of the KEV catalog, with the entries it lists.
  */
 export interface KevCatalog {
-    /** The title of the KEV catalog. */
+    /** The catalog's human-readable name. */
     title?: string,
-    /** The version string of the KEV catalog release. */
-    catalog_version?: string,
-    /** The ISO 8601 timestamp at which this catalog version was released. */
-    date_released?: string,
-    /** The total number of vulnerabilities in this catalog version. */
-    count?: number,
-    /** The list of known exploited vulnerabilities. */
-    vulnerabilities?: KevEntry[],
+    /** The version label of this release of the catalog. */
+    catalogVersion: string,
+    /** The date and time this release of the catalog came out. */
+    dateReleased: string,
+    /** How many entries CISA says the catalog holds. */
+    count: number,
+    /** The entries this release of the catalog lists. */
+    vulnerabilities: KevVulnerability[],
+}
+
+
+/**
+ * One entry of the KEV catalog, naming a CVE that CISA lists as exploited and the action it asks for by a due date.
+ */
+export interface KevVulnerability {
+    /** The CVE identifier of the listed vulnerability, which identifies the entry. */
+    cveID: string,
+    /** The vendor or project behind the affected product, as CISA names it. */
+    vendorProject: string,
+    /** The affected product, as CISA names it. */
+    product: string,
+    /** The name CISA gives the vulnerability. */
+    vulnerabilityName: string,
+    /** The day CISA added the vulnerability to the catalog. */
+    dateAdded: date,
+    /** A brief account of the vulnerability, in CISA's words. */
+    shortDescription: string,
+    /** What CISA says must be done about the vulnerability. */
+    requiredAction: string,
+    /** The day by which CISA wants the required action done. */
+    dueDate: date,
+    /** Whether CISA knows of the vulnerability's use in a ransomware campaign. */
+    knownRansomwareCampaignUse?: string,
+    /** Whether the vulnerability calls for forensic triage under BOD 26-04. */
+    forensicTriage?: string,
+    /** Anything else CISA adds about the entry, as free text. */
+    notes?: string,
+    /** The CWE codes CISA associates with the vulnerability. */
+    cwes?: string[],
 }
 
 

@@ -1,107 +1,38 @@
-# metamodel_version: 1.11.0
-# version: 1.0
-enum ImpactSeverity
+# metamodel_version: 1.12.0
+# version: 2026-09-17
+enum KevForensicTriage
   {
-    NONE
-    LOW
-    MEDIUM
-    HIGH
-    CRITICAL
-    UNKNOWN
+    Yes
+    No
   }
 
-enum KnownRansomwareCampaignUseEnum
+enum KevRansomwareCampaignUse
   {
-    known
-    unknown
-  }
-
-enum VulnerabilityStatus
-  {
-    ACTIVE
-    REJECTED
-    DISPUTED
-    RESERVED
-    DEPRECATED
-  }
-
-type Configuration
-  {
-    cpeUri: String
-    operator: String
-  }
-
-type Impact
-  {
-    severity: ImpactSeverity
-    vector: String
-    score: Float
+    Known
+    Unknown
   }
 
 type KevCatalog
   {
     title: String
-    catalogVersion: String
-    dateReleased: String
-    count: Int
-    vulnerabilities: [KevEntry]
+    catalogVersion: String!
+    dateReleased: String!
+    count: Int!
+    vulnerabilities: [KevVulnerability]!
   }
 
-type KevEntry
+type KevVulnerability
   {
-    title: String
-    description: String
-    publishedDate: String
-    lastModifiedDate: String
-    products: [Product]
-    weaknesses: [Weakness]
-    references: [Reference]
-    impact: Impact
-    status: VulnerabilityStatus
+    cveID: String!
     vendorProject: String!
     product: String!
     vulnerabilityName: String!
-    dateAdded: IsoDate!
+    dateAdded: String!
     shortDescription: String!
     requiredAction: String!
-    dueDate: IsoDate!
-    knownRansomwareCampaignUse: KnownRansomwareCampaignUseEnum
+    dueDate: String!
+    knownRansomwareCampaignUse: KevRansomwareCampaignUse
+    forensicTriage: KevForensicTriage
     notes: String
-    cveId: CveId!
-  }
-
-type Product
-  {
-    vendor: String
-    name: String
-    version: String
-    platforms: [String]
-  }
-
-type Reference
-  {
-    url: String
-    name: String
-    source: String
-  }
-
-interface Vulnerability
-  {
-    cveId: CveId!
-    title: String
-    description: String
-    publishedDate: String
-    lastModifiedDate: String
-    products: [Product]
-    weaknesses: [Weakness]
-    references: [Reference]
-    impact: Impact
-    status: VulnerabilityStatus
-  }
-
-type Weakness
-  {
-    cweId: String
-    name: String
-    description: String
+    cwes: [String]
   }

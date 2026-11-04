@@ -1,12 +1,8 @@
 # Auto generated from kev_catalog.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-31T01:20:54
-# Schema: kev-catalog
+# Schema: kev_catalog
 #
 # id: https://w3id.org/lmodel/kev-catalog
-# description: LinkML schema for the CISA Known Exploited Vulnerabilities (KEV) Catalog.
-#   The KEV catalog is the authoritative source of vulnerabilities that have
-#   been exploited in the wild, maintained by the Cybersecurity and
-#   Infrastructure Security Agency (CISA).
+# description: A LinkML model of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog that the Cybersecurity and Infrastructure Security Agency (CISA) publishes. CISA's keys and values are the schema's, so a real KEV file validates unchanged.
 # license: Apache-2.0
 
 import dataclasses
@@ -59,157 +55,39 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String, Uri
-from linkml_runtime.utils.metamodelcore import URI, XSDDateTime
+from linkml_runtime.linkml_model.types import Date, Datetime, Integer, String
+from linkml_runtime.utils.metamodelcore import XSDDate, XSDDateTime
 
-# fix-protocol patch: enum hash/eq
-from linkml_runtime.linkml_model.meta import PermissibleValue as _PV
-from linkml_runtime.utils.enumerations import EnumDefinitionImpl as _EDI
-if not getattr(_PV, "_fix_protocol_patched", False):
-    _orig_pv_eq = _PV.__eq__
-    def _pv_eq(self, other):
-        if isinstance(other, str):
-            return self.text == other
-        return _orig_pv_eq(self, other)
-    _PV.__eq__ = _pv_eq
-    _PV.__hash__ = lambda self: hash(self.text)
-    _PV._fix_protocol_patched = True
-if not getattr(_EDI, "_fix_protocol_patched", False):
-    _orig_edi_eq = _EDI.__eq__
-    def _edi_eq(self, other):
-        if isinstance(other, str):
-            return str(self) == other
-        return _orig_edi_eq(self, other)
-    # Bypass EnumDefinitionMeta.__setattr__, which routes assignments on
-    # enum subclasses through PermissibleValue handling.
-    type.__setattr__(_EDI, "__eq__", _edi_eq)
-    type.__setattr__(_EDI, "__hash__", lambda self: hash(str(self)))
-    type.__setattr__(_EDI, "_fix_protocol_patched", True)
-
-metamodel_version = "1.11.0"
-version = "1.0"
+metamodel_version = "1.12.0"
+version = "2026-09-17"
 
 # Namespaces
-WIKIDATA = CurieNamespace('WIKIDATA', 'https://www.wikidata.org/wiki/')
-CORE = CurieNamespace('core', 'https://w3id.org/lmodel/vulnerability-core/')
 CVE = CurieNamespace('cve', 'https://w3id.org/lmodel/cve/')
-CWE = CurieNamespace('cwe', 'https://w3id.org/lmodel/cwe/')
+DCAT = CurieNamespace('dcat', 'http://www.w3.org/ns/dcat#')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 KEV_CATALOG = CurieNamespace('kev_catalog', 'https://w3id.org/lmodel/kev-catalog/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
-NVD = CurieNamespace('nvd', 'https://w3id.org/lmodel/nist-nvd/')
-RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
-SCHEMA_VULNERABILITY_CORE = CurieNamespace('schema_vulnerability_core', 'https://w3id.org/lmodel/vulnerability-core/schema/')
+SEPSES_CVE = CurieNamespace('sepses_cve', 'http://w3id.org/sepses/vocab/ref/cve#')
 SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
-XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
+SPDX3 = CurieNamespace('spdx3', 'https://spdx.org/rdf/3.0.1/terms/')
+STIX = CurieNamespace('stix', 'https://w3id.org/lmodel/stix/')
+WD = CurieNamespace('wd', 'http://www.wikidata.org/entity/')
+WDT = CurieNamespace('wdt', 'http://www.wikidata.org/prop/direct/')
 DEFAULT_ = KEV_CATALOG
 
 
 # Types
-class CveId(str):
-    """ A CVE identifier assigned by a CVE Numbering Authority (CNA). Format: CVE-YYYY-NNNNN. """
-    type_class_uri = XSD["string"]
-    type_class_curie = "xsd:string"
-    type_name = "CveId"
-    type_model_uri = KEV_CATALOG.CveId
-
-
-class IsoDate(str):
-    """ A calendar date in ISO 8601 format (YYYY-MM-DD). """
-    type_class_uri = XSD["date"]
-    type_class_curie = "xsd:date"
-    type_name = "IsoDate"
-    type_model_uri = KEV_CATALOG.IsoDate
-
-
-
-
-# Enumerations
-class KnownRansomwareCampaignUseEnum(EnumDefinitionImpl):
-    """
-    Whether the vulnerability is known to have been used in ransomware campaigns.
-    """
-    known = PermissibleValue(
-        text="known",
-        description="The vulnerability is known to have been used in a ransomware campaign.")
-    unknown = PermissibleValue(
-        text="unknown",
-        description="It is not known whether the vulnerability has been used in a ransomware campaign.")
-
-    _defn = EnumDefinition(
-        name="KnownRansomwareCampaignUseEnum",
-        description="Whether the vulnerability is known to have been used in ransomware campaigns.",
-    )
-
-class VulnerabilityStatus(EnumDefinitionImpl):
-    """
-    Lifecycle state of a vulnerability record.
-    """
-    ACTIVE = PermissibleValue(
-        text="ACTIVE",
-        description="Vulnerability is actively maintained and published.")
-    REJECTED = PermissibleValue(
-        text="REJECTED",
-        description="CVE ID was rejected and should not be used.")
-    DISPUTED = PermissibleValue(
-        text="DISPUTED",
-        description="The vulnerability details are disputed by a party.")
-    RESERVED = PermissibleValue(
-        text="RESERVED",
-        description="CVE ID is reserved but details are not yet published.")
-    DEPRECATED = PermissibleValue(
-        text="DEPRECATED",
-        description="Entry has been superseded or withdrawn.")
-
-    _defn = EnumDefinition(
-        name="VulnerabilityStatus",
-        description="Lifecycle state of a vulnerability record.",
-    )
-
-class ImpactSeverity(EnumDefinitionImpl):
-    """
-    CVSS qualitative severity rating.
-    """
-    NONE = PermissibleValue(
-        text="NONE",
-        description="No measurable impact.")
-    LOW = PermissibleValue(
-        text="LOW",
-        description="Limited impact; exploitation requires specific conditions.")
-    MEDIUM = PermissibleValue(
-        text="MEDIUM",
-        description="Moderate impact; partial compromise of security properties.")
-    HIGH = PermissibleValue(
-        text="HIGH",
-        description="High impact; significant compromise of security properties.")
-    CRITICAL = PermissibleValue(
-        text="CRITICAL",
-        description="Critical impact; complete compromise; remote exploitation likely.")
-    UNKNOWN = PermissibleValue(
-        text="UNKNOWN",
-        description="Severity has not been assessed or is unavailable.")
-
-    _defn = EnumDefinition(
-        name="ImpactSeverity",
-        description="CVSS qualitative severity rating.",
-    )
-
 
 # Class references
-class VulnerabilityCveId(extended_str):
-    pass
-
-
-class KevEntryCveId(VulnerabilityCveId):
+class KevVulnerabilityCveID(extended_str):
     pass
 
 
 @dataclass(repr=False)
 class KevCatalog(YAMLRoot):
     """
-    The CISA Known Exploited Vulnerabilities (KEV) Catalog — the authoritative source of vulnerabilities confirmed
-    exploited in the wild, maintained by CISA per Binding Operational Directive (BOD) 22-01.
+    One published release of the KEV catalog, with the entries it lists.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -218,429 +96,206 @@ class KevCatalog(YAMLRoot):
     class_name: ClassVar[str] = "KevCatalog"
     class_model_uri: ClassVar[URIRef] = KEV_CATALOG.KevCatalog
 
+    catalogVersion: str = None
+    dateReleased: Union[str, XSDDateTime] = None
+    count: int = None
+    vulnerabilities: Union[dict[Union[str, KevVulnerabilityCveID], Union[dict, "KevVulnerability"]], list[Union[dict, "KevVulnerability"]]] = empty_dict()
     title: Optional[str] = None
-    catalog_version: Optional[str] = None
-    date_released: Optional[str] = None
-    count: Optional[int] = None
-    vulnerabilities: Optional[Union[dict[Union[str, KevEntryCveId], Union[dict, "KevEntry"]], list[Union[dict, "KevEntry"]]]] = empty_dict()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
+        if self._is_empty(self.catalogVersion):
+            self.MissingRequiredField("catalogVersion")
+        if not isinstance(self.catalogVersion, str):
+            self.catalogVersion = str(self.catalogVersion)
 
-        if self.catalog_version is not None and not isinstance(self.catalog_version, str):
-            self.catalog_version = str(self.catalog_version)
+        if self._is_empty(self.dateReleased):
+            self.MissingRequiredField("dateReleased")
+        if not isinstance(self.dateReleased, XSDDateTime):
+            self.dateReleased = XSDDateTime(self.dateReleased)
 
-        if self.date_released is not None and not isinstance(self.date_released, str):
-            self.date_released = str(self.date_released)
-
-        if self.count is not None and not isinstance(self.count, int):
+        if self._is_empty(self.count):
+            self.MissingRequiredField("count")
+        if not isinstance(self.count, int):
             self.count = int(self.count)
 
-        self._normalize_inlined_as_list(slot_name="vulnerabilities", slot_type=KevEntry, key_name="cve_id", keyed=True)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Vulnerability(YAMLRoot):
-    """
-    Abstract base representation of a security vulnerability. Extended by source-specific schemas (KEV, CVE, NVD).
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CORE["Vulnerability"]
-    class_class_curie: ClassVar[str] = "core:Vulnerability"
-    class_name: ClassVar[str] = "Vulnerability"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Vulnerability
-
-    cve_id: Union[str, VulnerabilityCveId] = None
-    title: Optional[str] = None
-    description: Optional[str] = None
-    published_date: Optional[Union[str, XSDDateTime]] = None
-    last_modified_date: Optional[Union[str, XSDDateTime]] = None
-    products: Optional[Union[Union[dict, "Product"], list[Union[dict, "Product"]]]] = empty_list()
-    weaknesses: Optional[Union[Union[dict, "Weakness"], list[Union[dict, "Weakness"]]]] = empty_list()
-    references: Optional[Union[Union[dict, "Reference"], list[Union[dict, "Reference"]]]] = empty_list()
-    impact: Optional[Union[dict, "Impact"]] = None
-    status: Optional[Union[str, "VulnerabilityStatus"]] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.cve_id):
-            self.MissingRequiredField("cve_id")
-        if not isinstance(self.cve_id, VulnerabilityCveId):
-            self.cve_id = VulnerabilityCveId(self.cve_id)
+        if self._is_empty(self.vulnerabilities):
+            self.MissingRequiredField("vulnerabilities")
+        self._normalize_inlined_as_list(slot_name="vulnerabilities", slot_type=KevVulnerability, key_name="cveID", keyed=True)
 
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
 
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
-        if self.published_date is not None and not isinstance(self.published_date, XSDDateTime):
-            self.published_date = XSDDateTime(self.published_date)
-
-        if self.last_modified_date is not None and not isinstance(self.last_modified_date, XSDDateTime):
-            self.last_modified_date = XSDDateTime(self.last_modified_date)
-
-        if not isinstance(self.products, list):
-            self.products = [self.products] if self.products is not None else []
-        self.products = [v if isinstance(v, Product) else Product(**as_dict(v)) for v in self.products]
-
-        if not isinstance(self.weaknesses, list):
-            self.weaknesses = [self.weaknesses] if self.weaknesses is not None else []
-        self.weaknesses = [v if isinstance(v, Weakness) else Weakness(**as_dict(v)) for v in self.weaknesses]
-
-        if not isinstance(self.references, list):
-            self.references = [self.references] if self.references is not None else []
-        self.references = [v if isinstance(v, Reference) else Reference(**as_dict(v)) for v in self.references]
-
-        if self.impact is not None and not isinstance(self.impact, Impact):
-            self.impact = Impact(**as_dict(self.impact))
-
-        if self.status is not None and not isinstance(self.status, VulnerabilityStatus):
-            self.status = VulnerabilityStatus(self.status)
-
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class KevEntry(Vulnerability):
+class KevVulnerability(YAMLRoot):
     """
-    A single entry in the CISA Known Exploited Vulnerabilities (KEV) catalog, representing one CVE that has been
-    confirmed exploited in the wild and for which clear remediation guidance exists.
+    One entry of the KEV catalog, naming a CVE that CISA lists as exploited and the action it asks for by a due date.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = KEV_CATALOG["KevEntry"]
-    class_class_curie: ClassVar[str] = "kev_catalog:KevEntry"
-    class_name: ClassVar[str] = "KevEntry"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.KevEntry
+    class_class_uri: ClassVar[URIRef] = KEV_CATALOG["KevVulnerability"]
+    class_class_curie: ClassVar[str] = "kev_catalog:KevVulnerability"
+    class_name: ClassVar[str] = "KevVulnerability"
+    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.KevVulnerability
 
-    cve_id: Union[str, KevEntryCveId] = None
-    vendor_project: str = None
+    cveID: Union[str, KevVulnerabilityCveID] = None
+    vendorProject: str = None
     product: str = None
-    vulnerability_name: str = None
-    date_added: str = None
-    short_description: str = None
-    required_action: str = None
-    due_date: str = None
-    known_ransomware_campaign_use: Optional[Union[str, "KnownRansomwareCampaignUseEnum"]] = None
+    vulnerabilityName: str = None
+    dateAdded: Union[str, XSDDate] = None
+    shortDescription: str = None
+    requiredAction: str = None
+    dueDate: Union[str, XSDDate] = None
+    knownRansomwareCampaignUse: Optional[Union[str, "KevRansomwareCampaignUse"]] = None
+    forensicTriage: Optional[Union[str, "KevForensicTriage"]] = None
     notes: Optional[str] = None
+    cwes: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.cve_id):
-            self.MissingRequiredField("cve_id")
-        if not isinstance(self.cve_id, KevEntryCveId):
-            self.cve_id = KevEntryCveId(self.cve_id)
+        if self._is_empty(self.cveID):
+            self.MissingRequiredField("cveID")
+        if not isinstance(self.cveID, KevVulnerabilityCveID):
+            self.cveID = KevVulnerabilityCveID(self.cveID)
 
-        if self._is_empty(self.vendor_project):
-            self.MissingRequiredField("vendor_project")
-        if not isinstance(self.vendor_project, str):
-            self.vendor_project = str(self.vendor_project)
+        if self._is_empty(self.vendorProject):
+            self.MissingRequiredField("vendorProject")
+        if not isinstance(self.vendorProject, str):
+            self.vendorProject = str(self.vendorProject)
 
         if self._is_empty(self.product):
             self.MissingRequiredField("product")
         if not isinstance(self.product, str):
             self.product = str(self.product)
 
-        if self._is_empty(self.vulnerability_name):
-            self.MissingRequiredField("vulnerability_name")
-        if not isinstance(self.vulnerability_name, str):
-            self.vulnerability_name = str(self.vulnerability_name)
+        if self._is_empty(self.vulnerabilityName):
+            self.MissingRequiredField("vulnerabilityName")
+        if not isinstance(self.vulnerabilityName, str):
+            self.vulnerabilityName = str(self.vulnerabilityName)
 
-        if self._is_empty(self.date_added):
-            self.MissingRequiredField("date_added")
-        if not isinstance(self.date_added, str):
-            self.date_added = str(self.date_added)
+        if self._is_empty(self.dateAdded):
+            self.MissingRequiredField("dateAdded")
+        if not isinstance(self.dateAdded, XSDDate):
+            self.dateAdded = XSDDate(self.dateAdded)
 
-        if self._is_empty(self.short_description):
-            self.MissingRequiredField("short_description")
-        if not isinstance(self.short_description, str):
-            self.short_description = str(self.short_description)
+        if self._is_empty(self.shortDescription):
+            self.MissingRequiredField("shortDescription")
+        if not isinstance(self.shortDescription, str):
+            self.shortDescription = str(self.shortDescription)
 
-        if self._is_empty(self.required_action):
-            self.MissingRequiredField("required_action")
-        if not isinstance(self.required_action, str):
-            self.required_action = str(self.required_action)
+        if self._is_empty(self.requiredAction):
+            self.MissingRequiredField("requiredAction")
+        if not isinstance(self.requiredAction, str):
+            self.requiredAction = str(self.requiredAction)
 
-        if self._is_empty(self.due_date):
-            self.MissingRequiredField("due_date")
-        if not isinstance(self.due_date, str):
-            self.due_date = str(self.due_date)
+        if self._is_empty(self.dueDate):
+            self.MissingRequiredField("dueDate")
+        if not isinstance(self.dueDate, XSDDate):
+            self.dueDate = XSDDate(self.dueDate)
 
-        if self.known_ransomware_campaign_use is not None and not isinstance(self.known_ransomware_campaign_use, KnownRansomwareCampaignUseEnum):
-            self.known_ransomware_campaign_use = KnownRansomwareCampaignUseEnum(self.known_ransomware_campaign_use)
+        if self.knownRansomwareCampaignUse is not None and not isinstance(self.knownRansomwareCampaignUse, KevRansomwareCampaignUse):
+            self.knownRansomwareCampaignUse = KevRansomwareCampaignUse(self.knownRansomwareCampaignUse)
+
+        if self.forensicTriage is not None and not isinstance(self.forensicTriage, KevForensicTriage):
+            self.forensicTriage = KevForensicTriage(self.forensicTriage)
 
         if self.notes is not None and not isinstance(self.notes, str):
             self.notes = str(self.notes)
 
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Product(YAMLRoot):
-    """
-    Software or hardware entity affected by the vulnerability.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CORE["Product"]
-    class_class_curie: ClassVar[str] = "core:Product"
-    class_name: ClassVar[str] = "Product"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Product
-
-    vendor: Optional[str] = None
-    name: Optional[str] = None
-    version: Optional[str] = None
-    platforms: Optional[Union[str, list[str]]] = empty_list()
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.vendor is not None and not isinstance(self.vendor, str):
-            self.vendor = str(self.vendor)
-
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.version is not None and not isinstance(self.version, str):
-            self.version = str(self.version)
-
-        if not isinstance(self.platforms, list):
-            self.platforms = [self.platforms] if self.platforms is not None else []
-        self.platforms = [v if isinstance(v, str) else str(v) for v in self.platforms]
+        if not isinstance(self.cwes, list):
+            self.cwes = [self.cwes] if self.cwes is not None else []
+        self.cwes = [v if isinstance(v, str) else str(v) for v in self.cwes]
 
         super().__post_init__(**kwargs)
 
 
-@dataclass(repr=False)
-class Reference(YAMLRoot):
+# Enumerations
+class KevRansomwareCampaignUse(EnumDefinitionImpl):
     """
-    External reference such as an advisory or article.
+    What CISA can say about a vulnerability's use in ransomware campaigns.
     """
-    _inherited_slots: ClassVar[list[str]] = []
+    Known = PermissibleValue(
+        text="Known",
+        description="CISA knows of a ransomware campaign that has used it.")
+    Unknown = PermissibleValue(
+        text="Unknown",
+        description="CISA has no confirmation that a ransomware campaign has used it.")
 
-    class_class_uri: ClassVar[URIRef] = CORE["Reference"]
-    class_class_curie: ClassVar[str] = "core:Reference"
-    class_name: ClassVar[str] = "Reference"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Reference
+    _defn = EnumDefinition(
+        name="KevRansomwareCampaignUse",
+        description="What CISA can say about a vulnerability's use in ransomware campaigns.",
+    )
 
-    url: Optional[Union[str, URI]] = None
-    name: Optional[str] = None
-    source: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.url is not None and not isinstance(self.url, URI):
-            self.url = URI(self.url)
-
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.source is not None and not isinstance(self.source, str):
-            self.source = str(self.source)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Weakness(YAMLRoot):
+class KevForensicTriage(EnumDefinitionImpl):
     """
-    Weakness classification from CWE or a similar taxonomy.
+    Whether BOD 26-04 calls for forensic triage of a vulnerability.
     """
-    _inherited_slots: ClassVar[list[str]] = []
+    Yes = PermissibleValue(
+        text="Yes",
+        description="The directive calls for forensic triage of this vulnerability.")
+    No = PermissibleValue(
+        text="No",
+        description="The directive does not call for forensic triage of this vulnerability.")
 
-    class_class_uri: ClassVar[URIRef] = CORE["Weakness"]
-    class_class_curie: ClassVar[str] = "core:Weakness"
-    class_name: ClassVar[str] = "Weakness"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Weakness
-
-    cwe_id: Optional[str] = None
-    name: Optional[str] = None
-    description: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.cwe_id is not None and not isinstance(self.cwe_id, str):
-            self.cwe_id = str(self.cwe_id)
-
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Impact(YAMLRoot):
-    """
-    Assessment of the vulnerability's impact and severity.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CORE["Impact"]
-    class_class_curie: ClassVar[str] = "core:Impact"
-    class_name: ClassVar[str] = "Impact"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Impact
-
-    severity: Optional[Union[str, "ImpactSeverity"]] = None
-    vector: Optional[str] = None
-    score: Optional[float] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.severity is not None and not isinstance(self.severity, ImpactSeverity):
-            self.severity = ImpactSeverity(self.severity)
-
-        if self.vector is not None and not isinstance(self.vector, str):
-            self.vector = str(self.vector)
-
-        if self.score is not None and not isinstance(self.score, float):
-            self.score = float(self.score)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Configuration(YAMLRoot):
-    """
-    Logical grouping of CPE match expressions.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CORE["Configuration"]
-    class_class_curie: ClassVar[str] = "core:Configuration"
-    class_name: ClassVar[str] = "Configuration"
-    class_model_uri: ClassVar[URIRef] = KEV_CATALOG.Configuration
-
-    cpe_uri: Optional[str] = None
-    operator: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.cpe_uri is not None and not isinstance(self.cpe_uri, str):
-            self.cpe_uri = str(self.cpe_uri)
-
-        if self.operator is not None and not isinstance(self.operator, str):
-            self.operator = str(self.operator)
-
-        super().__post_init__(**kwargs)
+    _defn = EnumDefinition(
+        name="KevForensicTriage",
+        description="Whether BOD 26-04 calls for forensic triage of a vulnerability.",
+    )
 
 # Slots
 class slots:
     pass
 
-slots.vendor_project = Slot(uri=SCHEMA.Organization, name="vendor_project", curie=SCHEMA.curie('Organization'),
-                   model_uri=KEV_CATALOG.vendor_project, domain=None, range=str)
-
-slots.product = Slot(uri=SCHEMA.name, name="product", curie=SCHEMA.curie('name'),
-                   model_uri=KEV_CATALOG.product, domain=None, range=str)
-
-slots.vulnerability_name = Slot(uri=DCTERMS.title, name="vulnerability_name", curie=DCTERMS.curie('title'),
-                   model_uri=KEV_CATALOG.vulnerability_name, domain=None, range=str)
-
-slots.date_added = Slot(uri=DCTERMS.created, name="date_added", curie=DCTERMS.curie('created'),
-                   model_uri=KEV_CATALOG.date_added, domain=None, range=str)
-
-slots.short_description = Slot(uri=DCTERMS.description, name="short_description", curie=DCTERMS.curie('description'),
-                   model_uri=KEV_CATALOG.short_description, domain=None, range=str)
-
-slots.required_action = Slot(uri=KEV_CATALOG.required_action, name="required_action", curie=KEV_CATALOG.curie('required_action'),
-                   model_uri=KEV_CATALOG.required_action, domain=None, range=str)
-
-slots.due_date = Slot(uri=KEV_CATALOG.due_date, name="due_date", curie=KEV_CATALOG.curie('due_date'),
-                   model_uri=KEV_CATALOG.due_date, domain=None, range=str)
-
-slots.known_ransomware_campaign_use = Slot(uri=KEV_CATALOG.known_ransomware_campaign_use, name="known_ransomware_campaign_use", curie=KEV_CATALOG.curie('known_ransomware_campaign_use'),
-                   model_uri=KEV_CATALOG.known_ransomware_campaign_use, domain=None, range=Optional[Union[str, "KnownRansomwareCampaignUseEnum"]])
-
-slots.notes = Slot(uri=SKOS.note, name="notes", curie=SKOS.curie('note'),
-                   model_uri=KEV_CATALOG.notes, domain=None, range=Optional[str])
-
-slots.catalog_version = Slot(uri=KEV_CATALOG.catalog_version, name="catalog_version", curie=KEV_CATALOG.curie('catalog_version'),
-                   model_uri=KEV_CATALOG.catalog_version, domain=None, range=Optional[str])
-
-slots.date_released = Slot(uri=KEV_CATALOG.date_released, name="date_released", curie=KEV_CATALOG.curie('date_released'),
-                   model_uri=KEV_CATALOG.date_released, domain=None, range=Optional[str])
-
-slots.count = Slot(uri=KEV_CATALOG.count, name="count", curie=KEV_CATALOG.curie('count'),
-                   model_uri=KEV_CATALOG.count, domain=None, range=Optional[int])
-
-slots.vulnerabilities = Slot(uri=KEV_CATALOG.vulnerabilities, name="vulnerabilities", curie=KEV_CATALOG.curie('vulnerabilities'),
-                   model_uri=KEV_CATALOG.vulnerabilities, domain=None, range=Optional[Union[dict[Union[str, KevEntryCveId], Union[dict, KevEntry]], list[Union[dict, KevEntry]]]])
-
-slots.cve_id = Slot(uri=DCTERMS.identifier, name="cve_id", curie=DCTERMS.curie('identifier'),
-                   model_uri=KEV_CATALOG.cve_id, domain=None, range=URIRef)
-
-slots.title = Slot(uri=DCTERMS.title, name="title", curie=DCTERMS.curie('title'),
+slots.title = Slot(uri=KEV_CATALOG.title, name="title", curie=KEV_CATALOG.curie('title'),
                    model_uri=KEV_CATALOG.title, domain=None, range=Optional[str])
 
-slots.description = Slot(uri=DCTERMS.description, name="description", curie=DCTERMS.curie('description'),
-                   model_uri=KEV_CATALOG.description, domain=None, range=Optional[str])
+slots.catalogVersion = Slot(uri=KEV_CATALOG.catalogVersion, name="catalogVersion", curie=KEV_CATALOG.curie('catalogVersion'),
+                   model_uri=KEV_CATALOG.catalogVersion, domain=None, range=str)
 
-slots.published_date = Slot(uri=DCTERMS.created, name="published_date", curie=DCTERMS.curie('created'),
-                   model_uri=KEV_CATALOG.published_date, domain=None, range=Optional[Union[str, XSDDateTime]])
+slots.dateReleased = Slot(uri=KEV_CATALOG.dateReleased, name="dateReleased", curie=KEV_CATALOG.curie('dateReleased'),
+                   model_uri=KEV_CATALOG.dateReleased, domain=None, range=Union[str, XSDDateTime])
 
-slots.last_modified_date = Slot(uri=DCTERMS.modified, name="last_modified_date", curie=DCTERMS.curie('modified'),
-                   model_uri=KEV_CATALOG.last_modified_date, domain=None, range=Optional[Union[str, XSDDateTime]])
+slots.count = Slot(uri=KEV_CATALOG.count, name="count", curie=KEV_CATALOG.curie('count'),
+                   model_uri=KEV_CATALOG.count, domain=None, range=int)
 
-slots.products = Slot(uri=CORE.products, name="products", curie=CORE.curie('products'),
-                   model_uri=KEV_CATALOG.products, domain=None, range=Optional[Union[Union[dict, Product], list[Union[dict, Product]]]])
+slots.vulnerabilities = Slot(uri=KEV_CATALOG.vulnerabilities, name="vulnerabilities", curie=KEV_CATALOG.curie('vulnerabilities'),
+                   model_uri=KEV_CATALOG.vulnerabilities, domain=None, range=Union[dict[Union[str, KevVulnerabilityCveID], Union[dict, KevVulnerability]], list[Union[dict, KevVulnerability]]])
 
-slots.weaknesses = Slot(uri=CORE.weaknesses, name="weaknesses", curie=CORE.curie('weaknesses'),
-                   model_uri=KEV_CATALOG.weaknesses, domain=None, range=Optional[Union[Union[dict, Weakness], list[Union[dict, Weakness]]]])
+slots.cveID = Slot(uri=KEV_CATALOG.cveID, name="cveID", curie=KEV_CATALOG.curie('cveID'),
+                   model_uri=KEV_CATALOG.cveID, domain=None, range=URIRef,
+                   pattern=re.compile(r'^CVE-[0-9]{4}-[0-9]{4,19}$'))
 
-slots.references = Slot(uri=CORE.references, name="references", curie=CORE.curie('references'),
-                   model_uri=KEV_CATALOG.references, domain=None, range=Optional[Union[Union[dict, Reference], list[Union[dict, Reference]]]])
+slots.vendorProject = Slot(uri=KEV_CATALOG.vendorProject, name="vendorProject", curie=KEV_CATALOG.curie('vendorProject'),
+                   model_uri=KEV_CATALOG.vendorProject, domain=None, range=str)
 
-slots.impact = Slot(uri=CORE.impact, name="impact", curie=CORE.curie('impact'),
-                   model_uri=KEV_CATALOG.impact, domain=None, range=Optional[Union[dict, Impact]])
+slots.product = Slot(uri=KEV_CATALOG.product, name="product", curie=KEV_CATALOG.curie('product'),
+                   model_uri=KEV_CATALOG.product, domain=None, range=str)
 
-slots.status = Slot(uri=CORE.status, name="status", curie=CORE.curie('status'),
-                   model_uri=KEV_CATALOG.status, domain=None, range=Optional[Union[str, "VulnerabilityStatus"]])
+slots.vulnerabilityName = Slot(uri=KEV_CATALOG.vulnerabilityName, name="vulnerabilityName", curie=KEV_CATALOG.curie('vulnerabilityName'),
+                   model_uri=KEV_CATALOG.vulnerabilityName, domain=None, range=str)
 
-slots.vendor = Slot(uri=SCHEMA.name, name="vendor", curie=SCHEMA.curie('name'),
-                   model_uri=KEV_CATALOG.vendor, domain=None, range=Optional[str])
+slots.dateAdded = Slot(uri=KEV_CATALOG.dateAdded, name="dateAdded", curie=KEV_CATALOG.curie('dateAdded'),
+                   model_uri=KEV_CATALOG.dateAdded, domain=None, range=Union[str, XSDDate])
 
-slots.name = Slot(uri=RDFS.label, name="name", curie=RDFS.curie('label'),
-                   model_uri=KEV_CATALOG.name, domain=None, range=Optional[str])
+slots.shortDescription = Slot(uri=KEV_CATALOG.shortDescription, name="shortDescription", curie=KEV_CATALOG.curie('shortDescription'),
+                   model_uri=KEV_CATALOG.shortDescription, domain=None, range=str)
 
-slots.version = Slot(uri=SCHEMA.version, name="version", curie=SCHEMA.curie('version'),
-                   model_uri=KEV_CATALOG.version, domain=None, range=Optional[str])
+slots.requiredAction = Slot(uri=KEV_CATALOG.requiredAction, name="requiredAction", curie=KEV_CATALOG.curie('requiredAction'),
+                   model_uri=KEV_CATALOG.requiredAction, domain=None, range=str)
 
-slots.platforms = Slot(uri=CORE.platforms, name="platforms", curie=CORE.curie('platforms'),
-                   model_uri=KEV_CATALOG.platforms, domain=None, range=Optional[Union[str, list[str]]])
+slots.dueDate = Slot(uri=KEV_CATALOG.dueDate, name="dueDate", curie=KEV_CATALOG.curie('dueDate'),
+                   model_uri=KEV_CATALOG.dueDate, domain=None, range=Union[str, XSDDate])
 
-slots.url = Slot(uri=SCHEMA.url, name="url", curie=SCHEMA.curie('url'),
-                   model_uri=KEV_CATALOG.url, domain=None, range=Optional[Union[str, URI]])
+slots.knownRansomwareCampaignUse = Slot(uri=KEV_CATALOG.knownRansomwareCampaignUse, name="knownRansomwareCampaignUse", curie=KEV_CATALOG.curie('knownRansomwareCampaignUse'),
+                   model_uri=KEV_CATALOG.knownRansomwareCampaignUse, domain=None, range=Optional[Union[str, "KevRansomwareCampaignUse"]])
 
-slots.source = Slot(uri=DCTERMS.source, name="source", curie=DCTERMS.curie('source'),
-                   model_uri=KEV_CATALOG.source, domain=None, range=Optional[str])
+slots.forensicTriage = Slot(uri=KEV_CATALOG.forensicTriage, name="forensicTriage", curie=KEV_CATALOG.curie('forensicTriage'),
+                   model_uri=KEV_CATALOG.forensicTriage, domain=None, range=Optional[Union[str, "KevForensicTriage"]])
 
-slots.cwe_id = Slot(uri=DCTERMS.identifier, name="cwe_id", curie=DCTERMS.curie('identifier'),
-                   model_uri=KEV_CATALOG.cwe_id, domain=None, range=Optional[str],
-                   pattern=re.compile(r'^CWE-[1-9][0-9]*$'))
+slots.notes = Slot(uri=KEV_CATALOG.notes, name="notes", curie=KEV_CATALOG.curie('notes'),
+                   model_uri=KEV_CATALOG.notes, domain=None, range=Optional[str])
 
-slots.severity = Slot(uri=CORE.severity, name="severity", curie=CORE.curie('severity'),
-                   model_uri=KEV_CATALOG.severity, domain=None, range=Optional[Union[str, "ImpactSeverity"]])
-
-slots.vector = Slot(uri=CORE.vector, name="vector", curie=CORE.curie('vector'),
-                   model_uri=KEV_CATALOG.vector, domain=None, range=Optional[str])
-
-slots.score = Slot(uri=CORE.score, name="score", curie=CORE.curie('score'),
-                   model_uri=KEV_CATALOG.score, domain=None, range=Optional[float])
-
-slots.cpe_uri = Slot(uri=CORE.cpe_uri, name="cpe_uri", curie=CORE.curie('cpe_uri'),
-                   model_uri=KEV_CATALOG.cpe_uri, domain=None, range=Optional[str])
-
-slots.operator = Slot(uri=CORE.operator, name="operator", curie=CORE.curie('operator'),
-                   model_uri=KEV_CATALOG.operator, domain=None, range=Optional[str])
-
-slots.KevEntry_cve_id = Slot(uri=DCTERMS.identifier, name="KevEntry_cve_id", curie=DCTERMS.curie('identifier'),
-                   model_uri=KEV_CATALOG.KevEntry_cve_id, domain=KevEntry, range=Union[str, KevEntryCveId])
-
-slots.KevCatalog_title = Slot(uri=DCTERMS.title, name="KevCatalog_title", curie=DCTERMS.curie('title'),
-                   model_uri=KEV_CATALOG.KevCatalog_title, domain=KevCatalog, range=Optional[str])
-
-slots.Vulnerability_cve_id = Slot(uri=DCTERMS.identifier, name="Vulnerability_cve_id", curie=DCTERMS.curie('identifier'),
-                   model_uri=KEV_CATALOG.Vulnerability_cve_id, domain=Vulnerability, range=Union[str, VulnerabilityCveId])
-
-slots.Vulnerability_description = Slot(uri=DCTERMS.description, name="Vulnerability_description", curie=DCTERMS.curie('description'),
-                   model_uri=KEV_CATALOG.Vulnerability_description, domain=Vulnerability, range=Optional[str])
+slots.cwes = Slot(uri=KEV_CATALOG.cwes, name="cwes", curie=KEV_CATALOG.curie('cwes'),
+                   model_uri=KEV_CATALOG.cwes, domain=None, range=Optional[Union[str, list[str]]],
+                   pattern=re.compile(r'^CWE-([0-9])+$'))

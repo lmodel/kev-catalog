@@ -1,15 +1,16 @@
 # Changes here will be overwritten by Copier
-_commit: v0.4.2-26-g940e423
+_commit: v0.5.0
 _src_path: gh:linkml/linkml-project-copier
-add_example: true
+add_example: false
 copyright_year: '2026'
 email: noel.mcloughlin@gmail.com
+existing_license_file: ''
 full_name: Noel McLoughlin
-gh_action_docs_preview: true
-gh_action_pypi: true
+gh_action_docs_preview: false
+gh_action_pypi: false
 github_org: lmodel
 license: Apache-2.0
-project_description: Catalog of Known Exploited Vunerabilities (KEV) LinkML Schema
+project_description: CISA Known Exploited Vulnerabilities (KEV) Catalog (LinkML)
 project_name: kev-catalog
 project_slug: kev_catalog
 

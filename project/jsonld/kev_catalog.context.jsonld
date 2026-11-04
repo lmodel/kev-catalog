@@ -1,172 +1,88 @@
 {
    "@context": {
       "xsd": "http://www.w3.org/2001/XMLSchema#",
-      "WIKIDATA": "https://www.wikidata.org/wiki/",
-      "core": "https://w3id.org/lmodel/vulnerability-core/",
       "cve": "https://w3id.org/lmodel/cve/",
-      "cwe": "https://w3id.org/lmodel/cwe/",
+      "dcat": "http://www.w3.org/ns/dcat#",
       "dcterms": "http://purl.org/dc/terms/",
       "kev_catalog": "https://w3id.org/lmodel/kev-catalog/",
       "linkml": "https://w3id.org/linkml/",
-      "nvd": "https://w3id.org/lmodel/nist-nvd/",
-      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
       "schema": "http://schema.org/",
-      "schema_vulnerability_core": "https://w3id.org/lmodel/vulnerability-core/schema/",
+      "sepses_cve": "http://w3id.org/sepses/vocab/ref/cve#",
       "skos": "http://www.w3.org/2004/02/skos/core#",
+      "spdx3": "https://spdx.org/rdf/3.0.1/terms/",
+      "stix": "https://w3id.org/lmodel/stix/",
+      "wd": "http://www.wikidata.org/entity/",
+      "wdt": "http://www.wikidata.org/prop/direct/",
       "@vocab": "https://w3id.org/lmodel/kev-catalog/",
-      "catalog_version": {
-         "@id": "catalog_version"
+      "catalogVersion": {
+         "@id": "catalogVersion"
       },
       "count": {
          "@type": "xsd:integer",
          "@id": "count"
       },
-      "cpe_uri": {
-         "@id": "core:cpe_uri"
+      "cveID": "@id",
+      "cwes": {
+         "@id": "cwes"
       },
-      "cve_id": "@id",
-      "cwe_id": {
-         "@id": "dcterms:identifier"
-      },
-      "date_added": {
+      "dateAdded": {
          "@type": "xsd:date",
-         "@id": "dcterms:created"
+         "@id": "dateAdded"
       },
-      "date_released": {
-         "@id": "date_released"
+      "dateReleased": {
+         "@type": "xsd:dateTime",
+         "@id": "dateReleased"
       },
-      "description": {
-         "@id": "dcterms:description"
-      },
-      "due_date": {
+      "dueDate": {
          "@type": "xsd:date",
-         "@id": "due_date"
+         "@id": "dueDate"
       },
-      "impact": {
-         "@type": "@id",
-         "@id": "core:impact"
-      },
-      "known_ransomware_campaign_use": {
+      "forensicTriage": {
          "@context": {
             "text": "skos:notation",
             "description": "skos:prefLabel",
             "meaning": "@id"
          },
-         "@id": "known_ransomware_campaign_use"
+         "@id": "forensicTriage"
       },
-      "last_modified_date": {
-         "@type": "xsd:dateTime",
-         "@id": "dcterms:modified"
-      },
-      "name": {
-         "@id": "rdfs:label"
+      "knownRansomwareCampaignUse": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "knownRansomwareCampaignUse"
       },
       "notes": {
-         "@id": "skos:note"
-      },
-      "operator": {
-         "@id": "core:operator"
-      },
-      "platforms": {
-         "@id": "core:platforms"
+         "@id": "notes"
       },
       "product": {
-         "@id": "schema:name"
+         "@id": "product"
       },
-      "products": {
-         "@type": "@id",
-         "@id": "core:products"
+      "requiredAction": {
+         "@id": "requiredAction"
       },
-      "published_date": {
-         "@type": "xsd:dateTime",
-         "@id": "dcterms:created"
-      },
-      "references": {
-         "@type": "@id",
-         "@id": "core:references"
-      },
-      "required_action": {
-         "@id": "required_action"
-      },
-      "score": {
-         "@type": "xsd:float",
-         "@id": "core:score"
-      },
-      "severity": {
-         "@context": {
-            "text": "skos:notation",
-            "description": "skos:prefLabel",
-            "meaning": "@id"
-         },
-         "@id": "core:severity"
-      },
-      "short_description": {
-         "@id": "dcterms:description"
-      },
-      "source": {
-         "@id": "dcterms:source"
-      },
-      "status": {
-         "@context": {
-            "text": "skos:notation",
-            "description": "skos:prefLabel",
-            "meaning": "@id"
-         },
-         "@id": "core:status"
+      "shortDescription": {
+         "@id": "shortDescription"
       },
       "title": {
-         "@id": "dcterms:title"
+         "@id": "title"
       },
-      "url": {
-         "@type": "xsd:anyURI",
-         "@id": "schema:url"
-      },
-      "vector": {
-         "@id": "core:vector"
-      },
-      "vendor": {
-         "@id": "schema:name"
-      },
-      "vendor_project": {
-         "@id": "schema:Organization"
-      },
-      "version": {
-         "@id": "schema:version"
+      "vendorProject": {
+         "@id": "vendorProject"
       },
       "vulnerabilities": {
          "@type": "@id",
          "@id": "vulnerabilities"
       },
-      "vulnerability_name": {
-         "@id": "dcterms:title"
-      },
-      "weaknesses": {
-         "@type": "@id",
-         "@id": "core:weaknesses"
-      },
-      "Configuration": {
-         "@id": "core:Configuration"
-      },
-      "Impact": {
-         "@id": "core:Impact"
+      "vulnerabilityName": {
+         "@id": "vulnerabilityName"
       },
       "KevCatalog": {
          "@id": "KevCatalog"
       },
-      "KevEntry": {
-         "@id": "KevEntry"
-      },
-      "Product": {
-         "@id": "core:Product"
-      },
-      "Reference": {
-         "@id": "core:Reference"
-      },
-      "Vulnerability": {
-         "@id": "core:Vulnerability"
-      },
-      "Weakness": {
-         "@id": "core:Weakness"
+      "KevVulnerability": {
+         "@id": "KevVulnerability"
       }
    }
 }

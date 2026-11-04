@@ -3,15 +3,17 @@ requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
 
 [project]
-name = "kev_catalog"
-description = "Catalog of Known Exploited Vunerabilities (KEV) LinkML Schema"
+# Named like lmodel/slsa's slsa-linkml, so the PyPI name says what it holds;
+# the import package stays kev_catalog. PyPI publishing is off.
+name = "kev-catalog-linkml"
+description = "CISA Known Exploited Vulnerabilities (KEV) Catalog (LinkML)"
 authors = [
   {name = "Noel McLoughlin", email = "noel.mcloughlin@gmail.com"},
 ]
 license = "Apache-2.0"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "NOTICE"]
 readme = "README.md"
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10"
 dynamic = ["version"]
 
 dependencies = [
@@ -21,12 +23,10 @@ dependencies = [
 [dependency-groups]
 dev = [
     "linkml>=1.9.3",
-    "mkdocs-material>=8.2.8",
-    "mkdocs-mermaid2-plugin>=1.1.1",
-    "mkdocs-pymdownx-material-extras>=2.5.6",
-    "jupyter>=1.0.0",
-    "mknotebooks>= 0.8.0",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kev_catalog"]
 
 # See https://hatch.pypa.io/latest/config/build/#file-selection for how to
 # explicitly include files other than default into the build distributions.
@@ -44,6 +44,14 @@ fallback-version = "0.0.0"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+exclude = [
+    "src/kev_catalog/_version.py",
+]
+# Set oldest supported Python version
+target-version = "py310"
+
 # Ref.: https://github.com/codespell-project/codespell
 [tool.codespell]
 skip = [
@@ -53,15 +61,29 @@ skip = [
   "project/*",
   "src/kev_catalog/datamodel/kev_catalog_pydantic.py",
   "src/kev_catalog/datamodel/kev_catalog.py",
+  # The neighbours' adapt copies, copied as released; CISA's own files and real
+  # entries, copied unchanged; and files copied in by the KTL sidecar sync or
+  # written by npm, not by hand.
+  "tests/neighbours/*",
+  "tests/upstream/*",
+  "tests/data/kev-data/extract/*",
+  "tests/data/valid/*",
+  "tests/data/invalid/*",
+  "tests/data/problem/valid/*",
+  ".lokf/scripts/*",
+  "website/package-lock.json",
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
-ignore-words-list = "linke"
+# CNA is a CVE Numbering Authority, which the CVE Record Format names.
+ignore-words-list = "linke,cna"
 quiet-level = 3
 
 # Ref.: https://github.com/crate-ci/typos (spell checker)
 [tool.typos.default.extend-words]
 linke = "linke"
+cna = "cna"
+
 [tool.typos.files]
 extend-exclude = [
   "LICENSE",
@@ -70,4 +92,12 @@ extend-exclude = [
   "project/*",
   "src/kev_catalog/datamodel/kev_catalog_pydantic.py",
   "src/kev_catalog/datamodel/kev_catalog.py",
+  "tests/neighbours/*",
+  "tests/upstream/*",
+  "tests/data/kev-data/extract/*",
+  "tests/data/valid/*",
+  "tests/data/invalid/*",
+  "tests/data/problem/valid/*",
+  ".lokf/scripts/*",
+  "website/package-lock.json",
 ]
