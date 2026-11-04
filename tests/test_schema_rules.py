@@ -30,10 +30,8 @@ NEIGHBOURS = {
     "spdx.yaml": "3411cf5d19b1955f0362988c542984e4c817417c7b7b7892647aba1adf1ddd4a",
     # lmodel/stix v0.1.0, schema-v0.1.0-stix.yaml
     "stix.yaml": "3837d097c0cd48e0d2a98d118003c099d1290333f5b973aee85a7017bae344c9",
-    # lmodel/cve is not released yet, so this is .lokf/cve.yaml on its feat/first-release
-    # branch at 5e83ca6. Replace it with the release's schema asset, checked against its
-    # .sha256 and attestation, once that release is out.
-    "cve.yaml": "464e2c4b21e6a6eb6ed12010f06261b8096c2f657166a6824dcd231ac3f86145",
+    # lmodel/cve v0.1.0, schema-v0.1.0-cve.yaml
+    "cve.yaml": "33e6086a81ac8e4cdc1e6143598cfcc961cbc1864ad9268773da9e863c652a73",
     # lmodel/uco v0.3.0, schema-v0.3.0-uco.yaml
     "uco.yaml": "78bc3a266fa463ba380da7290adcbdfb1b8e1b7cef1ceb992bf8b1bed9b7b758",
 }

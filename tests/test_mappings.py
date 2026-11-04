@@ -72,8 +72,7 @@ MAPPINGS = {
 }
 
 # The neighbour copy that holds each target's namespace. SPDX's terms live at
-# spdx.org, and lmodel/spdx's copy names them by those IRIs. lmodel/cve is not released
-# yet, so tests/test_schema_rules.py says where its copy came from.
+# spdx.org, and lmodel/spdx's copy names them by those IRIs.
 NEIGHBOUR_OF_PREFIX = {"stix": "stix.yaml", "spdx3": "spdx.yaml", "cve": "cve.yaml"}
 
 
