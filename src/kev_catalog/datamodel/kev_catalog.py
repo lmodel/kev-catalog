@@ -73,6 +73,7 @@ SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
 SPDX3 = CurieNamespace('spdx3', 'https://spdx.org/rdf/3.0.1/terms/')
 STIX = CurieNamespace('stix', 'https://w3id.org/lmodel/stix/')
 WD = CurieNamespace('wd', 'http://www.wikidata.org/entity/')
+WDT = CurieNamespace('wdt', 'http://www.wikidata.org/prop/direct/')
 DEFAULT_ = KEV_CATALOG
 
 

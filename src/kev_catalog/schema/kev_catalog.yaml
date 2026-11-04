@@ -10,6 +10,12 @@ description: >-
 version: "2026-09-17"
 source: https://github.com/cisagov/kev-data/blob/d98075f22b11ca60ede428f4397966d3523dc692/known_exploited_vulnerabilities_schema.json
 license: Apache-2.0
+keywords:
+  - vulnerability
+  - known exploited vulnerability
+  - CVE
+  - CISA
+  - catalog
 see_also:
   - https://lmodel.github.io/kev-catalog
   - https://www.cisa.gov/known-exploited-vulnerabilities-catalog
@@ -50,6 +56,7 @@ prefixes:
   sepses_cve: http://w3id.org/sepses/vocab/ref/cve#
   skos: http://www.w3.org/2004/02/skos/core#
   wd: http://www.wikidata.org/entity/
+  wdt: http://www.wikidata.org/prop/direct/
 
 default_prefix: kev_catalog
 default_range: string
@@ -76,14 +83,22 @@ classes:
         such as datasets, and an entry here describes a vulnerability, so that mapping
         is only related despite the shared word. A KEV release is a kind of dataset, so
         dcat:Dataset and schema:Dataset are broader terms, not equivalents.
+      - >-
+        Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's
+        ExploitCatalogType/kev is its name for that catalog as a kind of exploit
+        catalog. A class here is one release of it, so both are only related.
     broad_mappings:
       - dcat:Dataset
       - schema:Dataset
     related_mappings:
       - dcat:Catalog
+      - wd:Q125498394
+      - spdx3:Security/ExploitCatalogType/kev
     see_also:
       - https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset
       - https://schema.org/Dataset
+      - https://www.wikidata.org/wiki/Q125498394
+      - https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/
     annotations:
       upstream_path: "#"
     slots:
@@ -239,9 +254,11 @@ slots:
     notes:
       - >-
         Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal
-        to cveMetadata.cveId in the CVE record of that name.
+        to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the
+        same identifier, in the same form, on the item for the vulnerability.
     exact_mappings:
       - cve:cveId
+      - wdt:P3587
     annotations:
       upstream_path: "#/$defs/vulnerability/properties/cveID"
 
@@ -411,8 +428,11 @@ slots:
         Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the
         list equalled the codes of the CVE record's CNA and ADP containers together on 94.
         SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related.
+        Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes,
+        so it is close.
     close_mappings:
       - cve:cweId
+      - wdt:P3624
     related_mappings:
       - sepses_cve:hasCWE
     annotations:

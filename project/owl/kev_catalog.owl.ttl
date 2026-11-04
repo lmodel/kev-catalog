@@ -3,6 +3,7 @@
 @prefix sepses_cve: <http://w3id.org/sepses/vocab/ref/cve#> .
 @prefix kev_catalog: <https://w3id.org/lmodel/kev-catalog/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix spdx3: <https://spdx.org/rdf/3.0.1/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
@@ -19,6 +20,7 @@
 	dcterms:source <https://github.com/cisagov/kev-data/blob/d98075f22b11ca60ede428f4397966d3523dc692/known_exploited_vulnerabilities_schema.json> ;
 	dcterms:title "CISA Known Exploited Vulnerabilities Catalog" ;
 	pav:version "2026-09-17" ;
+	schema1:keywords "CISA" , "CVE" , "catalog" , "known exploited vulnerability" , "vulnerability" ;
 	a owl:Ontology ;
 	rdfs:label "kev_catalog" ;
 	rdfs:seeAlso <https://github.com/cisagov/kev-data> , <https://lmodel.github.io/kev-catalog> , <https://www.cisa.gov/known-exploited-vulnerabilities-catalog> , <https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json> ;
@@ -32,15 +34,15 @@
 	kev_catalog:upstream_schema_sha256 "0d5865c98694c5bfba2c78a26caf814f406b3fce8bfb81bef79e99c7f288b0e7" .
 kev_catalog:KevCatalog a owl:Class ;
 	rdfs:label "KevCatalog" ;
-	rdfs:seeAlso schema:Dataset , <https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset> ;
+	rdfs:seeAlso schema:Dataset , <https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/> , <https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset> , <https://www.wikidata.org/wiki/Q125498394> ;
 	rdfs:subClassOf _:c14n10 , _:c14n11 , _:c14n16 , _:c14n2 , _:c14n24 , _:c14n29 , _:c14n30 , _:c14n31 , _:c14n36 , _:c14n41 , _:c14n42 , _:c14n44 , _:c14n54 , _:c14n8 ;
 	skos:broadMatch schema1:Dataset , dcat:Dataset ;
 	skos:definition "One published release of the KEV catalog, with the entries it lists." ;
-	skos:editorialNote "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents." ;
+	skos:editorialNote "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents." , "Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's ExploitCatalogType/kev is its name for that catalog as a kind of exploit catalog. A class here is one release of it, so both are only related." ;
 	skos:exactMatch kev_catalog:KevCatalog ;
 	skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
 	skos:note "CISA's objects are open, so a key the schema does not name passes CISA's JSON schema. This class is closed, so a new key fails here until the schema names it." , "Each release is a whole file: the catalog is republished as a new file, with a new catalogVersion and dateReleased, when an entry is added or changed." ;
-	skos:relatedMatch dcat:Catalog ;
+	skos:relatedMatch dcat:Catalog , wd:Q125498394 , spdx3:Security\/ExploitCatalogType\/kev ;
 	kev_catalog:upstream_path "#" .
 kev_catalog:KevForensicTriage\#No a owl:Class ;
 	rdfs:label "No" ;
@@ -107,16 +109,16 @@ kev_catalog:cveID a owl:DatatypeProperty ;
 	rdfs:label "cveID" ;
 	rdfs:range _:c14n50 ;
 	skos:definition "The CVE identifier of the listed vulnerability, which identifies the entry." ;
-	skos:editorialNote "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name." ;
-	skos:exactMatch cve:cveId ;
+	skos:editorialNote "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the same identifier, in the same form, on the item for the vulnerability." ;
+	skos:exactMatch wdt:P3587 , cve:cveId ;
 	skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
 	kev_catalog:upstream_path "#/$defs/vulnerability/properties/cveID" .
 kev_catalog:cwes a owl:DatatypeProperty ;
 	rdfs:label "cwes" ;
 	rdfs:range _:c14n34 ;
-	skos:closeMatch cve:cweId ;
+	skos:closeMatch wdt:P3624 , cve:cweId ;
 	skos:definition "The CWE codes CISA associates with the vulnerability." ;
-	skos:editorialNote "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related." ;
+	skos:editorialNote "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related. Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes, so it is close." ;
 	skos:inScheme <https://w3id.org/lmodel/kev-catalog> ;
 	skos:note "The list may be empty, as it is on some entries of the pinned catalogue." ;
 	skos:relatedMatch sepses_cve:hasCWE ;

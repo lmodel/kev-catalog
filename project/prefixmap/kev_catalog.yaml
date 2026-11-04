@@ -9,5 +9,6 @@
    "skos": "http://www.w3.org/2004/02/skos/core#",
    "spdx3": "https://spdx.org/rdf/3.0.1/terms/",
    "stix": "https://w3id.org/lmodel/stix/",
-   "wd": "http://www.wikidata.org/entity/"
+   "wd": "http://www.wikidata.org/entity/",
+   "wdt": "http://www.wikidata.org/prop/direct/"
 }

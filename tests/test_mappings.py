@@ -26,12 +26,17 @@ KINDS = (
 )
 
 # Every mapping, by element and kind. Each target was read at its source on
-# 2026-11-03: DCAT 3, schema.org, Dublin Core, SKOS, Wikidata, SPDX 3.0.1's model
-# pages, SEPSES's CVE ontology, and the neighbours' copies.
+# 2026-11-03: DCAT 3, schema.org, Dublin Core, SKOS, Wikidata's items Q631425 and
+# Q125498394 and properties P3587 and P3624, SPDX 3.0.1's model pages, SEPSES's CVE
+# ontology, and the neighbours' copies.
 MAPPINGS = {
     "KevCatalog": {
         "broad_mappings": {"dcat:Dataset", "schema:Dataset"},
-        "related_mappings": {"dcat:Catalog"},
+        "related_mappings": {
+            "dcat:Catalog",
+            "wd:Q125498394",
+            "spdx3:Security/ExploitCatalogType/kev",
+        },
     },
     "KevVulnerability": {
         "close_mappings": {"spdx3:Security/ExploitCatalogVulnAssessmentRelationship"},
@@ -52,7 +57,7 @@ MAPPINGS = {
     "dateReleased": {"close_mappings": {"dcterms:issued", "schema:datePublished"}},
     "count": {"related_mappings": {"schema:numberOfItems"}},
     "vulnerabilities": {"broad_mappings": {"dcterms:hasPart"}},
-    "cveID": {"exact_mappings": {"cve:cveId"}},
+    "cveID": {"exact_mappings": {"cve:cveId", "wdt:P3587"}},
     "vendorProject": {"close_mappings": {"cve:vendor"}},
     "product": {"close_mappings": {"cve:product"}},
     "vulnerabilityName": {"related_mappings": {"cve:title"}},
@@ -61,7 +66,7 @@ MAPPINGS = {
     "requiredAction": {"related_mappings": {"cve:solutions"}},
     "notes": {"close_mappings": {"skos:note"}},
     "cwes": {
-        "close_mappings": {"cve:cweId"},
+        "close_mappings": {"cve:cweId", "wdt:P3624"},
         "related_mappings": {"sepses_cve:hasCWE"},
     },
 }
@@ -102,7 +107,8 @@ def _expand(curie, prefixes):
 
 
 def _terms(path):
-    """The IRI of every class, slot, attribute and enum a schema file declares."""
+    """The IRI of every class, slot, attribute and enum a schema file declares, and
+    of every permissible value whose meaning it names."""
     doc = yaml.safe_load(path.read_text(encoding="utf-8"))
     prefixes = doc.get("prefixes") or {}
     default = doc.get("default_prefix")
@@ -115,6 +121,9 @@ def _terms(path):
         for name, element in (doc.get(kind) or {}).items():
             curie = (element or {}).get(key) or f"{default}:{name}"
             terms.add(_expand(curie, prefixes))
+            for value in ((element or {}).get("permissible_values") or {}).values():
+                if (value or {}).get("meaning"):
+                    terms.add(_expand(value["meaning"], prefixes))
     for cls in (doc.get("classes") or {}).values():
         for name, slot in ((cls or {}).get("attributes") or {}).items():
             curie = (slot or {}).get("slot_uri") or f"{default}:{name}"

@@ -24,12 +24,12 @@ CISA's keys and values are the schema's, such as `cveID` and `Known`, so a real 
 
 The schema's mappings are the one home for what it crosses to, and `tests/test_mappings.py` checks each: its kind, its bound prefix, and that a target in lmodel/cve, lmodel/stix or lmodel/spdx is in that neighbour's copy under `tests/neighbours/`. The earlier hand-kept SSSOM file is gone, since its rows named removed elements and no source confirmed them. The kinds rest on [DCAT 3](https://www.w3.org/TR/vocab-dcat-3/), on schema.org and on a sample of 120 entries compared with their CVE records on 2026-11-03.
 
-* `KevCatalog`: `dcat:Dataset` and `schema:Dataset` in `broad_mappings`, and `dcat:Catalog` in `related_mappings`.
+* `KevCatalog`: `dcat:Dataset` and `schema:Dataset` in `broad_mappings`, and `dcat:Catalog`, Wikidata `wd:Q125498394` (the KEV catalog itself) and SPDX 3.0.1's `spdx3:Security/ExploitCatalogType/kev` in `related_mappings`, since a class here is one release of that catalog.
 * `KevVulnerability`: `spdx3:Security/ExploitCatalogVulnAssessmentRelationship` in `close_mappings`; Wikidata `wd:Q631425`, `stix:StixVulnerability`, `spdx3:Security/Vulnerability`, `sepses_cve:CVE`, `dcat:CatalogRecord` and `cve:CveRecord` in `related_mappings`, since an entry is a statement about a vulnerability.
-* `cveID`: `cve:cveId` in `exact_mappings`.
+* `cveID`: `cve:cveId` and Wikidata's `wdt:P3587` in `exact_mappings`.
 * `vendorProject`, `product` and `cwes`: `cve:vendor`, `cve:product` and `cve:cweId` in `close_mappings`.
 * `vulnerabilityName`, `shortDescription` and `requiredAction`: `cve:title`, `cve:descriptions` and `cve:solutions` in `related_mappings`.
-* `cwes` also: `sepses_cve:hasCWE` in `related_mappings`.
+* `cwes` also: Wikidata's `wdt:P3624` in `close_mappings`, since it holds the number without the `CWE-` prefix, and `sepses_cve:hasCWE` in `related_mappings`.
 * `title` and `catalogVersion`: `dcterms:title` and `dcat:version` in `exact_mappings`, and `schema:version` in `close_mappings` for the second.
 * `dateReleased` and `dateAdded`: `dcterms:issued` in `close_mappings`, and `schema:datePublished` too for the first.
 * `count`: `schema:numberOfItems` in `related_mappings`.

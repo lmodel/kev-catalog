@@ -38,6 +38,13 @@
     "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json",
     "https://github.com/cisagov/kev-data"
   ],
+  "keywords": [
+    "vulnerability",
+    "known exploited vulnerability",
+    "CVE",
+    "CISA",
+    "catalog"
+  ],
   "id": "https://w3id.org/lmodel/kev-catalog",
   "version": "2026-09-17",
   "imports": [
@@ -88,6 +95,10 @@
     {
       "prefix_prefix": "wd",
       "prefix_reference": "http://www.wikidata.org/entity/"
+    },
+    {
+      "prefix_prefix": "wdt",
+      "prefix_reference": "http://www.wikidata.org/prop/direct/"
     }
   ],
   "default_prefix": "kev_catalog",
@@ -635,7 +646,7 @@
       ],
       "description": "The CVE identifier of the listed vulnerability, which identifies the entry.",
       "notes": [
-        "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name."
+        "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the same identifier, in the same form, on the item for the vulnerability."
       ],
       "examples": [
         {
@@ -648,7 +659,8 @@
         "https://w3id.org/lmodel/kev-catalog/cveID"
       ],
       "exact_mappings": [
-        "https://w3id.org/lmodel/cve/cveId"
+        "https://w3id.org/lmodel/cve/cveId",
+        "http://www.wikidata.org/prop/direct/P3587"
       ],
       "slot_uri": "https://w3id.org/lmodel/kev-catalog/cveID",
       "identifier": true,
@@ -991,7 +1003,7 @@
       ],
       "description": "The CWE codes CISA associates with the vulnerability.",
       "notes": [
-        "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related."
+        "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related. Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes, so it is close."
       ],
       "comments": [
         "The list may be empty, as it is on some entries of the pinned catalogue."
@@ -1007,7 +1019,8 @@
         "https://w3id.org/lmodel/kev-catalog/cwes"
       ],
       "close_mappings": [
-        "https://w3id.org/lmodel/cve/cweId"
+        "https://w3id.org/lmodel/cve/cweId",
+        "http://www.wikidata.org/prop/direct/P3624"
       ],
       "related_mappings": [
         "http://w3id.org/sepses/vocab/ref/cve#hasCWE"
@@ -1036,7 +1049,8 @@
       ],
       "description": "One published release of the KEV catalog, with the entries it lists.",
       "notes": [
-        "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents."
+        "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents.",
+        "Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's ExploitCatalogType/kev is its name for that catalog as a kind of exploit catalog. A class here is one release of it, so both are only related."
       ],
       "comments": [
         "Each release is a whole file: the catalog is republished as a new file, with a new catalogVersion and dateReleased, when an entry is added or changed.",
@@ -1045,13 +1059,17 @@
       "from_schema": "https://w3id.org/lmodel/kev-catalog",
       "see_also": [
         "https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset",
-        "https://schema.org/Dataset"
+        "https://schema.org/Dataset",
+        "https://www.wikidata.org/wiki/Q125498394",
+        "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/"
       ],
       "exact_mappings": [
         "kev_catalog:KevCatalog"
       ],
       "related_mappings": [
-        "dcat:Catalog"
+        "dcat:Catalog",
+        "wd:Q125498394",
+        "spdx3:Security/ExploitCatalogType/kev"
       ],
       "broad_mappings": [
         "dcat:Dataset",
@@ -1128,8 +1146,8 @@
   ],
   "metamodel_version": "1.12.0",
   "source_file": "kev_catalog.yaml",
-  "source_file_date": "2026-11-03T21:57:51",
-  "source_file_size": 16117,
+  "source_file_date": "2026-11-04T00:01:17",
+  "source_file_size": 16964,
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/kev_catalog.context.jsonld",

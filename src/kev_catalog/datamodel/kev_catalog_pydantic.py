@@ -93,6 +93,11 @@ linkml_meta = LinkMLMeta({'annotations': {'upstream_license': {'tag': 'upstream_
                     'unchanged.',
      'id': 'https://w3id.org/lmodel/kev-catalog',
      'imports': ['linkml:types'],
+     'keywords': ['vulnerability',
+                  'known exploited vulnerability',
+                  'CVE',
+                  'CISA',
+                  'catalog'],
      'license': 'Apache-2.0',
      'name': 'kev_catalog',
      'notes': ["KEV's authority has moved to Binding Operational Directive (BOD) "
@@ -122,7 +127,9 @@ linkml_meta = LinkMLMeta({'annotations': {'upstream_license': {'tag': 'upstream_
                   'stix': {'prefix_prefix': 'stix',
                            'prefix_reference': 'https://w3id.org/lmodel/stix/'},
                   'wd': {'prefix_prefix': 'wd',
-                         'prefix_reference': 'http://www.wikidata.org/entity/'}},
+                         'prefix_reference': 'http://www.wikidata.org/entity/'},
+                  'wdt': {'prefix_prefix': 'wdt',
+                          'prefix_reference': 'http://www.wikidata.org/prop/direct/'}},
      'see_also': ['https://lmodel.github.io/kev-catalog',
                   'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
                   'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json',
@@ -178,10 +185,18 @@ class KevCatalog(ConfiguredBaseModel):
                    'about resources such as datasets, and an entry here describes a '
                    'vulnerability, so that mapping is only related despite the shared '
                    'word. A KEV release is a kind of dataset, so dcat:Dataset and '
-                   'schema:Dataset are broader terms, not equivalents.'],
-         'related_mappings': ['dcat:Catalog'],
+                   'schema:Dataset are broader terms, not equivalents.',
+                   "Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's "
+                   'ExploitCatalogType/kev is its name for that catalog as a kind of '
+                   'exploit catalog. A class here is one release of it, so both are '
+                   'only related.'],
+         'related_mappings': ['dcat:Catalog',
+                              'wd:Q125498394',
+                              'spdx3:Security/ExploitCatalogType/kev'],
          'see_also': ['https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset',
-                      'https://schema.org/Dataset'],
+                      'https://schema.org/Dataset',
+                      'https://www.wikidata.org/wiki/Q125498394',
+                      'https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/'],
          'tree_root': True})
 
     title: Optional[str] = Field(default=None, description="""The catalog's human-readable name.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_file_key': {'tag': 'upstream_file_key',
@@ -265,11 +280,12 @@ class KevVulnerability(ConfiguredBaseModel):
     cveID: str = Field(default=..., description="""The CVE identifier of the listed vulnerability, which identifies the entry.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_path': {'tag': 'upstream_path',
                                            'value': '#/$defs/vulnerability/properties/cveID'}},
          'domain_of': ['KevVulnerability'],
-         'exact_mappings': ['cve:cveId'],
+         'exact_mappings': ['cve:cveId', 'wdt:P3587'],
          'examples': [{'value': 'CVE-2021-44228'}],
          'notes': ['Exact: a seeded sample of 120 entries on 2026-11-03 found each '
                    "entry's value equal to cveMetadata.cveId in the CVE record of that "
-                   'name.'],
+                   "name. Wikidata's P3587 holds the same identifier, in the same "
+                   'form, on the item for the vulnerability.'],
          'slot_uri': 'kev_catalog:cveID'} })
     vendorProject: str = Field(default=..., description="""The vendor or project behind the affected product, as CISA names it.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_path': {'tag': 'upstream_path',
                                            'value': '#/$defs/vulnerability/properties/vendorProject'}},
@@ -361,7 +377,7 @@ class KevVulnerability(ConfiguredBaseModel):
          'slot_uri': 'kev_catalog:notes'} })
     cwes: Optional[list[str]] = Field(default=None, description="""The CWE codes CISA associates with the vulnerability.""", json_schema_extra = { "linkml_meta": {'annotations': {'upstream_path': {'tag': 'upstream_path',
                                            'value': '#/$defs/vulnerability/properties/cwes'}},
-         'close_mappings': ['cve:cweId'],
+         'close_mappings': ['cve:cweId', 'wdt:P3624'],
          'comments': ['The list may be empty, as it is on some entries of the pinned '
                       'catalogue.'],
          'domain_of': ['KevVulnerability'],
@@ -369,7 +385,9 @@ class KevVulnerability(ConfiguredBaseModel):
          'notes': ["Close, not exact: both give an entry's CWE codes, but in the "
                    'sample of 120 entries the list equalled the codes of the CVE '
                    "record's CNA and ADP containers together on 94. SEPSES's hasCWE "
-                   'links a CVE to a CWE resource, not a code, so it is only related.'],
+                   'links a CVE to a CWE resource, not a code, so it is only related. '
+                   "Wikidata's P3624 holds the CWE number alone, without the CWE- "
+                   'prefix CISA writes, so it is close.'],
          'related_mappings': ['sepses_cve:hasCWE'],
          'slot_uri': 'kev_catalog:cwes'} })
 
