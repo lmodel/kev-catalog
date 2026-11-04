@@ -9,6 +9,12 @@ description: A LinkML model of the CVE Record Format, in which the CVE Program p
 version: 5.2.0
 source: https://github.com/CVEProject/cve-schema/blob/v5.2.0/schema/CVE_Record_Format.json
 license: Apache-2.0
+keywords:
+- vulnerability
+- CVE
+- CVSS
+- CVE Numbering Authority
+- vulnerability record
 see_also:
 - https://lmodel.github.io/cve
 - https://www.cve.org/
@@ -28,9 +34,11 @@ prefixes:
   dcterms: http://purl.org/dc/terms/
   schema: http://schema.org/
   sepses_cve: http://w3id.org/sepses/vocab/ref/cve#
+  spdx_core: https://spdx.org/rdf/3.0.1/terms/Core/
   spdx_software: https://spdx.org/rdf/3.0.1/terms/Software/
   stix: https://w3id.org/lmodel/stix/
   wd: http://www.wikidata.org/entity/
+  wdt: http://www.wikidata.org/prop/direct/
   xsd: http://www.w3.org/2001/XMLSchema#
 default_prefix: cve
 default_range: string
@@ -538,6 +546,7 @@ classes:
           upstream_path: imports/cvss/cvss-v4.0.json#/properties/providerUrgency
   CveRecord:
     abstract: true
+    children_are_mutually_disjoint: true
     description: A record of one vulnerability under one CVE identifier, in the CVE Program's format.
     comments:
     - Its two kinds are told apart by cveMetadata's state, nested inside the record, so LinkML's type
@@ -595,6 +604,7 @@ classes:
         range: CveRejectedContainers
   CveRecordMetadata:
     abstract: true
+    children_are_mutually_disjoint: true
     description: The facts about a record itself, as distinct from the vulnerability it describes.
     annotations:
       upstream_path: CVE_Record_Format.json#/definitions/cveMetadataPublished CVE_Record_Format.json#/definitions/cveMetadataRejected
@@ -606,7 +616,12 @@ classes:
         description: The CVE identifier that the record belongs to.
         range: cve_identifier
         required: true
-        narrow_mappings:
+        comments:
+        - Wikidata's P3587 holds the same identifier in the same form, on the item for the vulnerability,
+          so it is exact. The Dublin Core and schema.org terms are any identifier, so they are broader.
+        exact_mappings:
+        - wdt:P3587
+        broad_mappings:
         - dcterms:identifier
         - schema:identifier
         annotations:
@@ -676,6 +691,7 @@ classes:
           upstream_path: CVE_Record_Format.json#/definitions/cveMetadataRejected/properties/dateRejected
   CveContainers:
     abstract: true
+    children_are_mutually_disjoint: true
     description: The sets of vulnerability information in a record, one per providing organisation.
     annotations:
       upstream_path: CVE_Record_Format.json#/oneOf/0/properties/containers CVE_Record_Format.json#/oneOf/1/properties/containers
@@ -727,6 +743,7 @@ classes:
           upstream_path: CVE_Record_Format.json#/definitions/providerMetadata/properties/shortName
   CveCnaContainer:
     abstract: true
+    children_are_mutually_disjoint: true
     description: The container from the CVE Numbering Authority that assigned the identifier.
     annotations:
       upstream_path: CVE_Record_Format.json#/definitions/cnaPublishedContainer CVE_Record_Format.json#/definitions/cnaRejectedContainer
@@ -923,8 +940,12 @@ classes:
         list_elements_unique: true
         close_mappings:
         - sepses_cve:hasCPE
+        related_mappings:
+        - spdx_core:ExternalIdentifierType/cpe23
         comments:
         - The upstream suggests cpeApplicability for new records.
+        - SPDX 3.0.1 names CPE 2.3 as one kind of external identifier, and this field also admits the
+          2.2 form, so that term is only related.
         annotations:
           upstream_path: CVE_Record_Format.json#/definitions/product/properties/cpes
       modules:
@@ -951,7 +972,7 @@ classes:
           upstream_path: CVE_Record_Format.json#/definitions/product/properties/programRoutines
       platforms:
         description: The platforms the flaw is limited to. Without this, it applies to all of them.
-        range: cve_short_text_1024
+        range: cve_text_up_to_1024
         multivalued: true
         minimum_cardinality: 1
         list_elements_unique: true
@@ -1255,6 +1276,10 @@ classes:
         pattern: ^CWE-[1-9][0-9]*$
         comments:
         - The upstream also allows it 5 to 9 characters. tests/cve_rules.py checks the length.
+        - Wikidata's P3624 holds the CWE number alone, without the CWE- prefix the format writes, so it
+          is close.
+        close_mappings:
+        - wdt:P3624
         annotations:
           upstream_path: CVE_Record_Format.json#/definitions/problemTypes/items/properties/descriptions/items/properties/cweId
   CveReference:
@@ -2767,7 +2792,7 @@ types:
     uri: xsd:string
     description: Text of 1 to 1024 characters.
     pattern: ^[\s\S]{1,1024}$
-  cve_short_text_1024:
+  cve_text_up_to_1024:
     typeof: string
     base: str
     uri: xsd:string
