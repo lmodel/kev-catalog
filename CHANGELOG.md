@@ -6,6 +6,8 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-04
+
 ### Added
 
 - **A LinkML model of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog, at the edition of CISA's JSON schema of 2026-09-17.** Its classes are `KevCatalog` and `KevVulnerability`, and CISA's keys and values are the schema's, so a real KEV file validates unchanged.
