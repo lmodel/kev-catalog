@@ -2,7 +2,7 @@
 type: Dataset
 id: https://w3id.org/lmodel/kev-catalog/knowledge/datasets/kev-catalog-linkml-schema
 title: kev-catalog LinkML schema
-description: "The LinkML schema of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog, `src/kev_catalog/schema/kev_catalog.yaml` (schema id `https://w3id.org/lmodel/kev-catalog`, version 2026-09-17): the classes `KevCatalog` and `KevVulnerability`, CISA's keys as its slots, and two enums. Its `lokf adapt` copy `.lokf/kev-catalog.yaml` is the bundle's domain schema."
+description: "The LinkML schema of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog, `src/kev_catalog/schema/kev_catalog.yaml` (schema id `https://w3id.org/lmodel/kev-catalog`, version 2026-09-17): the classes `KevCatalog` and `KevVulnerability`, CISA's keys as its slots, and two enums. Its `lokf adapt` copy `.lokf/schema/kev-catalog.yaml` is the bundle's domain schema."
 genre: reference
 resource: src/kev_catalog/schema/kev_catalog.yaml
 version: "2026-09-17"
@@ -16,7 +16,7 @@ sources:
   - id: project.justfile
     resource: project.justfile
     title: the lokf-adapt recipes and their roots
-  - resource: .lokf/kev-catalog.yaml
+  - resource: .lokf/schema/kev-catalog.yaml
     title: the copy lokf adapt wrote
   - resource: .lokf/justfile
     title: the schema line
@@ -24,7 +24,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-11-03T22:15:22Z"
+  at: "2026-11-06T21:21:49Z"
 status: draft
 ---
 
@@ -41,7 +41,7 @@ status: draft
 
 ## As the bundle's domain schema
 
-`just lokf-adapt` writes `.lokf/kev-catalog.yaml`, rooted on both classes with `--prefix kev`. In the copy, LOKF's `id` replaces `cveID`, and `title` becomes `kev_title` with its IRI kept. `.lokf/justfile` names the copy on its `schema :=` line, and `.lokf/pyproject.toml` names it under `tool.lokf`.[^project.justfile]
+`just lokf-adapt` writes `.lokf/schema/kev-catalog.yaml`, rooted on both classes with `--prefix kev`. In the copy, LOKF's `id` replaces `cveID`, and `title` becomes `kev_title` with its IRI kept. `.lokf/justfile` names the copy on its `schema :=` line, and `.lokf/pyproject.toml` names it under `tool.lokf`.[^project.justfile]
 
 [^kev_catalog.yaml]: src/kev_catalog/schema/kev_catalog.yaml, the header, the classes, the slots and the enums
 [^project.justfile]: project.justfile, the lokf-adapt recipes and their roots
