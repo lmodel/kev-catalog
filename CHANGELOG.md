@@ -10,6 +10,10 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 - **The bundle's schema files sit in `.lokf/schema/`**: `lokf.yaml` and the `lokf adapt` copy `kev-catalog.yaml`, as KTL v0.62.0 lays them out.
 
+### Fixed
+
+- **The knowledge librarian workflow can install its skill.** The root `.gitignore` now ignores `.agents/`, `.claude/` and `skills-lock.json`, where the workflow installs the ktl-librarian skill. While git did not ignore them, the workflow stopped before the agent ran.
+
 ## [0.1.0] - 2026-11-04
 
 ### Added
