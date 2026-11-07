@@ -1,5 +1,9 @@
 # Change Log
 
+## 2026-11-06
+
+* **Changed**: `lokf.yaml` and `kev-catalog.yaml` moved into `.lokf/schema/`, where KTL v0.62.0 keeps a sidecar's schema files, and the concepts that name them follow.
+
 ## 2026-11-04
 
 * **Changed**: lmodel/cve's neighbour copy is its v0.1.0 release asset.

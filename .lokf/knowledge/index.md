@@ -22,7 +22,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for kev-catalog. Every M
 
 # Datasets
 
-* [kev-catalog LinkML schema](datasets/kev-catalog-linkml-schema.md) - The LinkML schema of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog, `src/kev_catalog/schema/kev_catalog.yaml` (schema id `https://w3id.org/lmodel/kev-catalog`, version 2026-09-17): the classes `KevCatalog` and `KevVulnerability`, CISA's keys as its slots, and two enums. Its `lokf adapt` copy `.lokf/kev-catalog.yaml` is the bundle's domain schema.
+* [kev-catalog LinkML schema](datasets/kev-catalog-linkml-schema.md) - The LinkML schema of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog, `src/kev_catalog/schema/kev_catalog.yaml` (schema id `https://w3id.org/lmodel/kev-catalog`, version 2026-09-17): the classes `KevCatalog` and `KevVulnerability`, CISA's keys as its slots, and two enums. Its `lokf adapt` copy `.lokf/schema/kev-catalog.yaml` is the bundle's domain schema.
 * [The pinned KEV catalogue release](datasets/pinned-kev-catalogue-release.md) - The release of the KEV catalog that the tests pin: `catalogVersion` 2026.10.30, released 2026-10-30, with a count of 1,766 entries, fetched from `cisagov/kev-data` at commit `7ccba8e1223c` and validated in full by `just test-kev-data`. This concept lists no entries inline.
 * [The entry for CVE-2021-44228](datasets/worked-entry-cve-2021-44228.md) - The KEV catalog's entry for CVE-2021-44228, Apache Log4j2, as a worked example of an entry with every key. It is copied from the pinned catalogue into `tests/data/valid/KevVulnerability-every-key.yaml` and the extract.
 * [Generated artefacts](datasets/generated-artefacts.md) - What the LinkML generators write from the schema: `project/` (JSON Schema, OWL, SHACL, ShEx, JSON-LD and others), the Python models in `src/kev_catalog/datamodel/`, and the merged schema in `docs/schema/`. They are never edited by hand.
@@ -39,7 +39,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for kev-catalog. Every M
 # Glossary
 
 * [Known Exploited Vulnerabilities (KEV)](glossary/kev.md) - The Known Exploited Vulnerabilities (KEV) catalog: the list of CVEs that the Cybersecurity and Infrastructure Security Agency (CISA) publishes as a JSON and a CSV file, each entry naming the action it asks for and a due date.
-* [Adapt copy](glossary/adapt-copy.md) - An adapt copy: the copy of a published LinkML schema that `lokf adapt` writes so that it can sit beside LOKF's `lokf.yaml` in a domain schema, with its classes re-rooted on `Concept` and every name LOKF also defines renamed with its IRI kept. Here it is `.lokf/kev-catalog.yaml`.
+* [Adapt copy](glossary/adapt-copy.md) - An adapt copy: the copy of a published LinkML schema that `lokf adapt` writes so that it can sit beside LOKF's `lokf.yaml` in a domain schema, with its classes re-rooted on `Concept` and every name LOKF also defines renamed with its IRI kept. Here it is `.lokf/schema/kev-catalog.yaml`.
 * [Forensic triage (forensicTriage)](glossary/forensic-triage.md) - The KEV key `forensicTriage`: `Yes` when BOD 26-04 calls for forensic triage of a vulnerability and `No` when it does not. CISA types it as a string and names the two values in its description, and the schema makes them an enum.
 
 # Explanations

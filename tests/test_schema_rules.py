@@ -15,8 +15,8 @@ ROOT = Path(__file__).parent.parent
 # downloaded and checked against the release's .sha256 and its build-provenance
 # attestation on 2026-11-03, and pinned here by that checksum.
 SOURCE = ROOT / "src" / "kev_catalog" / "schema" / "kev_catalog.yaml"
-COPY = ROOT / ".lokf" / "kev-catalog.yaml"
-LOKF = ROOT / ".lokf" / "lokf.yaml"
+COPY = ROOT / ".lokf" / "schema" / "kev-catalog.yaml"
+LOKF = ROOT / ".lokf" / "schema" / "lokf.yaml"
 NEIGHBOURS = {
     # lmodel/slsa v0.10.0, schema-v0.10.0-slsa.yaml
     "slsa.yaml": "9eeb68decc918565886794fe4eb6e32e1fee0620688cc699961c227242a2f4c2",

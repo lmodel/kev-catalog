@@ -58,7 +58,7 @@ exclusions:
     reason: The sidecar's ignore list.
   - resource: .lokf/ingest.yaml.sample
     reason: The ingest's example manifest, unused here.
-  - resource: .lokf/lokf.yaml
+  - resource: .lokf/schema/lokf.yaml
     reason: LOKF's own schema, pinned from the installed package.
   - resource: .lokf/queries.http
     reason: The sidecar's sample queries.
@@ -75,7 +75,7 @@ sources:
   - resource: src/kev_catalog/schema
   - resource: src/kev_catalog/datamodel
   - resource: project.justfile
-  - resource: .lokf/kev-catalog.yaml
+  - resource: .lokf/schema/kev-catalog.yaml
   - resource: .lokf/justfile
   - resource: .lokf/pyproject.toml
   - resource: NOTICE
@@ -100,7 +100,7 @@ sources:
   - resource: config.public.mk
 generated:
   by: process:ktl-librarian
-  at: "2026-11-03T22:15:22Z"
+  at: "2026-11-06T21:21:49Z"
 status: draft
 ---
 
@@ -108,7 +108,7 @@ status: draft
 
 | Source | Yields | Re-check |
 | --- | --- | --- |
-| `src/kev_catalog/schema`, `project.justfile`, `.lokf/kev-catalog.yaml`, `.lokf/justfile`, `.lokf/pyproject.toml` | `datasets/kev-catalog-linkml-schema.md`, `glossary/adapt-copy.md` | the schema's header and classes, and the adapt recipes |
+| `src/kev_catalog/schema`, `project.justfile`, `.lokf/schema/kev-catalog.yaml`, `.lokf/justfile`, `.lokf/pyproject.toml` | `datasets/kev-catalog-linkml-schema.md`, `glossary/adapt-copy.md` | the schema's header and classes, and the adapt recipes |
 | `tests/upstream`, `scripts` | `references/cisa-kev-json-schema.md`, `references/cisagov-kev-data.md`, `datasets/upstream-copies.md`, `playbooks/move-the-upstream-pins.md` | the pins, and what the upstream watch reports |
 | `tests/data`, `tests` | `datasets/example-data.md`, `datasets/pinned-kev-catalogue-release.md`, `datasets/worked-entry-cve-2021-44228.md`, `datasets/neighbour-copies.md` | the manifest, the profile in `tests/test_kev_data.py`, and the neighbours' pins |
 | `README.md`, `docs/about.md`, `docs/index.md`, `CHANGELOG.md` | `glossary/kev.md`, `glossary/forensic-triage.md`, `explanations/keys-edition-and-departures.md`, `explanations/mappings.md`, `playbooks/validate-a-kev-file.md` | the headings each concept cites |

@@ -6,8 +6,8 @@
 
 # ============ Knowledge bundle: the adapted domain schema ============
 
-# `.lokf/kev-catalog.yaml` is the copy `lokf adapt` writes from the schema so that
-# it can sit beside `.lokf/lokf.yaml` (`lokf adapt --help` lists the moves). The
+# `.lokf/schema/kev-catalog.yaml` is the copy `lokf adapt` writes from the schema so that
+# it can sit beside `.lokf/schema/lokf.yaml` (`lokf adapt --help` lists the moves). The
 # roots are the schema's two classes, so a concept may name either as its `type`:
 # a release of the catalog, or one entry. adapt replaces the identifier `cveID`
 # with LOKF's own `id`, and refuses a class that lists an identifier without
@@ -20,15 +20,15 @@
 lokf_cmd := env_var_or_default("LOKF_CMD", "uv run --project .lokf lokf")
 lokf_adapt_roots := "--root KevCatalog --root KevVulnerability --prefix kev"
 
-# Rewrite .lokf/kev-catalog.yaml from the schema (run after every schema change)
+# Rewrite .lokf/schema/kev-catalog.yaml from the schema (run after every schema change)
 [group('knowledge bundle')]
 lokf-adapt:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/kev-catalog.yaml
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/kev-catalog.yaml
 
-# Fail when .lokf/kev-catalog.yaml is stale against the schema or .lokf/lokf.yaml
+# Fail when .lokf/schema/kev-catalog.yaml is stale against the schema or .lokf/schema/lokf.yaml
 [group('knowledge bundle')]
 lokf-adapt-check:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/kev-catalog.yaml --check
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/kev-catalog.yaml --check
 
 # ============ The pinned KEV catalogue ============
 
