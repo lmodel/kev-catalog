@@ -1,0 +1,607 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix schema1: <http://schema.org/> .
+<https://w3id.org/lmodel/kev-catalog/KevCatalog> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://schema.org/Dataset"^^xsd:anyURI , "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/"^^xsd:anyURI , "https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset"^^xsd:anyURI , "https://www.wikidata.org/wiki/Q125498394"^^xsd:anyURI ;
+	skos:broadMatch "dcat:Dataset"^^xsd:anyURI , "schema:Dataset"^^xsd:anyURI ;
+	skos:editorialNote "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents." , "Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's ExploitCatalogType/kev is its name for that catalog as a kind of exploit catalog. A class here is one release of it, so both are only related." ;
+	skos:exactMatch "kev_catalog:KevCatalog"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:note "CISA's objects are open, so a key the schema does not name passes CISA's JSON schema. This class is closed, so a new key fails here until the schema names it." , "Each release is a whole file: the catalog is republished as a new file, with a new catalogVersion and dateReleased, when an entry is added or changed." ;
+	skos:relatedMatch "dcat:Catalog"^^xsd:anyURI , "spdx3:Security/ExploitCatalogType/kev"^^xsd:anyURI , "wd:Q125498394"^^xsd:anyURI ;
+	linkml:annotations _:c14n1 ;
+	linkml:class_uri "https://w3id.org/lmodel/kev-catalog/KevCatalog"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/KevCatalog"^^xsd:anyURI ;
+	linkml:description "One published release of the KEV catalog, with the entries it lists." ;
+	linkml:slot_usage _:c14n40 ;
+	linkml:slots <https://w3id.org/lmodel/kev-catalog/catalogVersion> , <https://w3id.org/lmodel/kev-catalog/count> , <https://w3id.org/lmodel/kev-catalog/dateReleased> , <https://w3id.org/lmodel/kev-catalog/title> , <https://w3id.org/lmodel/kev-catalog/vulnerabilities> ;
+	linkml:tree_root true .
+<https://w3id.org/lmodel/kev-catalog/KevForensicTriage> skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	linkml:annotations _:c14n45 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/KevForensicTriage"^^xsd:anyURI ;
+	linkml:description "Whether BOD 26-04 calls for forensic triage of a vulnerability." ;
+	linkml:permissible_values <https://w3id.org/lmodel/kev-catalog/No> , <https://w3id.org/lmodel/kev-catalog/Yes> .
+<https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse> skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	linkml:annotations _:c14n39 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse"^^xsd:anyURI ;
+	linkml:description "What CISA can say about a vulnerability's use in ransomware campaigns." ;
+	linkml:permissible_values <https://w3id.org/lmodel/kev-catalog/Known> , <https://w3id.org/lmodel/kev-catalog/Unknown> .
+<https://w3id.org/lmodel/kev-catalog/KevVulnerability> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/ExploitCatalogVulnAssessmentRelationship/"^^xsd:anyURI , "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/Vulnerability/"^^xsd:anyURI , "https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record"^^xsd:anyURI , "https://www.wikidata.org/wiki/Q631425"^^xsd:anyURI ;
+	skos:closeMatch "spdx3:Security/ExploitCatalogVulnAssessmentRelationship"^^xsd:anyURI ;
+	skos:editorialNote "An entry is a statement in a catalog about a vulnerability, not the vulnerability itself. Wikidata's Q631425, STIX's vulnerability object and SPDX 3.0.1's Security/Vulnerability describe the weakness and carry nothing about exploitation or a required action, so each is only related. SPDX 3.0.1's Security/ExploitCatalogVulnAssessmentRelationship says that a vulnerability is listed in an exploit catalog, and names KEV as one, so it is close. dcat:CatalogRecord is related, since DCAT's record registers a dataset or a service." ;
+	skos:exactMatch "kev_catalog:KevVulnerability"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:note "Four keys are optional in CISA's JSON schema though every entry of the pinned catalogue carries them: knownRansomwareCampaignUse, forensicTriage, notes and cwes. The schema follows CISA's JSON schema." ;
+	skos:relatedMatch "cve:CveRecord"^^xsd:anyURI , "dcat:CatalogRecord"^^xsd:anyURI , "sepses_cve:CVE"^^xsd:anyURI , "spdx3:Security/Vulnerability"^^xsd:anyURI , "stix:StixVulnerability"^^xsd:anyURI , "wd:Q631425"^^xsd:anyURI ;
+	linkml:annotations _:c14n12 ;
+	linkml:class_uri "https://w3id.org/lmodel/kev-catalog/KevVulnerability"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/KevVulnerability"^^xsd:anyURI ;
+	linkml:description "One entry of the KEV catalog, naming a CVE that CISA lists as exploited and the action it asks for by a due date." ;
+	linkml:slot_usage _:c14n32 ;
+	linkml:slots <https://w3id.org/lmodel/kev-catalog/cveID> , <https://w3id.org/lmodel/kev-catalog/cwes> , <https://w3id.org/lmodel/kev-catalog/dateAdded> , <https://w3id.org/lmodel/kev-catalog/dueDate> , <https://w3id.org/lmodel/kev-catalog/forensicTriage> , <https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse> , <https://w3id.org/lmodel/kev-catalog/notes> , <https://w3id.org/lmodel/kev-catalog/product> , <https://w3id.org/lmodel/kev-catalog/requiredAction> , <https://w3id.org/lmodel/kev-catalog/shortDescription> , <https://w3id.org/lmodel/kev-catalog/vendorProject> , <https://w3id.org/lmodel/kev-catalog/vulnerabilityName> .
+<https://w3id.org/lmodel/kev-catalog/Known> linkml:description "CISA knows of a ransomware campaign that has used it." .
+<https://w3id.org/lmodel/kev-catalog/No> linkml:description "The directive does not call for forensic triage of this vulnerability." .
+<https://w3id.org/lmodel/kev-catalog/Unknown> linkml:description "CISA has no confirmation that a ransomware campaign has used it." .
+<https://w3id.org/lmodel/kev-catalog/Yes> linkml:description "The directive calls for forensic triage of this vulnerability." .
+<https://w3id.org/lmodel/kev-catalog/boolean> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+	skos:exactMatch "schema:Boolean"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Bool" ;
+	linkml:definition_uri "https://w3id.org/linkml/Boolean"^^xsd:anyURI ;
+	linkml:description "A binary (true or false) value" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "bool" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#boolean"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/catalogVersion> a linkml:SlotDefinition ;
+	rdfs:seeAlso "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_version"^^xsd:anyURI ;
+	skos:closeMatch "http://schema.org/version"^^xsd:anyURI ;
+	skos:exactMatch "http://www.w3.org/ns/dcat#version"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/catalogVersion"^^xsd:anyURI ;
+	skos:note "The value reads as a date, such as 2026.10.30, but CISA states only a string, so no pattern is given." ;
+	linkml:annotations _:c14n44 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/catalogVersion"^^xsd:anyURI ;
+	linkml:description "The version label of this release of the catalog." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:examples _:c14n8 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/catalogVersion"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/count> a linkml:SlotDefinition ;
+	skos:editorialNote "schema.org's numberOfItems is declared on ItemList, not Dataset, so the mapping is only related." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/count"^^xsd:anyURI ;
+	skos:note "CISA calls this the catalog's total. No validator here compares it with the list; tests/test_data.py does that in Python, over the examples and the pinned catalogue." ;
+	skos:relatedMatch "http://schema.org/numberOfItems"^^xsd:anyURI ;
+	linkml:annotations _:c14n46 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/count"^^xsd:anyURI ;
+	linkml:description "How many entries CISA says the catalog holds." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/integer> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/count"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/curie> dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations this MUST be expanded to a URI" , "in non-RDF serializations MAY be serialized as the compact representation" ;
+	linkml:base "Curie" ;
+	linkml:definition_uri "https://w3id.org/linkml/Curie"^^xsd:anyURI ;
+	linkml:description "a compact URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/cveID> a linkml:SlotDefinition ;
+	skos:editorialNote "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the same identifier, in the same form, on the item for the vulnerability." ;
+	skos:exactMatch "http://www.wikidata.org/prop/direct/P3587"^^xsd:anyURI , "https://w3id.org/lmodel/cve/cveId"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/cveID"^^xsd:anyURI ;
+	linkml:annotations _:c14n6 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/cveID"^^xsd:anyURI ;
+	linkml:description "The CVE identifier of the listed vulnerability, which identifies the entry." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n10 ;
+	linkml:identifier true ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:pattern "^CVE-[0-9]{4}-[0-9]{4,19}$" ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/cveID"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/cwes> a linkml:SlotDefinition ;
+	skos:closeMatch "http://www.wikidata.org/prop/direct/P3624"^^xsd:anyURI , "https://w3id.org/lmodel/cve/cweId"^^xsd:anyURI ;
+	skos:editorialNote "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related. Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes, so it is close." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/cwes"^^xsd:anyURI ;
+	skos:note "The list may be empty, as it is on some entries of the pinned catalogue." ;
+	skos:relatedMatch "http://w3id.org/sepses/vocab/ref/cve#hasCWE"^^xsd:anyURI ;
+	linkml:annotations _:c14n3 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/cwes"^^xsd:anyURI ;
+	linkml:description "The CWE codes CISA associates with the vulnerability." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n0 ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:pattern "^CWE-([0-9])+$" ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/cwes"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/date> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"." , "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+	skos:exactMatch "schema:Date"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDate" ;
+	linkml:definition_uri "https://w3id.org/linkml/Date"^^xsd:anyURI ;
+	linkml:description "a date (year, month and day) in an idealized calendar" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#date"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/dateAdded> a linkml:SlotDefinition ;
+	rdfs:seeAlso "https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date"^^xsd:anyURI ;
+	skos:closeMatch "http://purl.org/dc/terms/issued"^^xsd:anyURI ;
+	skos:editorialNote "DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service. An entry here lists a vulnerability, so the mapping is close. A CVE record repeats this date in CISA's ADP container, in a metric of type kev: on all 120 of the sample it was equal. That metric's content is free-form, so no slot mapping reaches it." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/dateAdded"^^xsd:anyURI ;
+	linkml:annotations _:c14n19 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/dateAdded"^^xsd:anyURI ;
+	linkml:description "The day CISA added the vulnerability to the catalog." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n41 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/date> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/dateAdded"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/dateReleased> a linkml:SlotDefinition ;
+	rdfs:seeAlso "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_release_date"^^xsd:anyURI ;
+	skos:closeMatch "http://purl.org/dc/terms/issued"^^xsd:anyURI , "http://schema.org/datePublished"^^xsd:anyURI ;
+	skos:editorialNote "DCAT 3's dcterms:issued is a resource's first known date of issuance. CISA's value moves with each release of a living catalog, so the mapping is close, not exact." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/dateReleased"^^xsd:anyURI ;
+	linkml:annotations _:c14n28 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/dateReleased"^^xsd:anyURI ;
+	linkml:description "The date and time this release of the catalog came out." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:examples _:c14n21 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/datetime> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/dateReleased"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/date_or_datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI ;
+	linkml:description "Either a date or a datetime" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+	skos:exactMatch "schema:DateTime"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDateTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Datetime"^^xsd:anyURI ;
+	linkml:description "The combination of a date and time" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#dateTime"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/decimal> a linkml:TypeDefinition ;
+	skos:broadMatch "schema:Number"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Decimal" ;
+	linkml:definition_uri "https://w3id.org/linkml/Decimal"^^xsd:anyURI ;
+	linkml:description "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#decimal"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/double> a linkml:TypeDefinition ;
+	skos:closeMatch "schema:Float"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Double"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:double specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#double"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/dueDate> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/dueDate"^^xsd:anyURI ;
+	skos:note "CISA states no relation between this and dateAdded, so the schema adds none." ;
+	linkml:annotations _:c14n17 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/dueDate"^^xsd:anyURI ;
+	linkml:description "The day by which CISA wants the required action done." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n26 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/date> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/dueDate"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/float> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+	skos:exactMatch "schema:Float"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Float"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:float specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#float"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/forensicTriage> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/forensicTriage"^^xsd:anyURI ;
+	skos:note "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue." ;
+	linkml:annotations _:c14n27 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/forensicTriage"^^xsd:anyURI ;
+	linkml:description "Whether the vulnerability calls for forensic triage under BOD 26-04." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/KevForensicTriage> ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/forensicTriage"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/integer> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+	skos:exactMatch "schema:Integer"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "int" ;
+	linkml:definition_uri "https://w3id.org/linkml/Integer"^^xsd:anyURI ;
+	linkml:description "An integer" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#integer"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/jsonpath> dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/jsonpointer> dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpointer"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/kev_catalog> dcterms:license "Apache-2.0" ;
+	dcterms:source "https://github.com/cisagov/kev-data/blob/d98075f22b11ca60ede428f4397966d3523dc692/known_exploited_vulnerabilities_schema.json"^^xsd:anyURI ;
+	dcterms:title "CISA Known Exploited Vulnerabilities Catalog" ;
+	pav:version "2026-09-17" ;
+	schema1:keywords "CISA" , "CVE" , "catalog" , "known exploited vulnerability" , "vulnerability" ;
+	a linkml:SchemaDefinition ;
+	rdfs:seeAlso "https://github.com/cisagov/kev-data"^^xsd:anyURI , "https://lmodel.github.io/kev-catalog"^^xsd:anyURI , "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"^^xsd:anyURI , "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json"^^xsd:anyURI ;
+	skos:editorialNote "KEV's authority has moved to Binding Operational Directive (BOD) 26-04, which the upstream's README and its forensicTriage description cite. Directive terms, dates and counts belong at their source, so none is restated here. CISA's directive pages answered a plain client with 403 on 2026-11-03: see https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk" ;
+	skos:note "CISA states its data's terms as CC0 1.0, and says that third-party links in the data keep their own terms and that use of the data gives no right to the CISA Logo or the DHS Seal and is no endorsement. NOTICE says the same." , "CISA's JSON schema states no version, so the version here is the date of the commit that last changed the file in cisagov/kev-data. tests/upstream/ copies the file, and scripts/check_upstream_release.py reports when it moves." ;
+	sh:declare _:c14n11 , _:c14n13 , _:c14n14 , _:c14n16 , _:c14n20 , _:c14n25 , _:c14n31 , _:c14n33 , _:c14n34 , _:c14n35 , _:c14n36 , _:c14n47 ;
+	linkml:annotations _:c14n15 , _:c14n23 , _:c14n37 , _:c14n4 , _:c14n5 ;
+	linkml:classes <https://w3id.org/lmodel/kev-catalog/KevCatalog> , <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:default_prefix "kev_catalog" ;
+	linkml:default_range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:description "A LinkML model of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog that the Cybersecurity and Infrastructure Security Agency (CISA) publishes. CISA's keys and values are the schema's, so a real KEV file validates unchanged." ;
+	linkml:enums <https://w3id.org/lmodel/kev-catalog/KevForensicTriage> , <https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse> ;
+	linkml:id "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	linkml:imports "linkml:types"^^xsd:anyURI ;
+	linkml:metamodel_version "1.12.0" ;
+	linkml:slots <https://w3id.org/lmodel/kev-catalog/catalogVersion> , <https://w3id.org/lmodel/kev-catalog/count> , <https://w3id.org/lmodel/kev-catalog/cveID> , <https://w3id.org/lmodel/kev-catalog/cwes> , <https://w3id.org/lmodel/kev-catalog/dateAdded> , <https://w3id.org/lmodel/kev-catalog/dateReleased> , <https://w3id.org/lmodel/kev-catalog/dueDate> , <https://w3id.org/lmodel/kev-catalog/forensicTriage> , <https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse> , <https://w3id.org/lmodel/kev-catalog/notes> , <https://w3id.org/lmodel/kev-catalog/product> , <https://w3id.org/lmodel/kev-catalog/requiredAction> , <https://w3id.org/lmodel/kev-catalog/shortDescription> , <https://w3id.org/lmodel/kev-catalog/title> , <https://w3id.org/lmodel/kev-catalog/vendorProject> , <https://w3id.org/lmodel/kev-catalog/vulnerabilities> , <https://w3id.org/lmodel/kev-catalog/vulnerabilityName> ;
+	linkml:source_file "kev_catalog.yaml" ;
+	linkml:source_file_date "2026-11-04T23:37:04"^^xsd:dateTime ;
+	linkml:source_file_size 16964 ;
+	linkml:types <https://w3id.org/lmodel/kev-catalog/boolean> , <https://w3id.org/lmodel/kev-catalog/curie> , <https://w3id.org/lmodel/kev-catalog/date> , <https://w3id.org/lmodel/kev-catalog/date_or_datetime> , <https://w3id.org/lmodel/kev-catalog/datetime> , <https://w3id.org/lmodel/kev-catalog/decimal> , <https://w3id.org/lmodel/kev-catalog/double> , <https://w3id.org/lmodel/kev-catalog/float> , <https://w3id.org/lmodel/kev-catalog/integer> , <https://w3id.org/lmodel/kev-catalog/jsonpath> , <https://w3id.org/lmodel/kev-catalog/jsonpointer> , <https://w3id.org/lmodel/kev-catalog/ncname> , <https://w3id.org/lmodel/kev-catalog/nodeidentifier> , <https://w3id.org/lmodel/kev-catalog/objectidentifier> , <https://w3id.org/lmodel/kev-catalog/sparqlpath> , <https://w3id.org/lmodel/kev-catalog/string> , <https://w3id.org/lmodel/kev-catalog/time> , <https://w3id.org/lmodel/kev-catalog/uri> , <https://w3id.org/lmodel/kev-catalog/uriorcurie> .
+<https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse"^^xsd:anyURI ;
+	skos:note "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue." ;
+	linkml:annotations _:c14n42 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse"^^xsd:anyURI ;
+	linkml:description "Whether CISA knows of the vulnerability's use in a ransomware campaign." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/KevRansomwareCampaignUse> ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/knownRansomwareCampaignUse"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/ncname> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NCName" ;
+	linkml:definition_uri "https://w3id.org/linkml/Ncname"^^xsd:anyURI ;
+	linkml:description "Prefix part of CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/nodeidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NodeIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Nodeidentifier"^^xsd:anyURI ;
+	linkml:description "A URI, CURIE or BNODE that represents a node in a model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#nonLiteral"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/notes> a linkml:SlotDefinition ;
+	skos:closeMatch "http://www.w3.org/2004/02/skos/core#note"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/notes"^^xsd:anyURI ;
+	skos:note "Often holds addresses separated by \" ; \", with empty places between them. The schema keeps it one string and parses nothing, since CISA states no form for it. Those addresses are third parties', under their own terms." ;
+	linkml:annotations _:c14n38 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/notes"^^xsd:anyURI ;
+	linkml:description "Anything else CISA adds about the entry, as free text." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/notes"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/objectidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "Used for inheritance and type checking" ;
+	linkml:base "ElementIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Objectidentifier"^^xsd:anyURI ;
+	linkml:description "A URI or CURIE that represents an object in the model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#iri"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/product> a linkml:SlotDefinition ;
+	skos:closeMatch "https://w3id.org/lmodel/cve/product"^^xsd:anyURI ;
+	skos:editorialNote "Close, not exact: both name the affected product, but in the sample of 120 entries the value matched a CNA's affected product on only 14, as CNAs often name a release line or write n/a." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/product"^^xsd:anyURI ;
+	linkml:annotations _:c14n24 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/product"^^xsd:anyURI ;
+	linkml:description "The affected product, as CISA names it." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n30 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/product"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/requiredAction> a linkml:SlotDefinition ;
+	skos:editorialNote "Related: a CVE record's solutions say what a CNA offers as a fix, and this says what CISA requires, often by pointing to the vendor's instructions. STIX's course-of-action is a kind of object, not a key, so no slot mapping reaches it." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/requiredAction"^^xsd:anyURI ;
+	skos:note "Free text. Older entries' text may name a directive since replaced, and the schema leaves the text as CISA wrote it." ;
+	skos:relatedMatch "https://w3id.org/lmodel/cve/solutions"^^xsd:anyURI ;
+	linkml:annotations _:c14n29 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/requiredAction"^^xsd:anyURI ;
+	linkml:description "What CISA says must be done about the vulnerability." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/requiredAction"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/shortDescription> a linkml:SlotDefinition ;
+	skos:editorialNote "Related: this is CISA's own account. In the sample of 120 entries none equalled a description in the CVE record's CNA container." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/shortDescription"^^xsd:anyURI ;
+	skos:relatedMatch "https://w3id.org/lmodel/cve/descriptions"^^xsd:anyURI ;
+	linkml:annotations _:c14n18 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/shortDescription"^^xsd:anyURI ;
+	linkml:description "A brief account of the vulnerability, in CISA's words." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/shortDescription"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/sparqlpath> dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Sparqlpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/string> a linkml:TypeDefinition ;
+	skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+	skos:exactMatch "schema:Text"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/String"^^xsd:anyURI ;
+	linkml:description "A character string" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/time> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"." , "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+	skos:exactMatch "schema:Time"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Time"^^xsd:anyURI ;
+	linkml:description "A time object represents a (local) time of day, independent of any particular day" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#time"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/title> a linkml:SlotDefinition ;
+	skos:exactMatch "http://purl.org/dc/terms/title"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/title"^^xsd:anyURI ;
+	skos:note "Every KEV file carries this key, though CISA's JSON schema lists it under no property. It is optional here for that reason." ;
+	linkml:annotations _:c14n22 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/title"^^xsd:anyURI ;
+	linkml:description "The catalog's human-readable name." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/title"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/uri> dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+	a linkml:TypeDefinition ;
+	skos:closeMatch "schema:URL"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+	linkml:base "URI" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uri"^^xsd:anyURI ;
+	linkml:description "a complete URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/uriorcurie> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "URIorCURIE" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uriorcurie"^^xsd:anyURI ;
+	linkml:description "a URI or a CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/vendorProject> a linkml:SlotDefinition ;
+	skos:closeMatch "https://w3id.org/lmodel/cve/vendor"^^xsd:anyURI ;
+	skos:editorialNote "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or n/a." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/vendorProject"^^xsd:anyURI ;
+	linkml:annotations _:c14n43 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/vendorProject"^^xsd:anyURI ;
+	linkml:description "The vendor or project behind the affected product, as CISA names it." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:examples _:c14n7 ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/vendorProject"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/vulnerabilities> a linkml:SlotDefinition ;
+	skos:broadMatch "http://purl.org/dc/terms/hasPart"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/vulnerabilities"^^xsd:anyURI ;
+	linkml:annotations _:c14n2 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/vulnerabilities"^^xsd:anyURI ;
+	linkml:description "The entries this release of the catalog lists." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevCatalog> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/vulnerabilities"^^xsd:anyURI .
+<https://w3id.org/lmodel/kev-catalog/vulnerabilityName> a linkml:SlotDefinition ;
+	skos:editorialNote "Related: this is CISA's own wording. In the sample of 120 entries only 39 CVE records had a CNA title at all, and 2 of those equalled it." ;
+	skos:inScheme "https://w3id.org/lmodel/kev-catalog"^^xsd:anyURI ;
+	skos:mappingRelation "https://w3id.org/lmodel/kev-catalog/vulnerabilityName"^^xsd:anyURI ;
+	skos:relatedMatch "https://w3id.org/lmodel/cve/title"^^xsd:anyURI ;
+	linkml:annotations _:c14n9 ;
+	linkml:definition_uri "https://w3id.org/lmodel/kev-catalog/vulnerabilityName"^^xsd:anyURI ;
+	linkml:description "The name CISA gives the vulnerability." ;
+	linkml:domain_of <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:owner <https://w3id.org/lmodel/kev-catalog/KevVulnerability> ;
+	linkml:range <https://w3id.org/lmodel/kev-catalog/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/kev-catalog/vulnerabilityName"^^xsd:anyURI .
+_:c14n0 a linkml:Example ;
+	skos:example "CWE-502" .
+_:c14n1 a linkml:Annotation ;
+	skos:example "#" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n10 a linkml:Example ;
+	skos:example "CVE-2021-44228" .
+_:c14n11 sh:namespace "http://w3id.org/sepses/vocab/ref/cve#"^^xsd:anyURI ;
+	sh:prefix "sepses_cve" .
+_:c14n12 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n13 sh:namespace "http://www.wikidata.org/prop/direct/"^^xsd:anyURI ;
+	sh:prefix "wdt" .
+_:c14n14 sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+	sh:prefix "linkml" .
+_:c14n15 skos:example "d98075f22b11ca60ede428f4397966d3523dc692" ;
+	linkml:tag "upstream_schema_commit"^^xsd:anyURI .
+_:c14n16 sh:namespace "http://schema.org/"^^xsd:anyURI ;
+	sh:prefix "schema" .
+_:c14n17 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/dueDate" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n18 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/shortDescription" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n19 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/dateAdded" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n2 a linkml:Annotation ;
+	skos:example "#/properties/vulnerabilities" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n20 sh:namespace "https://spdx.org/rdf/3.0.1/terms/"^^xsd:anyURI ;
+	sh:prefix "spdx3" .
+_:c14n21 a linkml:Example ;
+	skos:example "2026-10-30T17:02:45.3665Z" .
+_:c14n22 a linkml:Annotation ;
+	skos:example "title" ;
+	linkml:tag "upstream_file_key"^^xsd:anyURI .
+_:c14n23 skos:example "CC0-1.0" ;
+	linkml:tag "upstream_license"^^xsd:anyURI .
+_:c14n24 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/product" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n25 sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+	sh:prefix "dcterms" .
+_:c14n26 a linkml:Example ;
+	skos:example "2021-12-24" .
+_:c14n27 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/forensicTriage" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n28 a linkml:Annotation ;
+	skos:example "#/properties/dateReleased" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n29 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/requiredAction" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n3 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/cwes" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n30 a linkml:Example ;
+	skos:example "Log4j2" .
+_:c14n31 sh:namespace "http://www.w3.org/ns/dcat#"^^xsd:anyURI ;
+	sh:prefix "dcat" .
+_:c14n33 sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+	sh:prefix "skos" .
+_:c14n34 sh:namespace "https://w3id.org/lmodel/cve/"^^xsd:anyURI ;
+	sh:prefix "cve" .
+_:c14n35 sh:namespace "http://www.wikidata.org/entity/"^^xsd:anyURI ;
+	sh:prefix "wd" .
+_:c14n36 sh:namespace "https://w3id.org/lmodel/stix/"^^xsd:anyURI ;
+	sh:prefix "stix" .
+_:c14n37 skos:example "ec422845b354f58250d2e99cdfcce17a18659423" ;
+	linkml:tag "upstream_schema_blob"^^xsd:anyURI .
+_:c14n38 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/notes" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n39 skos:example "#/$defs/vulnerability/properties/knownRansomwareCampaignUse" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n4 skos:example "0d5865c98694c5bfba2c78a26caf814f406b3fce8bfb81bef79e99c7f288b0e7" ;
+	linkml:tag "upstream_schema_sha256"^^xsd:anyURI .
+_:c14n41 a linkml:Example ;
+	skos:example "2021-12-10" .
+_:c14n42 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/knownRansomwareCampaignUse" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n43 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/vendorProject" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n44 a linkml:Annotation ;
+	skos:example "#/properties/catalogVersion" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n45 skos:example "#/$defs/vulnerability/properties/forensicTriage" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n46 a linkml:Annotation ;
+	skos:example "#/properties/count" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n47 sh:namespace "https://w3id.org/lmodel/kev-catalog/"^^xsd:anyURI ;
+	sh:prefix "kev_catalog" .
+_:c14n5 skos:example "http://json-schema.org/draft-07/schema#" ;
+	linkml:tag "upstream_schema_draft"^^xsd:anyURI .
+_:c14n6 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/cveID" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+_:c14n7 a linkml:Example ;
+	skos:example "Apache" .
+_:c14n8 a linkml:Example ;
+	skos:example "2026.10.30" .
+_:c14n9 a linkml:Annotation ;
+	skos:example "#/$defs/vulnerability/properties/vulnerabilityName" ;
+	linkml:tag "upstream_path"^^xsd:anyURI .
+

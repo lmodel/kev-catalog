@@ -1,0 +1,1424 @@
+{
+  "name": "kev_catalog",
+  "annotations": {
+    "upstream_schema_commit": {
+      "tag": "upstream_schema_commit",
+      "value": "d98075f22b11ca60ede428f4397966d3523dc692"
+    },
+    "upstream_schema_blob": {
+      "tag": "upstream_schema_blob",
+      "value": "ec422845b354f58250d2e99cdfcce17a18659423"
+    },
+    "upstream_schema_sha256": {
+      "tag": "upstream_schema_sha256",
+      "value": "0d5865c98694c5bfba2c78a26caf814f406b3fce8bfb81bef79e99c7f288b0e7"
+    },
+    "upstream_schema_draft": {
+      "tag": "upstream_schema_draft",
+      "value": "http://json-schema.org/draft-07/schema#"
+    },
+    "upstream_license": {
+      "tag": "upstream_license",
+      "value": "CC0-1.0"
+    }
+  },
+  "description": "A LinkML model of the JSON format of the Known Exploited Vulnerabilities (KEV) catalog that the Cybersecurity and Infrastructure Security Agency (CISA) publishes. CISA's keys and values are the schema's, so a real KEV file validates unchanged.",
+  "title": "CISA Known Exploited Vulnerabilities Catalog",
+  "notes": [
+    "KEV's authority has moved to Binding Operational Directive (BOD) 26-04, which the upstream's README and its forensicTriage description cite. Directive terms, dates and counts belong at their source, so none is restated here. CISA's directive pages answered a plain client with 403 on 2026-11-03: see https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk"
+  ],
+  "comments": [
+    "CISA's JSON schema states no version, so the version here is the date of the commit that last changed the file in cisagov/kev-data. tests/upstream/ copies the file, and scripts/check_upstream_release.py reports when it moves.",
+    "CISA states its data's terms as CC0 1.0, and says that third-party links in the data keep their own terms and that use of the data gives no right to the CISA Logo or the DHS Seal and is no endorsement. NOTICE says the same."
+  ],
+  "source": "https://github.com/cisagov/kev-data/blob/d98075f22b11ca60ede428f4397966d3523dc692/known_exploited_vulnerabilities_schema.json",
+  "see_also": [
+    "https://lmodel.github.io/kev-catalog",
+    "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+    "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json",
+    "https://github.com/cisagov/kev-data"
+  ],
+  "keywords": [
+    "vulnerability",
+    "known exploited vulnerability",
+    "CVE",
+    "CISA",
+    "catalog"
+  ],
+  "id": "https://w3id.org/lmodel/kev-catalog",
+  "version": "2026-09-17",
+  "license": "Apache-2.0",
+  "prefixes": {
+    "kev_catalog": {
+      "prefix_prefix": "kev_catalog",
+      "prefix_reference": "https://w3id.org/lmodel/kev-catalog/"
+    },
+    "cve": {
+      "prefix_prefix": "cve",
+      "prefix_reference": "https://w3id.org/lmodel/cve/"
+    },
+    "stix": {
+      "prefix_prefix": "stix",
+      "prefix_reference": "https://w3id.org/lmodel/stix/"
+    },
+    "spdx3": {
+      "prefix_prefix": "spdx3",
+      "prefix_reference": "https://spdx.org/rdf/3.0.1/terms/"
+    },
+    "linkml": {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    "dcat": {
+      "prefix_prefix": "dcat",
+      "prefix_reference": "http://www.w3.org/ns/dcat#"
+    },
+    "dcterms": {
+      "prefix_prefix": "dcterms",
+      "prefix_reference": "http://purl.org/dc/terms/"
+    },
+    "schema": {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    "sepses_cve": {
+      "prefix_prefix": "sepses_cve",
+      "prefix_reference": "http://w3id.org/sepses/vocab/ref/cve#"
+    },
+    "skos": {
+      "prefix_prefix": "skos",
+      "prefix_reference": "http://www.w3.org/2004/02/skos/core#"
+    },
+    "wd": {
+      "prefix_prefix": "wd",
+      "prefix_reference": "http://www.wikidata.org/entity/"
+    },
+    "wdt": {
+      "prefix_prefix": "wdt",
+      "prefix_reference": "http://www.wikidata.org/prop/direct/"
+    },
+    "xsd": {
+      "prefix_prefix": "xsd",
+      "prefix_reference": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "shex": {
+      "prefix_prefix": "shex",
+      "prefix_reference": "http://www.w3.org/ns/shex#"
+    }
+  },
+  "default_prefix": "kev_catalog",
+  "default_range": "string",
+  "types": {
+    "string": {
+      "name": "string",
+      "description": "A character string",
+      "notes": [
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Text"
+      ],
+      "base": "str",
+      "uri": "xsd:string"
+    },
+    "integer": {
+      "name": "integer",
+      "description": "An integer",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
+      "base": "int",
+      "uri": "xsd:integer"
+    },
+    "boolean": {
+      "name": "boolean",
+      "description": "A binary (true or false) value",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
+      "base": "Bool",
+      "uri": "xsd:boolean",
+      "repr": "bool"
+    },
+    "float": {
+      "name": "float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "xsd:float"
+    },
+    "double": {
+      "name": "double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "xsd:double"
+    },
+    "decimal": {
+      "name": "decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "broad_mappings": [
+        "schema:Number"
+      ],
+      "base": "Decimal",
+      "uri": "xsd:decimal"
+    },
+    "time": {
+      "name": "time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Time"
+      ],
+      "base": "XSDTime",
+      "uri": "xsd:time",
+      "repr": "str"
+    },
+    "date": {
+      "name": "date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:Date"
+      ],
+      "base": "XSDDate",
+      "uri": "xsd:date",
+      "repr": "str"
+    },
+    "datetime": {
+      "name": "datetime",
+      "description": "The combination of a date and time",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
+      "base": "XSDDateTime",
+      "uri": "xsd:dateTime",
+      "repr": "str"
+    },
+    "date_or_datetime": {
+      "name": "date_or_datetime",
+      "description": "Either a date or a datetime",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "str",
+      "uri": "linkml:DateOrDatetime",
+      "repr": "str"
+    },
+    "uriorcurie": {
+      "name": "uriorcurie",
+      "description": "a URI or a CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "URIorCURIE",
+      "uri": "xsd:anyURI",
+      "repr": "str"
+    },
+    "curie": {
+      "name": "curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"."
+      ],
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "Curie",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "uri": {
+      "name": "uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"."
+      ],
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "schema:URL"
+      ],
+      "base": "URI",
+      "uri": "xsd:anyURI",
+      "repr": "str"
+    },
+    "ncname": {
+      "name": "ncname",
+      "description": "Prefix part of CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "NCName",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "objectidentifier": {
+      "name": "objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"."
+      ],
+      "comments": [
+        "Used for inheritance and type checking"
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "ElementIdentifier",
+      "uri": "shex:iri",
+      "repr": "str"
+    },
+    "nodeidentifier": {
+      "name": "nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "NodeIdentifier",
+      "uri": "shex:nonLiteral",
+      "repr": "str"
+    },
+    "jsonpointer": {
+      "name": "jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "jsonpath": {
+      "name": "jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "sparqlpath": {
+      "name": "sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    }
+  },
+  "enums": {
+    "KevRansomwareCampaignUse": {
+      "name": "KevRansomwareCampaignUse",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/knownRansomwareCampaignUse"
+        }
+      },
+      "description": "What CISA can say about a vulnerability's use in ransomware campaigns.",
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "permissible_values": {
+        "Known": {
+          "text": "Known",
+          "description": "CISA knows of a ransomware campaign that has used it."
+        },
+        "Unknown": {
+          "text": "Unknown",
+          "description": "CISA has no confirmation that a ransomware campaign has used it."
+        }
+      }
+    },
+    "KevForensicTriage": {
+      "name": "KevForensicTriage",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/forensicTriage"
+        }
+      },
+      "description": "Whether BOD 26-04 calls for forensic triage of a vulnerability.",
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "permissible_values": {
+        "Yes": {
+          "text": "Yes",
+          "description": "The directive calls for forensic triage of this vulnerability."
+        },
+        "No": {
+          "text": "No",
+          "description": "The directive does not call for forensic triage of this vulnerability."
+        }
+      }
+    }
+  },
+  "slots": {
+    "title": {
+      "name": "title",
+      "annotations": {
+        "upstream_file_key": {
+          "tag": "upstream_file_key",
+          "value": "title"
+        }
+      },
+      "description": "The catalog's human-readable name.",
+      "comments": [
+        "Every KEV file carries this key, though CISA's JSON schema lists it under no property. It is optional here for that reason."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "dcterms:title"
+      ],
+      "slot_uri": "kev_catalog:title",
+      "domain_of": [
+        "KevCatalog"
+      ],
+      "range": "string"
+    },
+    "catalogVersion": {
+      "name": "catalogVersion",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/properties/catalogVersion"
+        }
+      },
+      "description": "The version label of this release of the catalog.",
+      "comments": [
+        "The value reads as a date, such as 2026.10.30, but CISA states only a string, so no pattern is given."
+      ],
+      "examples": [
+        {
+          "value": "2026.10.30"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "see_also": [
+        "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_version"
+      ],
+      "exact_mappings": [
+        "dcat:version"
+      ],
+      "close_mappings": [
+        "schema:version"
+      ],
+      "slot_uri": "kev_catalog:catalogVersion",
+      "domain_of": [
+        "KevCatalog"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "dateReleased": {
+      "name": "dateReleased",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/properties/dateReleased"
+        }
+      },
+      "description": "The date and time this release of the catalog came out.",
+      "notes": [
+        "DCAT 3's dcterms:issued is a resource's first known date of issuance. CISA's value moves with each release of a living catalog, so the mapping is close, not exact."
+      ],
+      "examples": [
+        {
+          "value": "2026-10-30T17:02:45.3665Z"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "see_also": [
+        "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_release_date"
+      ],
+      "close_mappings": [
+        "dcterms:issued",
+        "schema:datePublished"
+      ],
+      "slot_uri": "kev_catalog:dateReleased",
+      "domain_of": [
+        "KevCatalog"
+      ],
+      "range": "datetime",
+      "required": true
+    },
+    "count": {
+      "name": "count",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/properties/count"
+        }
+      },
+      "description": "How many entries CISA says the catalog holds.",
+      "notes": [
+        "schema.org's numberOfItems is declared on ItemList, not Dataset, so the mapping is only related."
+      ],
+      "comments": [
+        "CISA calls this the catalog's total. No validator here compares it with the list; tests/test_data.py does that in Python, over the examples and the pinned catalogue."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "related_mappings": [
+        "schema:numberOfItems"
+      ],
+      "slot_uri": "kev_catalog:count",
+      "domain_of": [
+        "KevCatalog"
+      ],
+      "range": "integer",
+      "required": true
+    },
+    "vulnerabilities": {
+      "name": "vulnerabilities",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/properties/vulnerabilities"
+        }
+      },
+      "description": "The entries this release of the catalog lists.",
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "broad_mappings": [
+        "dcterms:hasPart"
+      ],
+      "slot_uri": "kev_catalog:vulnerabilities",
+      "domain_of": [
+        "KevCatalog"
+      ],
+      "range": "KevVulnerability",
+      "required": true,
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true
+    },
+    "cveID": {
+      "name": "cveID",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/cveID"
+        }
+      },
+      "description": "The CVE identifier of the listed vulnerability, which identifies the entry.",
+      "notes": [
+        "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the same identifier, in the same form, on the item for the vulnerability."
+      ],
+      "examples": [
+        {
+          "value": "CVE-2021-44228"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "exact_mappings": [
+        "cve:cveId",
+        "wdt:P3587"
+      ],
+      "slot_uri": "kev_catalog:cveID",
+      "identifier": true,
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true,
+      "pattern": "^CVE-[0-9]{4}-[0-9]{4,19}$"
+    },
+    "vendorProject": {
+      "name": "vendorProject",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/vendorProject"
+        }
+      },
+      "description": "The vendor or project behind the affected product, as CISA names it.",
+      "notes": [
+        "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or n/a."
+      ],
+      "examples": [
+        {
+          "value": "Apache"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "cve:vendor"
+      ],
+      "slot_uri": "kev_catalog:vendorProject",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "product": {
+      "name": "product",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/product"
+        }
+      },
+      "description": "The affected product, as CISA names it.",
+      "notes": [
+        "Close, not exact: both name the affected product, but in the sample of 120 entries the value matched a CNA's affected product on only 14, as CNAs often name a release line or write n/a."
+      ],
+      "examples": [
+        {
+          "value": "Log4j2"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "cve:product"
+      ],
+      "slot_uri": "kev_catalog:product",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "vulnerabilityName": {
+      "name": "vulnerabilityName",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/vulnerabilityName"
+        }
+      },
+      "description": "The name CISA gives the vulnerability.",
+      "notes": [
+        "Related: this is CISA's own wording. In the sample of 120 entries only 39 CVE records had a CNA title at all, and 2 of those equalled it."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "related_mappings": [
+        "cve:title"
+      ],
+      "slot_uri": "kev_catalog:vulnerabilityName",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "dateAdded": {
+      "name": "dateAdded",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/dateAdded"
+        }
+      },
+      "description": "The day CISA added the vulnerability to the catalog.",
+      "notes": [
+        "DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service. An entry here lists a vulnerability, so the mapping is close. A CVE record repeats this date in CISA's ADP container, in a metric of type kev: on all 120 of the sample it was equal. That metric's content is free-form, so no slot mapping reaches it."
+      ],
+      "examples": [
+        {
+          "value": "2021-12-10"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "see_also": [
+        "https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date"
+      ],
+      "close_mappings": [
+        "dcterms:issued"
+      ],
+      "slot_uri": "kev_catalog:dateAdded",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "date",
+      "required": true
+    },
+    "shortDescription": {
+      "name": "shortDescription",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/shortDescription"
+        }
+      },
+      "description": "A brief account of the vulnerability, in CISA's words.",
+      "notes": [
+        "Related: this is CISA's own account. In the sample of 120 entries none equalled a description in the CVE record's CNA container."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "related_mappings": [
+        "cve:descriptions"
+      ],
+      "slot_uri": "kev_catalog:shortDescription",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "requiredAction": {
+      "name": "requiredAction",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/requiredAction"
+        }
+      },
+      "description": "What CISA says must be done about the vulnerability.",
+      "notes": [
+        "Related: a CVE record's solutions say what a CNA offers as a fix, and this says what CISA requires, often by pointing to the vendor's instructions. STIX's course-of-action is a kind of object, not a key, so no slot mapping reaches it."
+      ],
+      "comments": [
+        "Free text. Older entries' text may name a directive since replaced, and the schema leaves the text as CISA wrote it."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "related_mappings": [
+        "cve:solutions"
+      ],
+      "slot_uri": "kev_catalog:requiredAction",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "required": true
+    },
+    "dueDate": {
+      "name": "dueDate",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/dueDate"
+        }
+      },
+      "description": "The day by which CISA wants the required action done.",
+      "comments": [
+        "CISA states no relation between this and dateAdded, so the schema adds none."
+      ],
+      "examples": [
+        {
+          "value": "2021-12-24"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "slot_uri": "kev_catalog:dueDate",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "date",
+      "required": true
+    },
+    "knownRansomwareCampaignUse": {
+      "name": "knownRansomwareCampaignUse",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/knownRansomwareCampaignUse"
+        }
+      },
+      "description": "Whether CISA knows of the vulnerability's use in a ransomware campaign.",
+      "comments": [
+        "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "slot_uri": "kev_catalog:knownRansomwareCampaignUse",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "KevRansomwareCampaignUse"
+    },
+    "forensicTriage": {
+      "name": "forensicTriage",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/forensicTriage"
+        }
+      },
+      "description": "Whether the vulnerability calls for forensic triage under BOD 26-04.",
+      "comments": [
+        "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "slot_uri": "kev_catalog:forensicTriage",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "KevForensicTriage"
+    },
+    "notes": {
+      "name": "notes",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/notes"
+        }
+      },
+      "description": "Anything else CISA adds about the entry, as free text.",
+      "comments": [
+        "Often holds addresses separated by \" ; \", with empty places between them. The schema keeps it one string and parses nothing, since CISA states no form for it. Those addresses are third parties', under their own terms."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "skos:note"
+      ],
+      "slot_uri": "kev_catalog:notes",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string"
+    },
+    "cwes": {
+      "name": "cwes",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability/properties/cwes"
+        }
+      },
+      "description": "The CWE codes CISA associates with the vulnerability.",
+      "notes": [
+        "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related. Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes, so it is close."
+      ],
+      "comments": [
+        "The list may be empty, as it is on some entries of the pinned catalogue."
+      ],
+      "examples": [
+        {
+          "value": "CWE-502"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "close_mappings": [
+        "cve:cweId",
+        "wdt:P3624"
+      ],
+      "related_mappings": [
+        "sepses_cve:hasCWE"
+      ],
+      "slot_uri": "kev_catalog:cwes",
+      "domain_of": [
+        "KevVulnerability"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "pattern": "^CWE-([0-9])+$"
+    }
+  },
+  "classes": {
+    "KevCatalog": {
+      "name": "KevCatalog",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#"
+        }
+      },
+      "description": "One published release of the KEV catalog, with the entries it lists.",
+      "notes": [
+        "DCAT 3 defines dcat:Catalog as a curated collection of metadata about resources such as datasets, and an entry here describes a vulnerability, so that mapping is only related despite the shared word. A KEV release is a kind of dataset, so dcat:Dataset and schema:Dataset are broader terms, not equivalents.",
+        "Wikidata's Q125498394 is the KEV catalog itself, and SPDX 3.0.1's ExploitCatalogType/kev is its name for that catalog as a kind of exploit catalog. A class here is one release of it, so both are only related."
+      ],
+      "comments": [
+        "Each release is a whole file: the catalog is republished as a new file, with a new catalogVersion and dateReleased, when an entry is added or changed.",
+        "CISA's objects are open, so a key the schema does not name passes CISA's JSON schema. This class is closed, so a new key fails here until the schema names it."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "see_also": [
+        "https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset",
+        "https://schema.org/Dataset",
+        "https://www.wikidata.org/wiki/Q125498394",
+        "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Vocabularies/ExploitCatalogType/"
+      ],
+      "related_mappings": [
+        "dcat:Catalog",
+        "wd:Q125498394",
+        "spdx3:Security/ExploitCatalogType/kev"
+      ],
+      "broad_mappings": [
+        "dcat:Dataset",
+        "schema:Dataset"
+      ],
+      "slots": [
+        "title",
+        "catalogVersion",
+        "dateReleased",
+        "count",
+        "vulnerabilities"
+      ],
+      "attributes": {
+        "title": {
+          "name": "title",
+          "annotations": {
+            "upstream_file_key": {
+              "tag": "upstream_file_key",
+              "value": "title"
+            }
+          },
+          "description": "The catalog's human-readable name.",
+          "comments": [
+            "Every KEV file carries this key, though CISA's JSON schema lists it under no property. It is optional here for that reason."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "exact_mappings": [
+            "dcterms:title"
+          ],
+          "slot_uri": "kev_catalog:title",
+          "owner": "KevCatalog",
+          "domain_of": [
+            "KevCatalog"
+          ],
+          "range": "string"
+        },
+        "catalogVersion": {
+          "name": "catalogVersion",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/properties/catalogVersion"
+            }
+          },
+          "description": "The version label of this release of the catalog.",
+          "comments": [
+            "The value reads as a date, such as 2026.10.30, but CISA states only a string, so no pattern is given."
+          ],
+          "examples": [
+            {
+              "value": "2026.10.30"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "see_also": [
+            "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_version"
+          ],
+          "exact_mappings": [
+            "dcat:version"
+          ],
+          "close_mappings": [
+            "schema:version"
+          ],
+          "slot_uri": "kev_catalog:catalogVersion",
+          "owner": "KevCatalog",
+          "domain_of": [
+            "KevCatalog"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "dateReleased": {
+          "name": "dateReleased",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/properties/dateReleased"
+            }
+          },
+          "description": "The date and time this release of the catalog came out.",
+          "notes": [
+            "DCAT 3's dcterms:issued is a resource's first known date of issuance. CISA's value moves with each release of a living catalog, so the mapping is close, not exact."
+          ],
+          "examples": [
+            {
+              "value": "2026-10-30T17:02:45.3665Z"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "see_also": [
+            "https://www.w3.org/TR/vocab-dcat-3/#Property:resource_release_date"
+          ],
+          "close_mappings": [
+            "dcterms:issued",
+            "schema:datePublished"
+          ],
+          "slot_uri": "kev_catalog:dateReleased",
+          "owner": "KevCatalog",
+          "domain_of": [
+            "KevCatalog"
+          ],
+          "range": "datetime",
+          "required": true
+        },
+        "count": {
+          "name": "count",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/properties/count"
+            }
+          },
+          "description": "How many entries CISA says the catalog holds.",
+          "notes": [
+            "schema.org's numberOfItems is declared on ItemList, not Dataset, so the mapping is only related."
+          ],
+          "comments": [
+            "CISA calls this the catalog's total. No validator here compares it with the list; tests/test_data.py does that in Python, over the examples and the pinned catalogue."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "related_mappings": [
+            "schema:numberOfItems"
+          ],
+          "slot_uri": "kev_catalog:count",
+          "owner": "KevCatalog",
+          "domain_of": [
+            "KevCatalog"
+          ],
+          "range": "integer",
+          "required": true
+        },
+        "vulnerabilities": {
+          "name": "vulnerabilities",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/properties/vulnerabilities"
+            }
+          },
+          "description": "The entries this release of the catalog lists.",
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "broad_mappings": [
+            "dcterms:hasPart"
+          ],
+          "slot_uri": "kev_catalog:vulnerabilities",
+          "owner": "KevCatalog",
+          "domain_of": [
+            "KevCatalog"
+          ],
+          "range": "KevVulnerability",
+          "required": true,
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        }
+      },
+      "class_uri": "kev_catalog:KevCatalog",
+      "tree_root": true
+    },
+    "KevVulnerability": {
+      "name": "KevVulnerability",
+      "annotations": {
+        "upstream_path": {
+          "tag": "upstream_path",
+          "value": "#/$defs/vulnerability"
+        }
+      },
+      "description": "One entry of the KEV catalog, naming a CVE that CISA lists as exploited and the action it asks for by a due date.",
+      "notes": [
+        "An entry is a statement in a catalog about a vulnerability, not the vulnerability itself. Wikidata's Q631425, STIX's vulnerability object and SPDX 3.0.1's Security/Vulnerability describe the weakness and carry nothing about exploitation or a required action, so each is only related. SPDX 3.0.1's Security/ExploitCatalogVulnAssessmentRelationship says that a vulnerability is listed in an exploit catalog, and names KEV as one, so it is close. dcat:CatalogRecord is related, since DCAT's record registers a dataset or a service."
+      ],
+      "comments": [
+        "Four keys are optional in CISA's JSON schema though every entry of the pinned catalogue carries them: knownRansomwareCampaignUse, forensicTriage, notes and cwes. The schema follows CISA's JSON schema."
+      ],
+      "from_schema": "https://w3id.org/lmodel/kev-catalog",
+      "see_also": [
+        "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/ExploitCatalogVulnAssessmentRelationship/",
+        "https://spdx.github.io/spdx-spec/v3.0.1/model/Security/Classes/Vulnerability/",
+        "https://www.wikidata.org/wiki/Q631425",
+        "https://www.w3.org/TR/vocab-dcat-3/#Class:Catalog_Record"
+      ],
+      "close_mappings": [
+        "spdx3:Security/ExploitCatalogVulnAssessmentRelationship"
+      ],
+      "related_mappings": [
+        "wd:Q631425",
+        "stix:StixVulnerability",
+        "spdx3:Security/Vulnerability",
+        "sepses_cve:CVE",
+        "dcat:CatalogRecord",
+        "cve:CveRecord"
+      ],
+      "slots": [
+        "cveID",
+        "vendorProject",
+        "product",
+        "vulnerabilityName",
+        "dateAdded",
+        "shortDescription",
+        "requiredAction",
+        "dueDate",
+        "knownRansomwareCampaignUse",
+        "forensicTriage",
+        "notes",
+        "cwes"
+      ],
+      "attributes": {
+        "cveID": {
+          "name": "cveID",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/cveID"
+            }
+          },
+          "description": "The CVE identifier of the listed vulnerability, which identifies the entry.",
+          "notes": [
+            "Exact: a seeded sample of 120 entries on 2026-11-03 found each entry's value equal to cveMetadata.cveId in the CVE record of that name. Wikidata's P3587 holds the same identifier, in the same form, on the item for the vulnerability."
+          ],
+          "examples": [
+            {
+              "value": "CVE-2021-44228"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "exact_mappings": [
+            "cve:cveId",
+            "wdt:P3587"
+          ],
+          "slot_uri": "kev_catalog:cveID",
+          "identifier": true,
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true,
+          "pattern": "^CVE-[0-9]{4}-[0-9]{4,19}$"
+        },
+        "vendorProject": {
+          "name": "vendorProject",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/vendorProject"
+            }
+          },
+          "description": "The vendor or project behind the affected product, as CISA names it.",
+          "notes": [
+            "Close, not exact: both name who is responsible for the product, but in the sample of 120 entries the value matched the affected vendor that a CVE Numbering Authority (CNA) wrote on only 54, as CNAs often write a longer legal name or n/a."
+          ],
+          "examples": [
+            {
+              "value": "Apache"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "close_mappings": [
+            "cve:vendor"
+          ],
+          "slot_uri": "kev_catalog:vendorProject",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "product": {
+          "name": "product",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/product"
+            }
+          },
+          "description": "The affected product, as CISA names it.",
+          "notes": [
+            "Close, not exact: both name the affected product, but in the sample of 120 entries the value matched a CNA's affected product on only 14, as CNAs often name a release line or write n/a."
+          ],
+          "examples": [
+            {
+              "value": "Log4j2"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "close_mappings": [
+            "cve:product"
+          ],
+          "slot_uri": "kev_catalog:product",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "vulnerabilityName": {
+          "name": "vulnerabilityName",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/vulnerabilityName"
+            }
+          },
+          "description": "The name CISA gives the vulnerability.",
+          "notes": [
+            "Related: this is CISA's own wording. In the sample of 120 entries only 39 CVE records had a CNA title at all, and 2 of those equalled it."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "related_mappings": [
+            "cve:title"
+          ],
+          "slot_uri": "kev_catalog:vulnerabilityName",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "dateAdded": {
+          "name": "dateAdded",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/dateAdded"
+            }
+          },
+          "description": "The day CISA added the vulnerability to the catalog.",
+          "notes": [
+            "DCAT 3 uses dcterms:issued on a catalog record for the date of listing, of a dataset or service. An entry here lists a vulnerability, so the mapping is close. A CVE record repeats this date in CISA's ADP container, in a metric of type kev: on all 120 of the sample it was equal. That metric's content is free-form, so no slot mapping reaches it."
+          ],
+          "examples": [
+            {
+              "value": "2021-12-10"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "see_also": [
+            "https://www.w3.org/TR/vocab-dcat-3/#Property:record_listing_date"
+          ],
+          "close_mappings": [
+            "dcterms:issued"
+          ],
+          "slot_uri": "kev_catalog:dateAdded",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "date",
+          "required": true
+        },
+        "shortDescription": {
+          "name": "shortDescription",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/shortDescription"
+            }
+          },
+          "description": "A brief account of the vulnerability, in CISA's words.",
+          "notes": [
+            "Related: this is CISA's own account. In the sample of 120 entries none equalled a description in the CVE record's CNA container."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "related_mappings": [
+            "cve:descriptions"
+          ],
+          "slot_uri": "kev_catalog:shortDescription",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "requiredAction": {
+          "name": "requiredAction",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/requiredAction"
+            }
+          },
+          "description": "What CISA says must be done about the vulnerability.",
+          "notes": [
+            "Related: a CVE record's solutions say what a CNA offers as a fix, and this says what CISA requires, often by pointing to the vendor's instructions. STIX's course-of-action is a kind of object, not a key, so no slot mapping reaches it."
+          ],
+          "comments": [
+            "Free text. Older entries' text may name a directive since replaced, and the schema leaves the text as CISA wrote it."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "related_mappings": [
+            "cve:solutions"
+          ],
+          "slot_uri": "kev_catalog:requiredAction",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "dueDate": {
+          "name": "dueDate",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/dueDate"
+            }
+          },
+          "description": "The day by which CISA wants the required action done.",
+          "comments": [
+            "CISA states no relation between this and dateAdded, so the schema adds none."
+          ],
+          "examples": [
+            {
+              "value": "2021-12-24"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "slot_uri": "kev_catalog:dueDate",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "date",
+          "required": true
+        },
+        "knownRansomwareCampaignUse": {
+          "name": "knownRansomwareCampaignUse",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/knownRansomwareCampaignUse"
+            }
+          },
+          "description": "Whether CISA knows of the vulnerability's use in a ransomware campaign.",
+          "comments": [
+            "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "slot_uri": "kev_catalog:knownRansomwareCampaignUse",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "KevRansomwareCampaignUse"
+        },
+        "forensicTriage": {
+          "name": "forensicTriage",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/forensicTriage"
+            }
+          },
+          "description": "Whether the vulnerability calls for forensic triage under BOD 26-04.",
+          "comments": [
+            "CISA types this as a string and names its two values only in the property's description, so the enum rests on that sentence and on the pinned catalogue."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "slot_uri": "kev_catalog:forensicTriage",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "KevForensicTriage"
+        },
+        "notes": {
+          "name": "notes",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/notes"
+            }
+          },
+          "description": "Anything else CISA adds about the entry, as free text.",
+          "comments": [
+            "Often holds addresses separated by \" ; \", with empty places between them. The schema keeps it one string and parses nothing, since CISA states no form for it. Those addresses are third parties', under their own terms."
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "close_mappings": [
+            "skos:note"
+          ],
+          "slot_uri": "kev_catalog:notes",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string"
+        },
+        "cwes": {
+          "name": "cwes",
+          "annotations": {
+            "upstream_path": {
+              "tag": "upstream_path",
+              "value": "#/$defs/vulnerability/properties/cwes"
+            }
+          },
+          "description": "The CWE codes CISA associates with the vulnerability.",
+          "notes": [
+            "Close, not exact: both give an entry's CWE codes, but in the sample of 120 entries the list equalled the codes of the CVE record's CNA and ADP containers together on 94. SEPSES's hasCWE links a CVE to a CWE resource, not a code, so it is only related. Wikidata's P3624 holds the CWE number alone, without the CWE- prefix CISA writes, so it is close."
+          ],
+          "comments": [
+            "The list may be empty, as it is on some entries of the pinned catalogue."
+          ],
+          "examples": [
+            {
+              "value": "CWE-502"
+            }
+          ],
+          "from_schema": "https://w3id.org/lmodel/kev-catalog",
+          "close_mappings": [
+            "cve:cweId",
+            "wdt:P3624"
+          ],
+          "related_mappings": [
+            "sepses_cve:hasCWE"
+          ],
+          "slot_uri": "kev_catalog:cwes",
+          "owner": "KevVulnerability",
+          "domain_of": [
+            "KevVulnerability"
+          ],
+          "range": "string",
+          "multivalued": true,
+          "pattern": "^CWE-([0-9])+$"
+        }
+      },
+      "class_uri": "kev_catalog:KevVulnerability"
+    }
+  },
+  "metamodel_version": "1.12.0",
+  "source_file": "src/kev_catalog/schema/kev_catalog.yaml",
+  "@type": "SchemaDefinition"
+}
