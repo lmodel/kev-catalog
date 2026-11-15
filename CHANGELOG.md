@@ -15,6 +15,7 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 ### Changed
 
 - **The knowledge website is built with Hugo from the ktl-website templates**, set by `website/site.toml`, in place of the Astro site.
+- **The project requires Python 3.11 or later**, since Python 3.10's support ended in October 2026.
 
 ### Security
 
