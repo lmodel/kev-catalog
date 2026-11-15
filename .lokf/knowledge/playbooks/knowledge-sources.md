@@ -100,7 +100,7 @@ sources:
   - resource: config.public.mk
 generated:
   by: process:ktl-librarian
-  at: "2026-11-06T21:21:49Z"
+  at: "2026-11-15T02:41:40Z"
 status: draft
 ---
 
@@ -117,7 +117,7 @@ status: draft
 | `.linkmllint.yaml` | `explanations/keys-edition-and-departures.md` | the naming rule's comment |
 | `SECURITY.md`, `AI_COVENANT.md`, `NOTICE`, `LICENSE`, `.github/dependabot.yml`, `.github/release` | `policies/security-policy.md`, `policies/ai-covenant.md`, `policies/license-and-attribution.md` | each file's sections |
 | `.github/workflows`, `.github/scripts` | one concept under `workflows/` per workflow | the on key and the jobs |
-| `website` | `services/documentation-site.md` | `website/README.md` and `site.config.mjs` |
+| `website` | `services/documentation-site.md` | `website/README.md` and `site.toml` |
 | The pages of BOD 26-04 | `references/bod-26-04.md` | whether CISA's page answers a plain client, never by getting round a refusal |
 
 The catalogue changes most weekdays, and the pin in `tests/data/kev-data/manifest.json` moves only by hand, so the bundle's numbers follow the pin and not CISA's latest file.

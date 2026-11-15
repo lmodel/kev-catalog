@@ -53,13 +53,13 @@ concurrency:
 jobs:
   validate:
     name: Validate the LOKF bundle
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.KNOWLEDGE_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read
     steps:
       - name: Harden the runner
-        uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: audit
 
@@ -73,10 +73,13 @@ jobs:
           # against the tree, and reports a shallow clone instead of passing it.
           fetch-depth: 0
 
+      # No uv cache, as in the release's `pack` job, so this gate runs the
+      # files .lokf/uv.lock names and not what another job left in a cache.
       - name: Set up uv
         uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           python-version: "3.12"
+          enable-cache: false
 
       # --locked installs what .lokf/uv.lock names, each file checked against
       # the hash recorded there, and fails when the lock is missing or behind
@@ -92,7 +95,7 @@ jobs:
       # resolves every target in the bundle's own namespace, taking the
       # relation slots from the schema. It is part of `lokf validate`, so it
       # rides on this step rather than validating the same bundle twice. A
-      # host with a domain schema names it as `schema :=` in the justfile, and
+      # host with a domain vocabulary names it as `schema :=` in the justfile, and
       # the recipe passes it; the workflow runs the recipe so no host edits this line.
       - name: Validate the knowledge bundle and its relation targets
         # just from uv.lock, checked against its hash, where the host's
@@ -122,7 +125,7 @@ jobs:
         run: |
           since=""
           if [ -n "$BASE_SHA" ]; then since="$(git merge-base "$BASE_SHA" "$HEAD_SHA")"; fi
-          bash scripts/knowledge-conventions.sh knowledge ${since:+--since "$since"}
+          bash scripts/knowledge-conventions.sh knowledge --strict ${since:+--since "$since"}
         working-directory: .lokf
 
   provenance:
@@ -171,7 +174,7 @@ jobs:
     #     compared by fixed string only;
     #   - token scope is read-only and no credential is persisted.
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.KNOWLEDGE_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     permissions:
       contents: read
@@ -180,6 +183,11 @@ jobs:
       verdict: ${{ steps.check.outputs.verdict }}
       actors: ${{ steps.check.outputs.actors }}
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -255,8 +263,13 @@ jobs:
             # past the gate. Accumulate to the closing bracket, then parse: a
             # sequence into its events, a mapping as one. Matches
             # knowledge-provenance.sh.
-            function flushflow(  b, n, items, i) { b = flowbuf
+            function flushflow(  b, n, items, i, q, tail) { b = flowbuf
               if (b ~ /(^|[[:space:]])#/) unread()
+              q = b; gsub(/"[^"]*"/, "", q); gsub(/'"'"'[^'"'"']*'"'"'/, "", q)
+              if (q ~ /["'"'"']/) unread()
+              tail = b; while (match(tail, /"[^"]*"|'"'"'[^'"'"']*'"'"'/)) { if (substr(tail, RSTART, RLENGTH) ~ /[][{}]/) unread(); tail = substr(tail, RSTART + RLENGTH) }
+              tail = q; if (flowseq) sub(/^[^]]*\]/, "", tail); else sub(/^[^}]*\}/, "", tail)
+              if (tail !~ /^[[:space:]]*$/) unread()
               if (flowseq) { sub(/^\[/, "", b); sub(/\].*/, "", b) } else { sub(/^\{/, "", b); sub(/\}.*/, "", b) }
               sub(/^[[:space:]]+/, "", b); sub(/[[:space:]]+$/, "", b)
               if (b != "") { if (flowseq) { n = split(b, items, /\}[[:space:]]*,/); for (i = 1; i <= n; i++) if (items[i] !~ /^[[:space:]]*$/) flow(items[i]) } else flow(b) }
@@ -289,6 +302,7 @@ jobs:
               else if (rest ~ /^\[/) { flowseq = 1; flowbuf = rest; inv = 0; if (index(rest, "]")) flushflow(); else inflow = 1 }
               else if (rest != "" && rest !~ /^#/ && rest !~ /^(null|~)$/) unread()
               next }
+            inv && /^[[:space:]]*#/ { next }
             inv && /^[^[:space:]-]/ { emit(); inv = 0 }
             inv && /^[[:space:]]*-[[:space:]]*(#.*)?$/ { emit(); inev = 1; next }
             inv && /^[[:space:]]*-[[:space:]]*\{/ { rest = $0; sub(/^[[:space:]]*-[[:space:]]*/, "", rest); flow(rest); next }
@@ -388,6 +402,10 @@ jobs:
             exit 0
           fi
 
+          if ! command -v gh >/dev/null; then
+            echo "unreadable: gh is not installed on this runner, and a person's confirmation is checked against GitHub's reviews and signatures with it."
+            exit 1
+          fi
           approvers="$(
             gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/reviews" --paginate \
               --jq '.[] | select(.state == "APPROVED") | .user.login'
@@ -545,11 +563,16 @@ jobs:
     # reviewers silently disables the whole gate.
     needs: provenance
     if: needs.provenance.outputs.verdict == 'unbacked'
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.KNOWLEDGE_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     permissions: {}
     environment: ${{ vars.KNOWLEDGE_CURATION_ENVIRONMENT }}
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
+
       - name: Record what was attested to
         env:
           ACTORS: ${{ needs.provenance.outputs.actors }}

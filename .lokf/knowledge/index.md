@@ -18,7 +18,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for kev-catalog. Every M
 
 # Services
 
-* [Documentation site](services/documentation-site.md) - The knowledge website in `website/`, an Astro Starlight site that the Knowledge website workflow publishes to GitHub Pages at `https://lmodel.github.io/kev-catalog/`: the README as its home page, `docs/`, the schema's pages, a page per concept and the four `lokf export` files, with redirects from the retired mkdocs site's addresses.
+* [Documentation site](services/documentation-site.md) - The knowledge website in `website/`, a Hugo site that the Knowledge website workflow publishes to GitHub Pages at `https://lmodel.github.io/kev-catalog/`: the README as its home page, `docs/`, the schema's pages, a page per concept and the four `lokf export` files, with redirects from the retired mkdocs site's addresses.
 
 # Datasets
 
@@ -63,7 +63,7 @@ A [LOKF](https://lokf.nolan-nichols.com) knowledge base for kev-catalog. Every M
 
 # Workflows
 
-* [Build and test (main.yaml)](workflows/main.md) - The Build and test workflow, `.github/workflows/main.yaml`: on a push to `main` and every pull request, its `test` job lints, tests and checks the adapt copy across Python 3.10 to 3.14, and its `kev-data` job validates the pinned catalogue in full.
+* [Build and test (main.yaml)](workflows/main.md) - The Build and test workflow, `.github/workflows/main.yaml`: on a push to `main` and every pull request, its `test` job lints, tests and checks the adapt copy across Python 3.11 to 3.14, and its `kev-data` job validates the pinned catalogue in full.
 * [Lint and docs (lint-and-docs.yaml)](workflows/lint-and-docs.md) - The Lint and docs workflow, `.github/workflows/lint-and-docs.yaml`: ShellCheck, actionlint, the word budgets of CONTRIBUTING.md and SECURITY.md, markdownlint, lychee and codespell, on a push to `main`, every pull request and Mondays at 06:00 UTC.
 * [Upstream watch (upstream-watch.yaml)](workflows/upstream-watch.md) - The Upstream watch workflow, `.github/workflows/upstream-watch.yaml`: every Monday at 07:00 UTC and by hand, its `kev-sources` job runs `scripts/check_upstream_release.py` against the GitHub API and CISA's copy, and on a finding opens or updates the issue titled Upstream watch: the KEV JSON schema or licence has changed.
 * [Semantic release (semantic-release.yml)](workflows/semantic-release.md) - The Semantic release workflow, `.github/workflows/semantic-release.yml`: `plan` previews a pull request's release, and `release`, on a push to `main` in the `release` Environment, promotes the changelog, tags, publishes and dispatches the knowledge release.
