@@ -50,7 +50,7 @@ The schema's mappings are the one home for what it crosses to, and `tests/test_m
 * [src/kev_catalog/schema/](src/kev_catalog/schema): the LinkML schema, `kev_catalog.yaml` (edit this)
 * [src/kev_catalog/datamodel/](src/kev_catalog/datamodel): the generated Python datamodel
 * [tests/](tests/): Python tests, with example data in [data/](tests/data), CISA's files in [upstream/](tests/upstream) and the neighbours' adapt copies in [neighbours/](tests/neighbours)
-* [website/](website/): the Astro Starlight site built from the README, `docs/`, the schema's pages and the knowledge bundle
+* [website/](website/): the Hugo site built from the README, `docs/`, the schema's pages and the knowledge bundle
 
 ## Developer Tools
 
