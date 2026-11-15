@@ -2,6 +2,7 @@
 
 ## 2026-11-15
 
+* **Changed**: sources and text follow the move of `.github/release` to `.release`.
 * **Changed**: The concepts that state the project's Python floor or its test matrix say 3.11, since the project no longer supports Python 3.10.
 * **Changed**: The documentation site says how the Hugo build that replaced the Astro one builds and checks the site, and names only the redirects `site.toml` holds.
 * **Changed**: The concepts that cite the knowledge website describe the Hugo site that replaced the Astro one, set by `website/site.toml`.

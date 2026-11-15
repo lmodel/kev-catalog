@@ -84,7 +84,7 @@ sources:
   - resource: .github/scripts
   - resource: .github/workflows
   - resource: .github/dependabot.yml
-  - resource: .github/release
+  - resource: .release
   - resource: justfile
   - resource: .linkml/generators.yaml
   - resource: .linkmllint.yaml
@@ -100,7 +100,7 @@ sources:
   - resource: config.public.mk
 generated:
   by: process:ktl-librarian
-  at: "2026-11-15T02:41:40Z"
+  at: "2026-11-15T20:58:24Z"
 status: draft
 ---
 
@@ -115,7 +115,7 @@ status: draft
 | `justfile`, `CONTRIBUTING.md`, `.releaserc.json` | `playbooks/regenerate-and-test.md`, `playbooks/release.md` | the recipes and the release rules |
 | `project`, `docs/schema`, `src/kev_catalog/datamodel`, `.linkml/generators.yaml`, `config.public.mk` | `datasets/generated-artefacts.md` | the generators' settings |
 | `.linkmllint.yaml` | `explanations/keys-edition-and-departures.md` | the naming rule's comment |
-| `SECURITY.md`, `AI_COVENANT.md`, `NOTICE`, `LICENSE`, `.github/dependabot.yml`, `.github/release` | `policies/security-policy.md`, `policies/ai-covenant.md`, `policies/license-and-attribution.md` | each file's sections |
+| `SECURITY.md`, `AI_COVENANT.md`, `NOTICE`, `LICENSE`, `.github/dependabot.yml`, `.release` | `policies/security-policy.md`, `policies/ai-covenant.md`, `policies/license-and-attribution.md` | each file's sections |
 | `.github/workflows`, `.github/scripts` | one concept under `workflows/` per workflow | the on key and the jobs |
 | `website` | `services/documentation-site.md` | `website/README.md` and `site.toml` |
 | The pages of BOD 26-04 | `references/bod-26-04.md` | whether CISA's page answers a plain client, never by getting round a refusal |
