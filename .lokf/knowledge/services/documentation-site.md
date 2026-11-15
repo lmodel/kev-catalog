@@ -19,7 +19,7 @@ sources:
   - resource: website
 generated:
   by: process:ktl-librarian
-  at: "2026-11-15T02:41:40Z"
+  at: "2026-11-15T03:05:15Z"
 status: draft
 ---
 
@@ -32,9 +32,9 @@ status: draft
 - each schema page that `gen-doc` writes as a page under `schema/`;
 - each concept as a page under `knowledge/`, beside the four files `lokf export` writes.
 
-`website/site.toml` redirects the retired mkdocs site's addresses: `/about`, `/elements`, and each old element page to its successor or to the schema's index.[^site.toml]
+`website/site.toml` redirects the retired mkdocs site's addresses: `/about`, and each old element page under `/elements/` to its successor or to the schema's index.[^site.toml]
 
-`cd website && npm ci --ignore-scripts && npm run build` builds it and checks every link.[^website-readme.md]
+`scripts/build.sh`, run from `website/`, writes the site to `dist/` with its search index, then checks every link between its pages. It needs bash, git and uv, and takes Hugo and Pagefind from PyPI.[^website-readme.md]
 
 [^website-readme.md]: website/README.md, the whole file
 [^site.toml]: website/site.toml, the site's address, title and redirects
