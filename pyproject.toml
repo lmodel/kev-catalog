@@ -76,7 +76,7 @@ skip = [
 
 # Reminder: words have to be lowercased for the ignore-words-list
 # CNA is a CVE Numbering Authority, which the CVE Record Format names.
-ignore-words-list = "linke,cna"
+ignore-words-list = "linke,cna,intoto"
 quiet-level = 3
 
 # Ref.: https://github.com/crate-ci/typos (spell checker)
